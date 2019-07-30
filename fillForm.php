@@ -1,7 +1,8 @@
 <?php
     include './headFoot/header.php';
 ?>
-
+    
+    <br>
     <div class="container">
         <h1> Patient Details<br>
         <small>Mahajan Homeo Clinic</small>

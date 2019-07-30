@@ -28,7 +28,7 @@
 				<hr class="my-4">
 				<p>Click Here to get Started ...</p>
 				<p class="lead">
-					<a class="btn btn-primary btn-lg" href="fillForm.php" role="button">Patient Records</a>
+					<a class="btn btn-primary btn-lg" href="fillForm.php" role="button">Add Patient</a>
 				</p>
 			</div>
 		</div>
