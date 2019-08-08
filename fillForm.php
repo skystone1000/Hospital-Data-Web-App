@@ -9,7 +9,7 @@
         </h1>
     </div>
 
-    <form action="action.php" method="get" class="container">
+    <form action="insertRecord.php" method="get" class="container">
         <div class="form-row">
             <div class="col-md-4 mb-3">
                 <label>First name</label>

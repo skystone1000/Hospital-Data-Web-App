@@ -9,18 +9,8 @@
 		
 
 	<?php
-		$servername = "localhost";
-		$username = "root";
-		$password = "";
-		$dbname = "hospital";
-
-		// Create connection
-		$conn = new mysqli($servername, $username, $password, $dbname);
-		// Check connection
-		if ($conn->connect_error) {
-		    die("Connection failed: " . $conn->connect_error);
-		} 
-
+		include './headFoot/connection.php';
+ 
 		$sql = "SELECT * FROM patient_data;";
 		$result = mysqli_query($conn, $sql);
 		$resultNum = mysqli_num_rows($result);
@@ -33,7 +23,7 @@
 				<div class="list-group-item list-group-item-action flex-column align-items-start active">
 					<div class="d-flex w-100 justify-content-between">
 						<h5 class="mb-1">' . $row['regno'] . " : " . $row['firstName'] . " " . $row['middleName'] . " " . $row['lastName']  . '</h5>
-						<small><button formaction="./patientDetails.php" class="btn btn-success my-2 my-sm-0" type="submit" value="submit">Details</button></small>
+						<small><a href="patientDetails.php?id=' . $row['id'] . '"><button class="btn btn-success my-2 my-sm-0" type="submit" value="submit">Details</button></a></small>
 					</div>
 					<p class="mb-1">Age: ' . $row['age'] . ', Occupation: ' . $row['occupation'] . ', Address: ' . $row['address'] . '</p>
 					<small>Date : ' . $row['dateJoined'] . ', Phone No: ' . $row['phone'] . '</small>
