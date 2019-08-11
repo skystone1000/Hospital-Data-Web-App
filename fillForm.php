@@ -13,46 +13,46 @@
         <div class="form-row">
             <div class="col-md-4 mb-3">
                 <label>First name</label>
-                <input type="text" class="form-control" name="firstName" placeholder="First name" required>
+                <input type="text" id="firstName" class="form-control" name="firstName" placeholder="First name" required>
             </div>
             <div class="col-md-4 mb-3">
                 <label>Middle name</label>
-                <input type="text" class="form-control" name="middleName" placeholder="Middle name"  >
+                <input type="text" id="middleName" class="form-control" name="middleName" placeholder="Middle name"  >
             </div>
             <div class="col-md-4 mb-3">
                 <label>Last name</label>
-                <input type="text" class="form-control" name="lastName" placeholder="Last name" required>
+                <input type="text" id="lastName" class="form-control" name="lastName" placeholder="Last name" required>
             </div>
         </div>
         <div class="form-row">
             <div class="col-md-4 mb-3">
                 <label>Age</label>
-                <input type="text" class="form-control" name="age" placeholder="Age" required>
+                <input type="text" id="age" class="form-control" name="age" placeholder="Age" required>
             </div>
             <div class="col-md-4 mb-3">
                 <label>Sex</label>
-                <input type="text" class="form-control" name="sex" placeholder="Gender"  required>
+                <input type="text" id="sex" class="form-control" name="sex" placeholder="Gender"  required>
             </div>
             <div class="col-md-4 mb-3">
                 <label>Occupation</label>
-                <input type="text" class="form-control" name="occupation" placeholder="Occupation">
+                <input type="text" id="occupation" class="form-control" name="occupation" placeholder="Occupation">
             </div>
         </div> 
         <br>
 
         <div class="form-group">
                 <label>Address : </label>
-                <input type="text" class="form-control input-lg" name="address" placeholder="Address" required>
+                <input type="text" id="address" class="form-control input-lg" name="address" placeholder="Address" required>
         </div> <br>
 
         <div class="form-row">
             <div class="col-md-4 mb-3">
                 <label>Phone Number : </label>
-                <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone">
+                <input type="text" id="phone" class="form-control" id="phone" name="phone" placeholder="Phone">
             </div> 
             <div class="col-md-4 mb-3">
                 <label>Registration Number : </label>
-                <input type="text" class="form-control" id="regno" name="regno" placeholder="Registration Number">
+                <input type="text" id="regno" class="form-control" id="regno" name="regno" placeholder="Registration Number">
             </div> 
         </div>
 
@@ -193,10 +193,15 @@
             <textarea class="form-control" rows="2" name="followUp4" placeholder="Leave Blank if first time"></textarea>
         </div>
         
-        <button class="btn btn-primary" type="submit">Submit form</button>
+        <button id="submitBtn" class="btn btn-primary" type="submit">Submit form</button>
     </form>
 
-
-
 </body>
+<script src="//cdnjs.cloudflare.com/ajax/libs/annyang/2.6.1/annyang.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/SpeechKITT/0.3.0/speechkitt.min.js"></script>
+<script type="text/javascript" src="./js/script.js"></script>
+
+
+
+
 </html>
