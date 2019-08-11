@@ -106,122 +106,123 @@ $data = mysqli_fetch_assoc($result);
 
         <div class="form-group">
             <label>Appetite : - </label>
-            <textarea class="form-control" rows="2" name="appetite"  value="<?php echo $data['appetite'] ?>" readonly></textarea>
+            <textarea type="text" class="form-control" rows="2" name="appetite" readonly><?php echo $data['appetite'] ?></textarea>
         </div>
+
 
         <div class="form-group">
             <label>Desire : - </label>
-            <textarea class="form-control" rows="5" name="desire" value="<?php echo $data['desire'] ?>" readonly></textarea>
+            <textarea class="form-control" rows="5" name="desire" readonly><?php echo $data['desire'] ?></textarea>
         </div>
 
         <div class="form-group">
             <label>Aversions : - </label>
-            <textarea class="form-control" rows="2" name="aversions"  value="<?php echo $data['aversions'] ?>" readonly></textarea>
+            <textarea class="form-control" rows="2" name="aversions" readonly><?php echo $data['aversions'] ?></textarea>
         </div>
         
         <div class="form-group">
             <label>Thirst : - </label>
-            <textarea class="form-control" rows="2" name="thirst" value="<?php echo $data['thirst'] ?>" readonly></textarea>
+            <textarea class="form-control" rows="2" name="thirst" readonly><?php echo $data['thirst'] ?></textarea>
         </div>
         
         <div class="form-group">
             <label>Perspiration : - </label>
-            <textarea class="form-control" rows="2" name="perspiration" value="<?php echo $data['perspiration'] ?>" readonly></textarea>
+            <textarea class="form-control" rows="2" name="perspiration" readonly><?php echo $data['perspiration'] ?></textarea>
         </div>
 
         <div class="form-group">
             <label>Sleep : - </label>
-            <textarea class="form-control" rows="2" name="sleep" value="<?php echo $data['sleep'] ?>" readonly></textarea>
+            <textarea class="form-control" rows="2" name="sleep" readonly><?php echo $data['sleep'] ?></textarea>
         </div>
 
         <div class="form-group">
             <label>Stool : - </label>
-            <textarea class="form-control" rows="2" name="stool" value="<?php echo $data['stool'] ?>" readonly></textarea>
+            <textarea class="form-control" rows="2" name="stool" readonly><?php echo $data['stool'] ?></textarea>
         </div>
 
         <div class="form-group">
             <label>Urine : - </label>
-            <textarea class="form-control" rows="2" name="urine" value="<?php echo $data['urine'] ?>" readonly></textarea>
+            <textarea class="form-control" rows="2" name="urine" readonly><?php echo $data['urine'] ?></textarea>
         </div>
 
         <div class="form-group">
             <label>Menses : - </label>
-            <textarea class="form-control" rows="2" name="menses" value="<?php echo $data['menses'] ?>" readonly></textarea>
+            <textarea class="form-control" rows="2" name="menses" readonly><?php echo $data['menses'] ?></textarea>
         </div>
         
 
         <div class="form-group">
             <label>Thermal : - </label>
-            <textarea class="form-control" rows="1" name="thermal" value="<?php echo $data['thermal'] ?>" readonly></textarea>
+            <textarea class="form-control" rows="1" name="thermal" readonly><?php echo $data['thermal'] ?></textarea>
         </div>
 
         <div class="form-group">
             <label>Mind : - </label>
-            <textarea class="form-control" rows="10" name="mind" value="<?php echo $data['mind'] ?>" readonly></textarea>
+            <textarea class="form-control" rows="10" name="mind" readonly><?php echo $data['mind'] ?></textarea>
         </div>
 
         <div class="form-group">
             <label>Hobbies : - </label>
-            <textarea class="form-control" rows="5" name="hobbies" value="<?php echo $data['hobbies'] ?>" readonly></textarea>
+            <textarea class="form-control" rows="5" name="hobbies" readonly><?php echo $data['hobbies'] ?></textarea>
         </div>
 
         <div class="form-group">
             <label>Particulars : - </label>
-            <textarea class="form-control" rows="15" name="particulars" value="<?php echo $data['particulars'] ?>" readonly></textarea>
+            <textarea class="form-control" rows="15" name="particulars" readonly><?php echo $data['particulars'] ?></textarea>
         </div>
 
 
         <div class="form-group">
             <label>On-Examination : - </label>
-            <textarea class="form-control" rows="8" name="on_examination" value="<?php echo $data['on_examination'] ?>" readonly></textarea>
+            <textarea class="form-control" rows="8" name="on_examination" readonly><?php echo $data['on_examination'] ?></textarea>
         </div>
 
         <div class="form-group">
             <label>Path-Inv : - </label>
-            <textarea class="form-control" rows="8" name="path_inv" value="<?php echo $data['path_inv'] ?>" readonly></textarea>
+            <textarea class="form-control" rows="8" name="path_inv" readonly><?php echo $data['path_inv'] ?></textarea>
         </div>
 
         <div class="form-group">
             <label>Previous-Rx : - </label>
-            <textarea class="form-control" rows="8" name="previous_rx" value="<?php echo $data['previous_rx'] ?>" readonly></textarea>
+            <textarea class="form-control" rows="8" name="previous_rx" readonly><?php echo $data['previous_rx'] ?></textarea>
         </div>
 
 
         <div class="form-group">
             <label>Past-history : - </label>
-            <textarea class="form-control" rows="8" name="past_history" value="<?php echo $data['past_history'] ?>" readonly></textarea>
+            <textarea class="form-control" rows="8" name="past_history" readonly><?php echo $data['past_history'] ?></textarea>
         </div>
 
 
         <div class="form-group">
             <label>Family-history : - </label>
-            <textarea class="form-control" rows="2" name="family_history" value="<?php echo $data['family_history'] ?>" readonly></textarea>
+            <textarea class="form-control" rows="2" name="family_history" readonly><?php echo $data['family_history'] ?></textarea>
         </div>
 
         <div class="form-group">
             <label>Treatment : - </label>
-            <textarea class="form-control" rows="3" name="treatment" value="<?php echo $data['treatment'] ?>" readonly></textarea>
+            <textarea class="form-control" rows="3" name="treatment" readonly><?php echo $data['treatment'] ?></textarea>
         </div>
 
 
         <div class="form-group">
             <label>Follow Up 1 : - </label>
-            <textarea class="form-control" rows="2" name="followUp1" value="<?php echo $data['followUp1'] ?>" readonly></textarea>
+            <textarea class="form-control" rows="2" name="followUp1" readonly><?php echo $data['followUp1'] ?></textarea>
         </div>
 
         <div class="form-group">
             <label>Follow Up 2 : - </label>
-            <textarea class="form-control" rows="2" name="followUp2" value="<?php echo $data['followUp2'] ?>" readonly></textarea>
+            <textarea class="form-control" rows="2" name="followUp2" readonly><?php echo $data['followUp2'] ?></textarea>
         </div>
         
         <div class="form-group">
             <label>Follow Up 3 : - </label>
-            <textarea class="form-control" rows="2" name="followUp3" value="<?php echo $data['followUp3'] ?>" readonly></textarea>
+            <textarea class="form-control" rows="2" name="followUp3" readonly><?php echo $data['followUp3'] ?></textarea>
         </div>
         
         <div class="form-group">
             <label>Follow Up 4 : - </label>
-            <textarea class="form-control" rows="2" name="followUp4" value="<?php echo $data['followUp4'] ?>" readonly></textarea>
+            <textarea class="form-control" rows="2" name="followUp4" readonly><?php echo $data['followUp4'] ?></textarea>
         </div>
 
     </form>
