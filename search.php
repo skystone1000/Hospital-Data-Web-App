@@ -55,13 +55,14 @@ if ($resultNum > 0) {
 	while($row = mysqli_fetch_assoc($result)){
 		echo '
 		<div class="list-group-item list-group-item-action flex-column align-items-start active">
-			<div class="d-flex w-100 justify-content-between">
-				<h5 class="mb-1">' . $row['regno'] . " : " . $row['firstName'] . " " . $row['middleName'] . " " . $row['lastName']  . '</h5>
-				<small>' . $row['dateJoined'] . '</small>
-			</div>
-			<p class="mb-1">Age: ' . $row['age'] . ', Occupation: ' . $row['occupation'] . ', Address: ' . $row['address'] . '</p>
-			<small>Phone No: ' . $row['phone'] . '</small>
-		</div>
+					<div class="d-flex w-100 justify-content-between">
+						<h5 class="mb-1">' . $row['regno'] . " : " . $row['firstName'] . " " . $row['middleName'] . " " . $row['lastName']  . '</h5>
+						<small><a href="patientDetails.php?id=' . $row['id'] . '"><button class="btn btn-success my-2 my-sm-0" type="submit" value="submit">Details</button></a></small>
+					</div>
+					<p class="mb-1">Age: ' . $row['age'] . ', Occupation: ' . $row['occupation'] . ', Address: ' . $row['address'] . '</p>
+					<small>Date : ' . $row['dateJoined'] . ', Phone No: ' . $row['phone'] . '</small>
+					
+				</div>
 		';
 		echo "<br>";
 	}

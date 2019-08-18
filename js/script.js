@@ -49,6 +49,17 @@ var commands = {
 }
 
 
+
+/*
+annyang.addCallback('result',function(whatWasHeard) {
+  document.getElementById("voiceToText").innerHTML = whatWasHeard[0];
+});
+*/
+
+
+
+
+
 annyang.addCommands(commands);
 annyang.start({ autoRestart: true, continuous: false });
 annyang.debug();

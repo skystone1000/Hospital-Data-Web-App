@@ -25,12 +25,8 @@
 						<h5 class="mb-1">' . $row['regno'] . " : " . $row['firstName'] . " " . $row['middleName'] . " " . $row['lastName']  . '</h5>
 						<small><a href="patientDetails.php?id=' . $row['id'] . '"><button class="btn btn-success my-2 my-sm-0" type="submit" value="submit">Details</button></a></small>
 					</div>
-					<p class="mb-1">Age: ' . $row['age'] . ', Occupation: ' . $row['occupation'] . ', Address: ' . $row['address'] . '</p>
-					<small>Date : ' . $row['dateJoined'] . ', Phone No: ' . $row['phone'] . '</small>
-					
 				</div>
 				';
-				echo "<br>";
 			}
 		} else {
 			echo "<h1>No Results Found !!!</h1>";
