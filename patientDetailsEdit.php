@@ -96,122 +96,122 @@ $data = mysqli_fetch_assoc($result);
 
         <div class="form-group">
             <label>Appetite : - </label>
-            <textarea class="form-control" rows="2" name="appetite"  value="<?php echo $data['appetite'] ?>" ></textarea>
+            <textarea class="form-control" rows="2" name="appetite" ><?php echo $data['appetite'] ?></textarea>
         </div>
 
         <div class="form-group">
             <label>Desire : - </label>
-            <textarea class="form-control" rows="5" name="desire" value="<?php echo $data['desire'] ?>" ></textarea>
+            <textarea class="form-control" rows="5" name="desire" ><?php echo $data['desire'] ?></textarea>
         </div>
 
         <div class="form-group">
             <label>Aversions : - </label>
-            <textarea class="form-control" rows="2" name="aversions"  value="<?php echo $data['aversions'] ?>" ></textarea>
+            <textarea class="form-control" rows="2" name="aversions" ><?php echo $data['aversions'] ?></textarea>
         </div>
         
         <div class="form-group">
             <label>Thirst : - </label>
-            <textarea class="form-control" rows="2" name="thirst" value="<?php echo $data['thirst'] ?>" ></textarea>
+            <textarea class="form-control" rows="2" name="thirst" ><?php echo $data['thirst'] ?></textarea>
         </div>
         
         <div class="form-group">
             <label>Perspiration : - </label>
-            <textarea class="form-control" rows="2" name="perspiration" value="<?php echo $data['perspiration'] ?>" ></textarea>
+            <textarea class="form-control" rows="2" name="perspiration" ><?php echo $data['perspiration'] ?></textarea>
         </div>
 
         <div class="form-group">
             <label>Sleep : - </label>
-            <textarea class="form-control" rows="2" name="sleep" value="<?php echo $data['sleep'] ?>" ></textarea>
+            <textarea class="form-control" rows="2" name="sleep" ><?php echo $data['sleep'] ?></textarea>
         </div>
 
         <div class="form-group">
             <label>Stool : - </label>
-            <textarea class="form-control" rows="2" name="stool" value="<?php echo $data['stool'] ?>" ></textarea>
+            <textarea class="form-control" rows="2" name="stool" ><?php echo $data['stool'] ?></textarea>
         </div>
 
         <div class="form-group">
             <label>Urine : - </label>
-            <textarea class="form-control" rows="2" name="urine" value="<?php echo $data['urine'] ?>" ></textarea>
+            <textarea class="form-control" rows="2" name="urine" ><?php echo $data['urine'] ?></textarea>
         </div>
 
         <div class="form-group">
             <label>Menses : - </label>
-            <textarea class="form-control" rows="2" name="menses" value="<?php echo $data['menses'] ?>" ></textarea>
+            <textarea class="form-control" rows="2" name="menses" ><?php echo $data['menses'] ?></textarea>
         </div>
         
 
         <div class="form-group">
             <label>Thermal : - </label>
-            <textarea class="form-control" rows="1" name="thermal" value="<?php echo $data['thermal'] ?>" ></textarea>
+            <textarea class="form-control" rows="1" name="thermal" ><?php echo $data['thermal'] ?></textarea>
         </div>
 
         <div class="form-group">
             <label>Mind : - </label>
-            <textarea class="form-control" rows="10" name="mind" value="<?php echo $data['mind'] ?>" ></textarea>
+            <textarea class="form-control" rows="10" name="mind" ><?php echo $data['mind'] ?></textarea>
         </div>
 
         <div class="form-group">
             <label>Hobbies : - </label>
-            <textarea class="form-control" rows="5" name="hobbies" value="<?php echo $data['hobbies'] ?>" ></textarea>
+            <textarea class="form-control" rows="5" name="hobbies" ><?php echo $data['hobbies'] ?></textarea>
         </div>
 
         <div class="form-group">
             <label>Particulars : - </label>
-            <textarea class="form-control" rows="15" name="particulars" value="<?php echo $data['particulars'] ?>" ></textarea>
+            <textarea class="form-control" rows="15" name="particulars" ><?php echo $data['particulars'] ?></textarea>
         </div>
 
 
         <div class="form-group">
             <label>On-Examination : - </label>
-            <textarea class="form-control" rows="8" name="on_examination" value="<?php echo $data['on_examination'] ?>" ></textarea>
+            <textarea class="form-control" rows="8" name="on_examination" ><?php echo $data['on_examination'] ?></textarea>
         </div>
 
         <div class="form-group">
             <label>Path-Inv : - </label>
-            <textarea class="form-control" rows="8" name="path_inv" value="<?php echo $data['path_inv'] ?>" ></textarea>
+            <textarea class="form-control" rows="8" name="path_inv" ><?php echo $data['path_inv'] ?></textarea>
         </div>
 
         <div class="form-group">
             <label>Previous-Rx : - </label>
-            <textarea class="form-control" rows="8" name="previous_rx" value="<?php echo $data['previous_rx'] ?>" ></textarea>
+            <textarea class="form-control" rows="8" name="previous_rx" ><?php echo $data['previous_rx'] ?></textarea>
         </div>
 
 
         <div class="form-group">
             <label>Past-history : - </label>
-            <textarea class="form-control" rows="8" name="past_history" value="<?php echo $data['past_history'] ?>" ></textarea>
+            <textarea class="form-control" rows="8" name="past_history" ><?php echo $data['past_history'] ?></textarea>
         </div>
 
 
         <div class="form-group">
             <label>Family-history : - </label>
-            <textarea class="form-control" rows="2" name="family_history" value="<?php echo $data['family_history'] ?>" ></textarea>
+            <textarea class="form-control" rows="2" name="family_history" ><?php echo $data['family_history'] ?></textarea>
         </div>
 
         <div class="form-group">
             <label>Treatment : - </label>
-            <textarea class="form-control" rows="3" name="treatment" value="<?php echo $data['treatment'] ?>" ></textarea>
+            <textarea class="form-control" rows="3" name="treatment" ><?php echo $data['treatment'] ?></textarea>
         </div>
 
 
         <div class="form-group">
             <label>Follow Up 1 : - </label>
-            <textarea class="form-control" rows="2" name="followUp1" value="<?php echo $data['followUp1'] ?>" ></textarea>
+            <textarea class="form-control" rows="2" name="followUp1" ><?php echo $data['followUp1'] ?></textarea>
         </div>
 
         <div class="form-group">
             <label>Follow Up 2 : - </label>
-            <textarea class="form-control" rows="2" name="followUp2" value="<?php echo $data['followUp2'] ?>" ></textarea>
+            <textarea class="form-control" rows="2" name="followUp2" ><?php echo $data['followUp2'] ?></textarea>
         </div>
         
         <div class="form-group">
             <label>Follow Up 3 : - </label>
-            <textarea class="form-control" rows="2" name="followUp3" value="<?php echo $data['followUp3'] ?>" ></textarea>
+            <textarea class="form-control" rows="2" name="followUp3" ><?php echo $data['followUp3'] ?></textarea>
         </div>
         
         <div class="form-group">
             <label>Follow Up 4 : - </label>
-            <textarea class="form-control" rows="2" name="followUp4" value="<?php echo $data['followUp4'] ?>" ></textarea>
+            <textarea class="form-control" rows="2" name="followUp4" ><?php echo $data['followUp4'] ?></textarea>
         </div>
 
         <button class="btn btn-primary" type="submit">Update Record</button>

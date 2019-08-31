@@ -197,8 +197,10 @@
     </form>
 
 </body>
+<!--
 <script src="//cdnjs.cloudflare.com/ajax/libs/annyang/2.6.1/annyang.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/SpeechKITT/0.3.0/speechkitt.min.js"></script>
+-->
 <script type="text/javascript" src="./js/script.js"></script>
 
 
