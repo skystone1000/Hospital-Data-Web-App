@@ -9,6 +9,7 @@
 		
 
 	<?php
+		include './headFoot/filter.php';
 		include './headFoot/connection.php';
  
 		$sql = "SELECT * FROM patient_data;";

@@ -7,31 +7,20 @@
 	<h1>List Of Patients </h1>
 	<div class="list-group">
 	
-	<div>
-		<button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
-			Filter
-			<img src="./img/filter.svg" style="width: 30px ; height: 30px;">
-		    <ul class="dropdown-menu">
-				<!--<input class="form-control" id="myInput" type="text" placeholder="Search..">-->
-				<li><a href="<?php $sort = fname ?>">First Name</a></li>
-				<li><a href="<?php $sort = lname ?>">Last Name</a></li>
-				<li><a href="<?php $sort = date ?>">Date</a></li>
-		    </ul>
-
-		</button>
-	</div>	
-
 	<?php
+		include './headFoot/filter.php';
 		include './headFoot/connection.php';
  		
- 		echo $sort;
-		$sql = "SELECT * FROM patient_data;";
 		$result = mysqli_query($conn, $sql);
 		$resultNum = mysqli_num_rows($result);
 
+		# If results are not null
 		if ($resultNum > 0) {
+
+			# Output total number of results
 			echo "<h2>" . $resultNum . " Results ... </h2>";
-			//include './headFoot/detailsCard.php';
+
+			# Information Card
 			echo '
 			<div class="list-group-item list-group-item-action flex-column align-items-start">
 				<div class="d-flex w-100 justify-content-between">
@@ -40,6 +29,7 @@
 			</div>
 			';
 
+			# Each Patient record card
 			while($row = mysqli_fetch_assoc($result)){
 				echo '
 				<div class="list-group-item list-group-item-action flex-column align-items-start active">
@@ -52,7 +42,9 @@
 				</div>
 				';
 			}
-		} else {
+		} 
+		# If no results found
+		else {
 			echo "<h1>No Results Found !!!</h1>";
 		}
 	?>	
@@ -61,9 +53,6 @@
 
 
 </div>
-
-
-
 
 <?php
 	include './headFoot/footer.php';

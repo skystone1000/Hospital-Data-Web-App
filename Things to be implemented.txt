@@ -1,0 +1,14 @@
+THINGS TO BE IMPLEMENTED
+
+1) Follow Up add module
+2) Shift database to oracle
+
+3) height Field
+
+NEW Follow up
+2) Previous complains - Better/Same/Worse
+3) Date for Last Follow up
+4) Medicine for days 3/8/15/30
+5) Weight
+
+4) Message to patient 2 days before medicine end period 
