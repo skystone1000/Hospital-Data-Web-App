@@ -205,5 +205,6 @@
 
 
 
-
-</html>
+<?php
+    include './headFoot/footer.php';
+?>

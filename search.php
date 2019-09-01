@@ -63,7 +63,7 @@ if ($resultNum > 0) {
 					<p class="mb-1">Age: ' . $row['age'] . ', Occupation: ' . $row['occupation'] . ', Address: ' . $row['address'] . '</p>
 					<small>Date : ' . $row['dateJoined'] . ', Phone No: ' . $row['phone'] . '</small>
 					
-				</div>
+		</div>
 		';
 		echo "<br>";
 	}
@@ -76,3 +76,8 @@ if ($resultNum > 0) {
 
 
 </div>
+
+
+<?php
+	include './headFoot/footer.php';
+?>

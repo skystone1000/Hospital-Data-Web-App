@@ -34,3 +34,8 @@
 		</div>
 	</div>
 </div>
+
+
+<?php
+	include './headFoot/footer.php';
+?>

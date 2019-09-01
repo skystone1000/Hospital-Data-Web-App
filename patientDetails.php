@@ -228,9 +228,9 @@ $data = mysqli_fetch_assoc($result);
     </form>
 
 
-
-
-
-
-
 </div>
+
+
+<?php
+    include './headFoot/footer.php';
+?>

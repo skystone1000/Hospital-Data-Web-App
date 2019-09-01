@@ -6,11 +6,25 @@
 	<br>
 	<h1>List Of Patients </h1>
 	<div class="list-group">
-		
+	
+	<div>
+		<button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+			Filter
+			<img src="./img/filter.svg" style="width: 30px ; height: 30px;">
+		    <ul class="dropdown-menu">
+				<!--<input class="form-control" id="myInput" type="text" placeholder="Search..">-->
+				<li><a href="<?php $sort = fname ?>">First Name</a></li>
+				<li><a href="<?php $sort = lname ?>">Last Name</a></li>
+				<li><a href="<?php $sort = date ?>">Date</a></li>
+		    </ul>
+
+		</button>
+	</div>	
 
 	<?php
 		include './headFoot/connection.php';
- 
+ 		
+ 		echo $sort;
 		$sql = "SELECT * FROM patient_data;";
 		$result = mysqli_query($conn, $sql);
 		$resultNum = mysqli_num_rows($result);
@@ -51,8 +65,6 @@
 
 
 
-</body>
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-</html>
+<?php
+	include './headFoot/footer.php';
+?>
