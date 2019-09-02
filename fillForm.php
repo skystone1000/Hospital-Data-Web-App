@@ -9,7 +9,7 @@
         </h1>
     </div>
 
-    <form action="insertRecord.php" method="get" class="container">
+    <form action="insertRecord.php" method="get" class="container" onsubmit="setFormSubmitting()">
         <div class="form-row">
             <div class="col-md-4 mb-3">
                 <label>First name</label>
@@ -201,17 +201,35 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/annyang/2.6.1/annyang.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/SpeechKITT/0.3.0/speechkitt.min.js"></script>
 -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript" src="./js/script.js"></script>
 
-<script type="text/javascript">
-    $('a').click(function(event) {
-        var href = $(this).attr('href');
+<script>
+    // To give a popup alert when user is switching to other page that 
+    // unsaved data will be lost    
+    var formSubmitting = false;
+    var setFormSubmitting = function() { formSubmitting = true; };
 
-            event.preventDefault();
-            alert('You are about to leave');
-        //if href does not contain test.php
-        if(href.indexOf('fillForm.php') == -1) { 
-        }
+    window.onload = function() {
+        window.addEventListener("beforeunload", function (e) {
+            if (formSubmitting) {
+                return undefined;
+            }
+
+            var confirmationMessage = 'It looks like you have been editing something. '
+                                    + 'If you leave before saving, your changes will be lost.';
+
+            (e || window.event).returnValue = confirmationMessage; //Gecko + IE
+            return confirmationMessage; //Gecko + Webkit, Safari, Chrome etc.
+        });
+    };
+
+    // function while closing the tab so that unsaved data is not lost
+    $(function (){
+        $(window).on('beforeunload',function(){
+            //while closing the tab it throws an alert
+            return '';
+        })
     });
 </script>
 
