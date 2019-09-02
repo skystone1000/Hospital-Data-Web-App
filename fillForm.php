@@ -223,14 +223,6 @@
             return confirmationMessage; //Gecko + Webkit, Safari, Chrome etc.
         });
     };
-
-    // function while closing the tab so that unsaved data is not lost
-    $(function (){
-        $(window).on('beforeunload',function(){
-            //while closing the tab it throws an alert
-            return '';
-        })
-    });
 </script>
 
 <?php
