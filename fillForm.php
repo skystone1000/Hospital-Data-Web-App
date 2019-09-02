@@ -121,7 +121,7 @@
 
         <div class="form-group">
             <label>Thermal : - </label>
-            <textarea class="form-control" rows="1" name="thermal" placeholder="Body TTemperature conditions"></textarea>
+            <textarea class="form-control" rows="1" name="thermal" placeholder="Body Temperature conditions"></textarea>
         </div>
 
         <div class="form-group">
@@ -203,7 +203,17 @@
 -->
 <script type="text/javascript" src="./js/script.js"></script>
 
+<script type="text/javascript">
+    $('a').click(function(event) {
+        var href = $(this).attr('href');
 
+            event.preventDefault();
+            alert('You are about to leave');
+        //if href does not contain test.php
+        if(href.indexOf('fillForm.php') == -1) { 
+        }
+    });
+</script>
 
 <?php
     include './headFoot/footer.php';
