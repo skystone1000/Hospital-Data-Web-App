@@ -1,14 +1,25 @@
 THINGS TO BE IMPLEMENTED
 
-1) Follow Up add module
 2) Shift database to oracle
-
+4) Message to patient 2 days before medicine end period 
+5) Adding a patient profile photo
+6) Adding patient record images of documents
 3) height Field
+4) Scan for image and fill the form automatically (image processing)
 
+
+1) Follow Up add module
 NEW Follow up
+5) Weight
 2) Previous complains - Better/Same/Worse
 3) Date for Last Follow up
 4) Medicine for days 3/8/15/30
-5) Weight
+1) Other complains
 
-4) Message to patient 2 days before medicine end period 
+
+
+
+
+COMPLTED things
+7) Delete popup message
+8) Alert message on back button from fill form
