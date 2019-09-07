@@ -43,7 +43,20 @@ if ($conn->query($sql) === TRUE) {
     echo "Error creating table: " . $conn->error;
 }
 
+// SQL to create admin_user
+$sql1 = "
+	CREATE TABLE admin_users (
+	id_admin int(11) AUTO_INCREMENT PRIMARY KEY NOT NULL,
+	uid_admin TINYTEXT NOT NULL,
+	email_admin TINYTEXT NOT NULL,
+	password_admin LONGTEXT NOT NULL
+	);
+"
 
+$sql2 = "
+	INSERT INTO `admin_users` (`id_admin`, `uid_admin`, `email_admin`, `password_admin`) 
+	VALUES (NULL, 'shivramspmahajan', 'shivramspmahajan@gmail.com', 'progress23456');
+"
 
 $conn->close();
 ?>

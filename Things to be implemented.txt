@@ -3,10 +3,17 @@ THINGS TO BE IMPLEMENTED
 2) Shift database to oracle
 4) Message to patient 2 days before medicine end period 
 5) Adding a patient profile photo
+4) Scan for image and fill the form automatically (image processing)
 6) Adding patient record images of documents
 3) height Field
-4) Scan for image and fill the form automatically (image processing)
-
+5) Clinical Diagnosis field
+	miasmatic / confirmed 
+6) Clinical diagnosis in filter
+7) payment and balance 
+9) Expenses
+	medicine , stationary , others
+8) Days colletion / Weeks collection /months collection / years collection   
+9) Signin form
 
 1) Follow Up add module
 NEW Follow up
