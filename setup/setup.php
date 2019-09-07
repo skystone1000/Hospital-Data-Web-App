@@ -58,5 +58,10 @@ $sql2 = "
 	VALUES (NULL, 'shivramspmahajan', 'shivramspmahajan@gmail.com', 'progress23456');
 "
 
+$sql3 = "
+	INSERT INTO `admin_users` (`id_admin`, `uid_admin`, `email_admin`, `password_admin`) 
+	VALUES (NULL, 'santoshimahajan', 'santoshimahajan@gmail.com', 'progress23456');
+"
+
 $conn->close();
 ?>

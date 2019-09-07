@@ -81,10 +81,26 @@ $data = mysqli_fetch_assoc($result);
                 <label>Registration Number : </label>
                 <input type="text" class="form-control" id="regno" name="regno" value="<?php echo $data['regno'] ?>" readonly>
             </div>
+
             <div class="col-md-4 mb-3">
                 <label>Id : </label>
                 <input type="text" class="form-control" id="id" name="id" value="<?php echo $data['id'] ?>" readonly>
             </div> 
+        </div>
+
+        <div class="form-row">
+            <div class="col-md-4 mb-3">
+                <label>Height : </label>
+                <input type="text" class="form-control" id="height" name="height" value="<?php echo $data['height'] ?>" readonly>
+            </div>
+            <div class="col-md-4 mb-3">
+                <label>Weight : </label>
+                <input type="text" class="form-control" id="weight" name="weight" value="<?php echo $data['weight'] ?>" readonly>
+            </div> 
+            <div class="col-md-4 mb-3">
+                <label>Clinical Diagnosis: </label>
+                <input type="text" class="form-control" id="diagnosis" name="diagnosis" value="<?php echo $data['diagnosis'] ?>" readonly>
+            </div>
         </div>
 
         <br>
@@ -158,39 +174,39 @@ $data = mysqli_fetch_assoc($result);
 
         <div class="form-group">
             <label>Mind : - </label>
-            <textarea class="form-control" rows="10" name="mind" readonly><?php echo $data['mind'] ?></textarea>
+            <textarea class="form-control" rows="6" name="mind" readonly><?php echo $data['mind'] ?></textarea>
         </div>
 
         <div class="form-group">
             <label>Hobbies : - </label>
-            <textarea class="form-control" rows="5" name="hobbies" readonly><?php echo $data['hobbies'] ?></textarea>
+            <textarea class="form-control" rows="2" name="hobbies" readonly><?php echo $data['hobbies'] ?></textarea>
         </div>
 
         <div class="form-group">
             <label>Particulars : - </label>
-            <textarea class="form-control" rows="15" name="particulars" readonly><?php echo $data['particulars'] ?></textarea>
+            <textarea class="form-control" rows="8" name="particulars" readonly><?php echo $data['particulars'] ?></textarea>
         </div>
 
 
         <div class="form-group">
             <label>On-Examination : - </label>
-            <textarea class="form-control" rows="8" name="on_examination" readonly><?php echo $data['on_examination'] ?></textarea>
+            <textarea class="form-control" rows="4" name="on_examination" readonly><?php echo $data['on_examination'] ?></textarea>
         </div>
 
         <div class="form-group">
             <label>Path-Inv : - </label>
-            <textarea class="form-control" rows="8" name="path_inv" readonly><?php echo $data['path_inv'] ?></textarea>
+            <textarea class="form-control" rows="4" name="path_inv" readonly><?php echo $data['path_inv'] ?></textarea>
         </div>
 
         <div class="form-group">
             <label>Previous-Rx : - </label>
-            <textarea class="form-control" rows="8" name="previous_rx" readonly><?php echo $data['previous_rx'] ?></textarea>
+            <textarea class="form-control" rows="4" name="previous_rx" readonly><?php echo $data['previous_rx'] ?></textarea>
         </div>
 
 
         <div class="form-group">
             <label>Past-history : - </label>
-            <textarea class="form-control" rows="8" name="past_history" readonly><?php echo $data['past_history'] ?></textarea>
+            <textarea class="form-control" rows="4" name="past_history" readonly><?php echo $data['past_history'] ?></textarea>
         </div>
 
 
@@ -203,6 +219,19 @@ $data = mysqli_fetch_assoc($result);
             <label>Treatment : - </label>
             <textarea class="form-control" rows="3" name="treatment" readonly><?php echo $data['treatment'] ?></textarea>
         </div>
+
+        <div class="form-row">
+            <div class="col-md-4 mb-3">
+                <label>Paid</label>
+                <input type="text" id="paid" class="form-control" name="paid" value="<?php echo $data['paid'] ?>" readonly>
+            </div>
+            <div class="col-md-4 mb-3">
+                <label>Balance</label>
+                <input type="text" id="balance" class="form-control" name="balance" value="<?php echo $data['balance'] ?>" readonly>
+            </div>
+        </div> 
+        <br>
+
 
 
         <div class="form-group">

@@ -77,6 +77,22 @@ $data = mysqli_fetch_assoc($result);
             </div>  
         </div>
 
+        <div class="form-row">
+            <div class="col-md-4 mb-3">
+                <label>Height : </label>
+                <input type="text" class="form-control" id="height" name="height" value="<?php echo $data['height'] ?>" >
+            </div>
+            <div class="col-md-4 mb-3">
+                <label>Weight : </label>
+                <input type="text" class="form-control" id="weight" name="weight" value="<?php echo $data['weight'] ?>" >
+            </div> 
+            <div class="col-md-4 mb-3">
+                <label>Clinical Diagnosis: </label>
+                <input type="text" class="form-control" id="diagnosis" name="diagnosis" value="<?php echo $data['diagnosis'] ?>" >
+            </div>
+        </div>
+
+
         <br>
         <h3>Chief Complaints</h3>
         <div class="form-group">
@@ -147,39 +163,39 @@ $data = mysqli_fetch_assoc($result);
 
         <div class="form-group">
             <label>Mind : - </label>
-            <textarea class="form-control" rows="10" name="mind" ><?php echo $data['mind'] ?></textarea>
+            <textarea class="form-control" rows="6" name="mind" ><?php echo $data['mind'] ?></textarea>
         </div>
 
         <div class="form-group">
             <label>Hobbies : - </label>
-            <textarea class="form-control" rows="5" name="hobbies" ><?php echo $data['hobbies'] ?></textarea>
+            <textarea class="form-control" rows="2" name="hobbies" ><?php echo $data['hobbies'] ?></textarea>
         </div>
 
         <div class="form-group">
             <label>Particulars : - </label>
-            <textarea class="form-control" rows="15" name="particulars" ><?php echo $data['particulars'] ?></textarea>
+            <textarea class="form-control" rows="8" name="particulars" ><?php echo $data['particulars'] ?></textarea>
         </div>
 
 
         <div class="form-group">
             <label>On-Examination : - </label>
-            <textarea class="form-control" rows="8" name="on_examination" ><?php echo $data['on_examination'] ?></textarea>
+            <textarea class="form-control" rows="4" name="on_examination" ><?php echo $data['on_examination'] ?></textarea>
         </div>
 
         <div class="form-group">
             <label>Path-Inv : - </label>
-            <textarea class="form-control" rows="8" name="path_inv" ><?php echo $data['path_inv'] ?></textarea>
+            <textarea class="form-control" rows="4" name="path_inv" ><?php echo $data['path_inv'] ?></textarea>
         </div>
 
         <div class="form-group">
             <label>Previous-Rx : - </label>
-            <textarea class="form-control" rows="8" name="previous_rx" ><?php echo $data['previous_rx'] ?></textarea>
+            <textarea class="form-control" rows="4" name="previous_rx" ><?php echo $data['previous_rx'] ?></textarea>
         </div>
 
 
         <div class="form-group">
             <label>Past-history : - </label>
-            <textarea class="form-control" rows="8" name="past_history" ><?php echo $data['past_history'] ?></textarea>
+            <textarea class="form-control" rows="4" name="past_history" ><?php echo $data['past_history'] ?></textarea>
         </div>
 
 
@@ -193,6 +209,17 @@ $data = mysqli_fetch_assoc($result);
             <textarea class="form-control" rows="3" name="treatment" ><?php echo $data['treatment'] ?></textarea>
         </div>
 
+        <div class="form-row">
+            <div class="col-md-4 mb-3">
+                <label>Paid</label>
+                <input type="text" id="paid" class="form-control" name="paid" value="<?php echo $data['paid'] ?>">
+            </div>
+            <div class="col-md-4 mb-3">
+                <label>Balance</label>
+                <input type="text" id="balance" class="form-control" name="balance" value="<?php echo $data['balance'] ?>" >
+            </div>
+        </div> 
+        <br>
 
         <div class="form-group">
             <label>Follow Up 1 : - </label>

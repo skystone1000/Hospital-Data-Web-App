@@ -48,12 +48,28 @@
         <div class="form-row">
             <div class="col-md-4 mb-3">
                 <label>Phone Number : </label>
-                <input type="text" id="phone" class="form-control" id="phone" name="phone" placeholder="Phone">
+                <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone">
             </div> 
             <div class="col-md-4 mb-3">
                 <label>Registration Number : </label>
-                <input type="text" id="regno" class="form-control" id="regno" name="regno" placeholder="Registration Number">
+                <input type="text" class="form-control" id="regno" name="regno" placeholder="Registration Number">
+            </div>
+             
+        </div>
+
+        <div class="form-row">
+            <div class="col-md-4 mb-3">
+                <label>Height : </label>
+                <input type="text" class="form-control" id="height" name="height" placeholder="Height (in cm)">
+            </div>
+            <div class="col-md-4 mb-3">
+                <label>Weight : </label>
+                <input type="text" class="form-control" id="weight" name="weight" placeholder="Weight">
             </div> 
+            <div class="col-md-4 mb-3">
+                <label>Clinical Diagnosis: </label>
+                <input type="text" class="form-control" id="diagnosis" name="diagnosis" placeholder="Diagnosis">
+            </div>
         </div>
 
         <br>
@@ -126,39 +142,39 @@
 
         <div class="form-group">
             <label>Mind : - </label>
-            <textarea class="form-control" rows="10" name="mind" placeholder="Most Imp Ques? "></textarea>
+            <textarea class="form-control" rows="6" name="mind" placeholder="Most Imp Ques? "></textarea>
         </div>
 
         <div class="form-group">
             <label>Hobbies : - </label>
-            <textarea class="form-control" rows="5" name="hobbies" placeholder="What are your hobbies?"></textarea>
+            <textarea class="form-control" rows="2" name="hobbies" placeholder="What are your hobbies?"></textarea>
         </div>
 
         <div class="form-group">
             <label>Particulars : - </label>
-            <textarea class="form-control" rows="15" name="particulars" placeholder="Particulars ..."></textarea>
+            <textarea class="form-control" rows="8" name="particulars" placeholder="Particulars ..."></textarea>
         </div>
 
 
         <div class="form-group">
             <label>On-Examination : - </label>
-            <textarea class="form-control" rows="8" name="on_examination" placeholder="What did you seeeee ...."></textarea>
+            <textarea class="form-control" rows="4" name="on_examination" placeholder="What did you seeeee ...."></textarea>
         </div>
 
         <div class="form-group">
             <label>Path-Inv : - </label>
-            <textarea class="form-control" rows="8" name="path_inv" placeholder="Pathelogy Investigation"></textarea>
+            <textarea class="form-control" rows="4" name="path_inv" placeholder="Pathelogy Investigation"></textarea>
         </div>
 
         <div class="form-group">
             <label>Previous-Rx : - </label>
-            <textarea class="form-control" rows="8" name="previous_rx" placeholder="Have you taken some previous Statements"></textarea>
+            <textarea class="form-control" rows="4" name="previous_rx" placeholder="Have you taken some previous Statements"></textarea>
         </div>
 
 
         <div class="form-group">
             <label>Past-history : - </label>
-            <textarea class="form-control" rows="8" name="past_history" placeholder="What's your history?"></textarea>
+            <textarea class="form-control" rows="4" name="past_history" placeholder="What's your history?"></textarea>
         </div>
 
 
@@ -172,6 +188,17 @@
             <textarea class="form-control" rows="3" name="treatment" placeholder="Treatment Given"></textarea>
         </div>
 
+        <div class="form-row">
+            <div class="col-md-4 mb-3">
+                <label>Paid</label>
+                <input type="text" id="paid" class="form-control" name="paid" placeholder="Paid" required>
+            </div>
+            <div class="col-md-4 mb-3">
+                <label>Balance</label>
+                <input type="text" id="balance" class="form-control" name="balance" placeholder="Balance"  required>
+            </div>
+        </div> 
+        <br>
 
         <div class="form-group">
             <label>Follow Up 1 : - </label>
@@ -195,7 +222,7 @@
         
         <button id="submitBtn" class="btn btn-primary" type="submit">Submit form</button>
     </form>
-
+    <br><br><br>
 </body>
 <!--
 <script src="//cdnjs.cloudflare.com/ajax/libs/annyang/2.6.1/annyang.min.js"></script>
