@@ -16,6 +16,7 @@
 		<a href="records.php?sort=lname"><button type="button" class="btn btn-warning">Last Name</button></a>
 		<a href="records.php?sort=datejoined"><button type="button" class="btn btn-warning">Date</button></a>
 		<a href="records.php?sort=regno"><button type="button" class="btn btn-warning">Registration No</button></a>
+		<a href="records.php?sort=diagnosis"><button type="button" class="btn btn-warning">Clinical Diagnosis</button></a>
 	</div>
 	<br>
 	<?php 
@@ -31,6 +32,7 @@
 		elseif ($sort=='fname'){ $sql = "SELECT * FROM patient_data ORDER BY firstName;"; }
 		elseif ($sort=='lname'){ $sql = "SELECT * FROM patient_data ORDER BY lastName;"; } 
 		elseif ($sort=='datejoined'){ $sql = "SELECT * FROM patient_data ORDER BY dateJoined;"; }
+		elseif ($sort=='diagnosis'){ $sql = "SELECT * FROM patient_data ORDER BY diagnosis;"; }
 		else{ $sql = "SELECT * FROM patient_data;"; }
 		?>
 
