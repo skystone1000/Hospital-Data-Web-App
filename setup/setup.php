@@ -63,5 +63,8 @@ $sql3 = "
 	VALUES (NULL, 'santoshimahajan', 'santoshimahajan@gmail.com', 'progress23456');
 "
 
+$sql = "
+	CREATE TABLE `hospital`.`follow_up_data` ( `followUpId` INT NOT NULL AUTO_INCREMENT , `id` INT(5) NOT NULL , `date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP , `regno` VARCHAR(5) NOT NULL , `weight` VARCHAR(4) NOT NULL , `treatment_output` VARCHAR(10) NOT NULL , `other_complains` VARCHAR(300) NOT NULL , `treatment` VARCHAR(300) NOT NULL , `medicine_duration` VARCHAR(20) NOT NULL , `paid` VARCHAR(5) NOT NULL , `balance` VARCHAR(5) NOT NULL , PRIMARY KEY (`followUpId`(5))) ENGINE = InnoDB;
+"
 $conn->close();
 ?>

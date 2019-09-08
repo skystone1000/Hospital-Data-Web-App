@@ -3,33 +3,41 @@
 ?>
 
 <?php
+
 $id = $_GET['id'];
 include './headFoot/connection.php';
-
-//echo '<h1>' . $id . '</h1>';
 
 $sql = "SELECT * FROM patient_data WHERE id LIKE '%$id%';";
 $result = mysqli_query($conn, $sql);
 $data = mysqli_fetch_assoc($result);
-
-//echo $data['firstName'] ;
 
 ?>
 
 <div class="container">
 	<br>
     <div class="row">
-        <div class="col-md-4 mb-3">
+        <div class="col-md-6 mb-4">
     	   <h2>Patient Details</h2>
         </div>
-        <div class="col-md-4 mb-3">
-
+        <div class="col-md-2 mb-4">
+            <?php
+            echo '
+            <div class="col"><a href="followUp.php?id=' . $id . '"><button class="btn btn-success my-2 my-sm-0" type="submit" value="submit">FollowUp</button></a></div>
+            '
+            ?>
         </div>
-        <div class="col-md-4 mb-3">
+        <div class="col-md-2 mb-4">
             <?php
             echo '
             <small><a href="patientDetailsEdit.php?id=' . $id . '"><button class="btn btn-success my-2 my-sm-0" type="submit" value="submit">Edit Record</button></a></small>
-            '
+            ';
+            ?>
+        </div>
+        <div class="col-md-2 mb-4">
+            <?php
+            echo '
+            <div class="col"><a href="deleteRecord.php?id=' . $id . '" onclick="return confirm(\'Are you sure you want to delete this item?\');"><button class="btn btn-success my-2 my-sm-0" type="submit" value="submit">Delete</button></a></div>
+            ';                
             ?>
         </div>
     </div>

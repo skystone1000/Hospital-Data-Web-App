@@ -31,7 +31,13 @@
             </div>
             <div class="col-md-4 mb-3">
                 <label>Sex</label>
-                <input type="text" id="sex" class="form-control" name="sex" placeholder="Gender"  required>
+                <!--<input type="text" id="sex" class="form-control" name="sex" placeholder="Gender"  required>-->
+                <select class="form-control" id="sex" class="form-control" name="sex" required>
+                    <option>None</option>
+                    <option>Male</option>
+                    <option>Female</option>
+                    <option>Other</option>
+                </select>
             </div>
             <div class="col-md-4 mb-3">
                 <label>Occupation</label>
@@ -48,7 +54,7 @@
         <div class="form-row">
             <div class="col-md-4 mb-3">
                 <label>Phone Number : </label>
-                <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone">
+                <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone" maxlength="15">
             </div> 
             <div class="col-md-4 mb-3">
                 <label>Registration Number : </label>
@@ -190,11 +196,11 @@
 
         <div class="form-row">
             <div class="col-md-4 mb-3">
-                <label>Paid</label>
+                <label>Paid Amount</label>
                 <input type="text" id="paid" class="form-control" name="paid" placeholder="Paid" required>
             </div>
             <div class="col-md-4 mb-3">
-                <label>Balance</label>
+                <label>Balance Amount</label>
                 <input type="text" id="balance" class="form-control" name="balance" placeholder="Balance"  required>
             </div>
         </div> 

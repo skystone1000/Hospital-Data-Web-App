@@ -36,6 +36,12 @@
 				<li class="nav-item">
 					<a class="nav-link" href="fillForm.php">
 						Add Patient
+						<img src="./img/add-patient.svg" style="width: 20px ; height: 20px;">
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="records.php">
+						Follow Up
 						<img src="./img/plus.svg" style="width: 20px ; height: 20px;">
 					</a>
 				</li>

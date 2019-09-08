@@ -65,7 +65,7 @@ $data = mysqli_fetch_assoc($result);
         <div class="form-row">
             <div class="col-md-4 mb-3">
                 <label>Phone Number : </label>
-                <input type="text" class="form-control" id="phone" name="phone" value="<?php echo $data['phone'] ?>" >
+                <input type="text" class="form-control" id="phone" name="phone" value="<?php echo $data['phone'] ?>" maxlength="15">
             </div> 
             <div class="col-md-4 mb-3">
                 <label>Registration Number : </label>
