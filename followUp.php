@@ -21,7 +21,7 @@ $data = mysqli_fetch_assoc($result);
         </h1>
     </div>
 
-    <form action="" method="get" class="container" onsubmit="setFormSubmitting()">
+    <form action="insertFollowUp.php" method="get" class="container" onsubmit="setFormSubmitting()">
         <div class="form-row">
             <div class="col-md-4 mb-3">
                 <label>First name</label>
