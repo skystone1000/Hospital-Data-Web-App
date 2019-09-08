@@ -37,6 +37,17 @@ $data = mysqli_fetch_assoc($result);
             </div>
         </div>
 
+        <div class="form-row">
+            <div class="col-md-4 mb-3">
+                <label>Phone Number : </label>
+                <input type="text" class="form-control" id="phone" name="phone" value="<?php echo $data['phone'] ?>" maxlength="15" readonly>
+            </div> 
+            <div class="col-md-4 mb-3">
+                <label>Id : </label>
+                <input type="text" class="form-control" id="id" name="id" value="<?php echo $data['id'] ?>" readonly>
+            </div>  
+        </div>
+
         <h2>Follow Up Details : </h2>
         <div class="form-row">
             <div class="col-md-4 mb-3">
