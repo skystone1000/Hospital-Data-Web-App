@@ -9,21 +9,12 @@ THINGS TO BE IMPLEMENTED
 8) Days colletion / Weeks collection / months collection / years collection   
 9) Expenses
 	medicine , stationary , others
-
-1) Follow Up add module
-	NEW Follow up
-	
-	5) Weight , height
-	2) Previous complains - Better/Same/Worse
-	3) Date
-	4) Medicine for days 3/8/15/30
-	1) Other complains
-	7) payment and balance 
+10) Follow Up module GUI 
 
 
 ===============================================
 
-COMPLTED things
+COMPLETED things
 7) Delete popup message
 8) Alert message on back button from fill form
 9) Signin form
@@ -35,3 +26,13 @@ Fields to be added
 	5) Clinical Diagnosis field
 		miasmatic / confirmed 
 	7) paid and balance 
+
+Follow Up add module
+	NEW Follow up
+	
+	5) Weight , height
+	2) Previous complains - Better/Same/Worse
+	3) Date
+	4) Medicine for days 3/8/15/30
+	1) Other complains
+	7) payment and balance 
