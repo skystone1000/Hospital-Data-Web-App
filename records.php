@@ -1,5 +1,5 @@
 <?php
-	include './headFoot/header.php';
+	include './includes/header.php';
 ?>
 
 <div class="container">
@@ -8,8 +8,8 @@
 	<div class="list-group">
 	
 	<?php
-		include './headFoot/filter.php';
-		include './headFoot/connection.php';
+		include './includes/filter.php';
+		include './includes/connection.php';
  		
 		$result = mysqli_query($conn, $sql);
 		$resultNum = mysqli_num_rows($result);
@@ -31,7 +31,7 @@
 
 			# Each Patient record card
 			while($row = mysqli_fetch_assoc($result)){
-				include './headFoot/recordCard.php';
+				include './includes/recordCard.php';
 			}
 		} 
 		# If no results found
@@ -46,5 +46,5 @@
 </div>
 
 <?php
-	include './headFoot/footer.php';
+	include './includes/footer.php';
 ?>

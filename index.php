@@ -72,7 +72,7 @@ h3{
 			<div class="col docLogo"></div>
 
 			<div class="col fillForm">
-				<form class="site-form form" action="./headFoot/logincheck.php" method="post">
+				<form class="site-form form" action="./includes/logincheck.php" method="post">
 					<h3>Log In</h3>
 
 					<div class="form-row">
@@ -97,5 +97,5 @@ h3{
 	</div>
 
 <?php
-	include './headFoot/footer.php';
+	include './includes/footer.php';
 ?>

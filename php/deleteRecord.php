@@ -1,5 +1,5 @@
 <?php
-//include './headFoot/connection.php';
+//include './includes/connection.php';
 $servername = "localhost";
 $username = "root";
 $password = "";

@@ -1,5 +1,5 @@
 <?php
-	include './headFoot/header.php';	
+	include './includes/header.php';	
 ?>
 
 <div class="container">
@@ -28,7 +28,7 @@ $results = $pdo->query("SELECT * FROM patient_data WHERE $construct;");
 print_r($results->fetchAll());
 */
 
-include './headFoot/connection.php';
+include './includes/connection.php';
 
 $search = $_GET['dataSearch']; 
 $searchE = explode(" ", $search);
@@ -51,9 +51,9 @@ $resultNum = mysqli_num_rows($result);
 
 if ($resultNum > 0) {
 	echo "<br><h2>Search Results : " . $resultNum . " Found ... </h2><br>";
-	include './headFoot/detailsCard.php';
+	include './includes/detailsCard.php';
 	while($row = mysqli_fetch_assoc($result)){
-		include './headFoot/recordCard.php';
+		include './includes/recordCard.php';
 	}
 } else {
 	echo "<h1>No Results Found !!!</h1>";
@@ -64,5 +64,5 @@ if ($resultNum > 0) {
 </div>
 
 <?php
-	include './headFoot/footer.php';
+	include './includes/footer.php';
 ?>

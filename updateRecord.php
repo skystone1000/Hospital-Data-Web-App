@@ -1,5 +1,5 @@
 <?php
-include './headFoot/connection.php';
+include './includes/connection.php';
 
 $id	= $_GET['id'];
 $firstName	= $_GET['firstName'];

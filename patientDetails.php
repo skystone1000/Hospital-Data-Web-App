@@ -1,11 +1,11 @@
 <?php
-    include './headFoot/header.php';
+    include './includes/header.php';
 ?>
 
 <?php
 
 $id = $_GET['id'];
-include './headFoot/connection.php';
+include './includes/connection.php';
 
 $sql = "SELECT * FROM patient_data WHERE id LIKE '%$id%';";
 $result = mysqli_query($conn, $sql);
@@ -36,7 +36,7 @@ $data = mysqli_fetch_assoc($result);
         <div class="col-md-2 mb-4">
             <?php
             echo '
-            <div class="col"><a href="deleteRecord.php?id=' . $id . '" onclick="return confirm(\'Are you sure you want to delete this item?\');"><button class="btn btn-success my-2 my-sm-0" type="submit" value="submit">Delete</button></a></div>
+            <div class="col"><a href="./php/deleteRecord.php?id=' . $id . '" onclick="return confirm(\'Are you sure you want to delete this item?\');"><button class="btn btn-success my-2 my-sm-0" type="submit" value="submit">Delete</button></a></div>
             ';                
             ?>
         </div>
@@ -269,5 +269,5 @@ $data = mysqli_fetch_assoc($result);
 
 
 <?php
-    include './headFoot/footer.php';
+    include './includes/footer.php';
 ?>

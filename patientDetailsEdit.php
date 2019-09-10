@@ -1,10 +1,10 @@
 <?php
-    include './headFoot/header.php';
+    include './includes/header.php';
 ?>
 
 <?php
 $id = $_GET['id'];
-include './headFoot/connection.php';
+include './includes/connection.php';
 $sql = "SELECT * FROM patient_data WHERE id LIKE '%$id%';";
 $result = mysqli_query($conn, $sql);
 $data = mysqli_fetch_assoc($result);
@@ -26,7 +26,7 @@ $data = mysqli_fetch_assoc($result);
 
 
 
-	<form action="updateRecord.php" method="get" class="container">
+	<form action="./php/updateRecord.php" method="get" class="container">
         <div class="form-row">
             <div class="col-md-4 mb-3">
                 <label>First name</label>
@@ -251,5 +251,5 @@ $data = mysqli_fetch_assoc($result);
 
 
 <?php
-    include './headFoot/footer.php';
+    include './includes/footer.php';
 ?>

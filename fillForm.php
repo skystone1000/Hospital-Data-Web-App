@@ -1,5 +1,5 @@
 <?php
-    include './headFoot/header.php';
+    include './includes/header.php';
 ?>
     
     <br>
@@ -9,7 +9,7 @@
         </h1>
     </div>
 
-    <form action="insertRecord.php" method="get" class="container" onsubmit="setFormSubmitting()">
+    <form action="./php/insertRecord.php" method="get" class="container" onsubmit="setFormSubmitting()">
         <div class="form-row">
             <div class="col-md-4 mb-3">
                 <label>First name</label>
@@ -259,5 +259,5 @@
 </script>
 
 <?php
-    include './headFoot/footer.php';
+    include './includes/footer.php';
 ?>
