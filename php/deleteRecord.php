@@ -1,16 +1,5 @@
 <?php
-//include './includes/connection.php';
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "hospital";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-if ($conn->connect_error) {
-	die("Connection failed: " . $conn->connect_error);
-}
+include '../includes/connection.php';
 
 
 $id	= $_GET['id'];
@@ -57,6 +46,6 @@ $followUp4  = $_GET['followUp4'];
 $sql = "DELETE FROM patient_data WHERE id = $id;";
 
 mysqli_query($conn , $sql);
-header("Location: ./records.php?id=" . $id . "&delete=success");
+header("Location: ../records.php?id=" . $id . "&delete=success");
 
 ?>

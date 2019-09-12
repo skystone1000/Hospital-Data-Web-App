@@ -1,5 +1,5 @@
 <?php
-include './includes/connection.php';
+include '../includes/connection.php';
 
 $followUpId = '';
 $id	= $_GET['id'];
@@ -33,7 +33,7 @@ $sql = "INSERT INTO follow_up_data (	followUpId,	id,	regno,	follow_up_num,	weigh
 
 
 mysqli_query($conn , $sql);
-header("Location: ./records.php?insert=success");
+header("Location: ../records.php?insert=success");
 
 
 ?>

@@ -10,7 +10,7 @@ THINGS TO BE IMPLEMENTED
 9) Expenses
 	medicine , stationary , others
 10) Follow Up module GUI 
-
+11) Adding a side bar to dispaly fields in fillform and to edit details
 
 ===============================================
 

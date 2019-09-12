@@ -1,5 +1,5 @@
 <?php
-include './includes/connection.php';
+include '../includes/connection.php';
 
 $id	= $_GET['id'];
 $firstName	= $_GET['firstName'];
@@ -50,6 +50,6 @@ $sql = "UPDATE patient_data SET firstName='$firstName' ,	middleName = '$middleNa
 
 
 mysqli_query($conn , $sql);
-header("Location: ./patientDetails.php?id=" . $id . "&insert=success");
+header("Location: ../patientDetails.php?id=" . $id . "&insert=success");
 
 ?>

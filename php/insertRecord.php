@@ -1,5 +1,5 @@
 <?php
-include './includes/connection.php';
+include '../includes/connection.php';
 
 $id	= '' ;
 $firstName	= $_GET['firstName'];
@@ -50,6 +50,6 @@ $sql = "INSERT INTO patient_data (	id,	firstName,	middleName,	lastName,	age,	sex
 
 
 mysqli_query($conn , $sql);
-header("Location: ./fillForm.php?insert=success");
+header("Location: ../fillForm.php?insert=success");
 
 ?>
