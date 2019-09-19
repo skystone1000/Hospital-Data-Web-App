@@ -12,6 +12,7 @@ THINGS TO BE IMPLEMENTED
 10) Follow Up module GUI 
 11) Adding a side bar to dispaly fields in fillform and to edit details
 12) move the fillForm Followup 1 to 4 to followup table
+13) Adding dashboard for analytics
 
 ===============================================
 
