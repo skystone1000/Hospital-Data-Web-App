@@ -27,6 +27,13 @@
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item active">
+					<a class="nav-link" href="Dashboard.php">
+						Dashboard 
+						<span class="sr-only">(current)</span>
+						<img src="./img/dashboard.svg" style="width: 20px ; height: 20px;">
+					</a>
+				</li>
+				<li class="nav-item active">
 					<a class="nav-link" href="home.php">
 						Home 
 						<span class="sr-only">(current)</span>

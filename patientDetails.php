@@ -22,7 +22,7 @@ $data = mysqli_fetch_assoc($result);
 			<div class="card-header" id="headingTwo">
 				<h2 class="mb-0">
 					<button class="btn btn-info collapsed" type="button" data-toggle="collapse" data-target="#mainRecord" aria-expanded="false" aria-controls="mainRecord">
-						Case Details
+						Case Details ---- Date Joined : <?php echo $data['dateJoined'] ?>
 					</button>
 				</h2>
 			</div>
