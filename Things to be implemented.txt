@@ -6,13 +6,9 @@ THINGS TO BE IMPLEMENTED
 
 5) Adding a patient profile photo
 6) Adding patient record images of documents
-8) Days colletion / Weeks collection / months collection / years collection   
 9) Expenses
 	medicine , stationary , others
-10) Follow Up module GUI 
-11) Adding a side bar to dispaly fields in fillform and to edit details
 12) move the fillForm Followup 1 to 4 to followup table
-13) Adding dashboard for analytics
 
 ===============================================
 
@@ -21,6 +17,10 @@ COMPLETED things
 8) Alert message on back button from fill form
 9) Signin form
 6) Clinical diagnosis in filter
+11) Adding a side bar to dispaly fields in fillform and to edit details
+10) Follow Up module GUI 
+13) Adding dashboard for analytics
+8) Days colletion / Weeks collection / months collection / years collection   
 
 Fields to be added
 	3) height Field
@@ -31,7 +31,6 @@ Fields to be added
 
 Follow Up add module
 	NEW Follow up
-	
 	5) Weight , height
 	2) Previous complains - Better/Same/Worse
 	3) Date
