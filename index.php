@@ -1,6 +1,10 @@
+
+
 <!DOCTYPE html>
 <html>
 <head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Patient Records</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="./css/style.css">
@@ -23,16 +27,17 @@ h3{
 
 .docLogo{
 	background-image: url(./img/docLogo.png);
-	background-size: 300px;
+	background-size: 25vw;
 	background-repeat: no-repeat;
 	background-position: center;
+	display: none;
 }
-@media (max-width: 576px) { 
-	.docLogo { display: none; }
+@media (max-width: 1000px) { 
+	.fillForm { min-width: 100%; }
 }
 
-@media(min-width: 576px) {
-	.fillForm { min-width: 45%; }
+@media(min-width: 1000px) {
+	.docLogo { display: block; }
 }
 
 .heading{
@@ -69,9 +74,9 @@ h3{
 	<br>
 	<div class="container">
 		<div class="row">
-			<div class="col docLogo"></div>
+			<div class="col-sm-4 docLogo"></div>
 
-			<div class="col fillForm">
+			<div class="col-sm-4 fillForm">
 				<form class="site-form form" action="./includes/logincheck.php" method="post">
 					<h3>Log In</h3>
 
@@ -92,7 +97,7 @@ h3{
 				</form>
 			</div>
 
-			<div class="col docLogo"></div>
+			<div class="col-sm-4 docLogo"></div>
 		</div>
 	</div>
 

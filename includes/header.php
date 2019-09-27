@@ -12,6 +12,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Patient Records</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="./css/style.css">
@@ -28,7 +30,7 @@
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item active">
-					<a class="nav-link" href="Dashboard.php">
+					<a class="nav-link" href="dashboard.php">
 						Dashboard 
 						<span class="sr-only">(current)</span>
 						<img src="./img/dashboard.svg" style="width: 20px ; height: 20px;">
