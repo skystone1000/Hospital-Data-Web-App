@@ -1,5 +1,5 @@
 <div class="sticky-top" style="overflow-y: scroll; max-height: 650px ; ">
-        <nav id="navbar-example3" class="navbar navbar-light bg-light">
+        <nav id="navbar-example3" class="peach-gradient navbar navbar-light bg-light">
             <a class="navbar-brand" href="#">Attributes</a>
             <nav class="nav nav-pills flex-column">
                 <!--

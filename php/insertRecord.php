@@ -40,16 +40,19 @@ $treatment	= $_GET['treatment'];
 $paid = $_GET['paid'];
 $balance = $_GET['balance'];
 
-$followUp1	= $_GET['followUp1'];
-$followUp2  = $_GET['followUp2'];
-$followUp3	= $_GET['followUp3'];
-$followUp4  = $_GET['followUp4'];
+$followUp1	= isset($_GET['followUp1']);
+$followUp2  = isset($_GET['followUp2']);
+$followUp3	= isset($_GET['followUp3']);
+$followUp4  = isset($_GET['followUp4']);
 
 
-$sql = "INSERT INTO patient_data (	id,	firstName,	middleName,	lastName,	age,	sex,	occupation,	address,	phone,	regno,	height,	weight,	diagnosis,	cc1,	cc2,	cc3,	appetite,	desire,	aversions,	thirst,	perspiration,	sleep,	stool,	urine,	menses,	thermal,	mind,	hobbies,	particulars,	on_examination,	path_inv,	previous_rx,	past_history,	family_history,	treatment,	paid,	balance,	followUp1,	followUp2,	followUp3,	followUp4) VALUES (	'$id',	'$firstName',	'$middleName',	'$lastName',	'$age',	'$sex',	'$occupation',	'$address',	'$phone',	'$regno',	'$height',	'$weight',	'$diagnosis',	'$cc1',	'$cc2',	'$cc3',	'$appetite',	'$desire',	'$aversions',	'$thirst',	'$perspiration',	'$sleep',	'$stool',	'$urine',	'$menses',	'$thermal',	'$mind',	'$hobbies',	'$particulars',	'$on_examination',	'$path_inv',	'$previous_rx',	'$past_history',	'$family_history',	'$treatment',	'$paid',	'$balance',	'$followUp1',	'$followUp2',	'$followUp3',	'$followUp4');";
+$sql = "INSERT INTO patient_data (	firstName,	middleName,	lastName,	age,	sex,	occupation,	address,	phone,	regno,	height,	weight,	diagnosis,	cc1,	cc2,	cc3,	appetite,	desire,	aversions,	thirst,	perspiration,	sleep,	stool,	urine,	menses,	thermal,	mind,	hobbies,	particulars,	on_examination,	path_inv,	previous_rx,	past_history,	family_history,	treatment,	paid,	balance,	followUp1,	followUp2,	followUp3,	followUp4) VALUES (	'$firstName',	'$middleName',	'$lastName',	'$age',	'$sex',	'$occupation',	'$address',	'$phone',	'$regno',	'$height',	'$weight',	'$diagnosis',	'$cc1',	'$cc2',	'$cc3',	'$appetite',	'$desire',	'$aversions',	'$thirst',	'$perspiration',	'$sleep',	'$stool',	'$urine',	'$menses',	'$thermal',	'$mind',	'$hobbies',	'$particulars',	'$on_examination',	'$path_inv',	'$previous_rx',	'$past_history',	'$family_history',	'$treatment',	'$paid',	'$balance',	'$followUp1',	'$followUp2',	'$followUp3',	'$followUp4');";
 
 
-mysqli_query($conn , $sql);
-header("Location: ../fillForm.php?insert=success");
-
+if (mysqli_query($conn , $sql) == true){
+	header("Location: ../fillForm.php?insert=success");
+}else {
+    echo "Error: " . $sql . "<br>" . $conn->error;
+    echo "Record NOT INSERTED";
+}
 ?>

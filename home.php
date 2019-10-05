@@ -23,8 +23,8 @@
 		</div>
 		<div class="col">
 			<div class="jumbotron">
-				<h1 class="display-4">Ok, Whats next!</h1>
-				<p class="lead">Ready for the next, Want to add some <br>more patients.</p>
+				<h1 class="display-4">Ok,Whats next!</h1>
+				<p class="lead">Ready for next, Want to add some more<br> patients.</p>
 				<hr class="my-4">
 				<p>Click Here to get Started ...</p>
 				<p class="lead">
