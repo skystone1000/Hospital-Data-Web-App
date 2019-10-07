@@ -8,11 +8,19 @@
         </div>
         <div class="col-md-4 mb-3">
         	<label>Previous treatment Output : </label>
-        	<select class="form-control" name="treatment_output" value="<?php echo $dataRowF['treatment_output']; ?>">
-			    <option>None</option>
+        	<select class="form-control" name="treatment_output" readonly>
+			    <option>
+                    <?php 
+                        if(isset($id)){
+                            echo $dataRowF['treatment_output'];
+                        } else {
+                    ?>
+                    None
+                </option>
 			    <option>Better</option>
 			    <option>Same</option>
 			    <option>Worse</option>
+                    <?php      }       ?>
 			</select>
         </div>
         <div class="col-md-4 mb-3">
@@ -34,12 +42,20 @@
     <div class="form-row">
         <div class="col-md-4 mb-3">
         	<label>Medicine Duration : </label>
-        	<select class="form-control" name="medicine_duration">
-			    <option>None</option>
+        	<select class="form-control" name="medicine_duration" readonly>
+			    <option>
+                    <?php 
+                        if(isset($id)){
+                            echo $dataRowF['medicine_duration'];
+                        } else {
+                    ?>
+                None
+                </option>
 			    <option>3 Days</option>
 			    <option>8 Days</option>
 			    <option>15 Days</option>
 			    <option>1 Month</option>
+                    <?php      }       ?>
 			</select>
         </div>
         <div class="col-md-4 mb-3">

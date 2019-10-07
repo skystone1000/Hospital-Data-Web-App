@@ -10,6 +10,7 @@ THINGS TO BE IMPLEMENTED
 	medicine , stationary , others
 12) move the fillForm Followup 1 to 4 to followup table
 13) http request in ajax (Pagination)
+14) Adding Form FIll checks like int and max length
 
 
 ===============================================

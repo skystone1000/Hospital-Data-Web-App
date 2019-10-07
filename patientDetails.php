@@ -14,28 +14,15 @@ $data = mysqli_fetch_assoc($result);
 <br>
 <div class="container-fluid">
 
-	<h3>Case Details : <?php echo $data['firstName'] ?> <?php echo $data['lastName'] ?></h3>
-	<h4>Registration No : <?php echo $data['regno'] ?></h4><br>
-
-	<div class="accordion">
-		<div class="card">
-			<div class="card-header" id="headingTwo">
-				<h2 class="mb-0">
-					<button class="btn btn-info collapsed" type="button" data-toggle="collapse" data-target="#mainRecord" aria-expanded="false" aria-controls="mainRecord">
-						Case Details ---- Date Joined : <?php echo $data['dateJoined'] ?>
-					</button>
-				</h2>
-			</div>
-			<div id="mainRecord" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-				<div class="card-body">
-					<?php include './includes/patientDetailsForm.php'; ?>
-				</div>
-			</div>
+	<div class="row">
+		<div class="col">
+			<h3>Case Details : <?php echo $data['firstName'] ?> <?php echo $data['lastName'] ?></h3>
+		</div>
+		<div class="col">
+			<h4>Registration No : <?php echo $data['regno'] ?></h4><br>
 		</div>
 	</div>
 
-
-	<br>
 	<div class="row">
 		<div class="col-md-2">
 			<h3>Follow Ups : </h3>
@@ -46,6 +33,7 @@ $data = mysqli_fetch_assoc($result);
 			<div class="col"><a href="followUp.php?id=' . $id . '"><button class="btn btn-success my-2 my-sm-0" type="submit" value="submit">Add Follow Up</button></a></div>
 			'
 			?>
+			<br>
 		</div>
 	</div>
 
@@ -53,7 +41,7 @@ $data = mysqli_fetch_assoc($result);
 
 		<?php 
 
-		$sqlF = "SELECT * FROM follow_up_data WHERE id LIKE '$id' ORDER BY id;";
+		$sqlF = "SELECT * FROM follow_up_data WHERE id LIKE '$id' ORDER BY date DESC;";
 		$resultF = mysqli_query($conn, $sqlF);
 		$resultNumF = mysqli_num_rows($resultF);
 
@@ -65,7 +53,7 @@ $data = mysqli_fetch_assoc($result);
 				<div class="card">
 				<div class="card-header" id="headingOne">
 				<h2 class="mb-0">
-				<button class="btn btn-info collapsed " type="button" data-toggle="collapse" data-target="#followUp'.$dataRowF['follow_up_num'].'" aria-expanded="true" aria-controls="followUp'.$dataRowF['follow_up_num'].'">
+				<button class="btn btn-info show " type="button" data-toggle="collapse" data-target="#followUp'.$dataRowF['follow_up_num'].'" aria-expanded="true" aria-controls="followUp'.$dataRowF['follow_up_num'].'">
 				Follow Up Number : '.$dataRowF['follow_up_num'].'
 				---- Patient ID : '.$dataRowF['id'].' 
 				---- Registration No : '.$dataRowF['regno'].'
@@ -91,8 +79,30 @@ $data = mysqli_fetch_assoc($result);
 			echo "<h4>No Follow Ups Found !!!</h4>";
 		}
 		?>	
-
 	</div>
+	<br>
+
+	<h2>Initial Details :</h2>
+
+	<div class="accordion">
+		<div class="card">
+			<div class="card-header" id="headingTwo">
+				<h2 class="mb-0">
+					<button class="btn btn-info collapsed" type="button" data-toggle="collapse" data-target="#mainRecord" aria-expanded="false" aria-controls="mainRecord">
+						Case Details ---- Date Joined : <?php echo $data['dateJoined'] ?>
+					</button>
+				</h2>
+			</div>
+			<div id="mainRecord" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+				<div class="card-body">
+					<?php include './includes/patientDetailsForm.php'; ?>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
 </div>
 
 
