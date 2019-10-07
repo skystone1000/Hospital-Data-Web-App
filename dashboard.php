@@ -169,16 +169,17 @@
                 <thead class="purple-gradient white-text">
                     <tr>
                         <th width="14%" height="36"><div align="center">Patient Name</div></th>
-                        <th width="17%"><div align="center">Date Joined</div></th>
-                        <th width="22%"><div align="center">Address</div></th>    
-                        <th width="12%"><div align="center">Balance</div></th>
+                        <th width="11%"><div align="center">Date Joined</div></th>
+                        <th width="20%"><div align="center">Address</div></th>   
+                        <th width="10%"><div align="center">Paid</div></th> 
+                        <th width="10%"><div align="center">Balance</div></th>
                         <th width="15%"><div align="center">Treatment</div></th>
                         <th width="20%"><div align="center">Action</div></th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
-                    $weekNewTab = "select id, firstName, lastName, dateJoined, address, phone, balance, treatment from patient_data where  `dateJoined` >= DATE_SUB(CURDATE(), INTERVAL 7 DAY ) ORDER BY dateJoined DESC;";
+                    $weekNewTab = "select id, firstName, lastName, dateJoined, address, phone, paid,balance, treatment from patient_data where  `dateJoined` >= DATE_SUB(CURDATE(), INTERVAL 7 DAY ) ORDER BY dateJoined DESC;";
 
                     /*
                     $weekFollow = "select COUNT(id) as count from follow_up_data where  `date` >= DATE_SUB(CURDATE(), INTERVAL 7 DAY);";
@@ -203,6 +204,7 @@
                         
                         <td>$rs[address]<br><strong>Phone No :</strong> $rs[phone]
                         </td>
+                        <td>Rs $rs[paid]</td>
                         
                         <td>Rs $rs[balance]</td>
                         <td>$rs[treatment]</td>
@@ -226,9 +228,10 @@
                 <thead class="purple-gradient white-text">
                     <tr>
                         <th width="14%" height="36"><div align="center">Patient Name</div></th>
-                        <th width="17%"><div align="center">Date Joined</div></th>
-                        <th width="22%"><div align="center">Address</div></th>    
-                        <th width="12%"><div align="center">Balance</div></th>
+                        <th width="11%"><div align="center">Date Joined</div></th>
+                        <th width="20%"><div align="center">Address</div></th>    
+                        <th width="10%"><div align="center">Paid</div></th>
+                        <th width="10%"><div align="center">Balance</div></th>
                         <th width="15%"><div align="center">Treatment</div></th>
                         <th width="20%"><div align="center">Action</div></th>
                     </tr>
@@ -236,7 +239,7 @@
                 <tbody>
                     <?php
                     
-                    $weekFollowTab = "select patient_data.id, firstName, lastName, dateJoined, address, phone, follow_up_data.balance, follow_up_data.treatment from follow_up_data INNER JOIN patient_data ON follow_up_data.id = patient_data.id where  `date` >= DATE_SUB(CURDATE(), INTERVAL 7 DAY);";
+                    $weekFollowTab = "select patient_data.id, firstName, lastName, dateJoined, address, phone, follow_up_data.balance,follow_up_data.paid, follow_up_data.treatment from follow_up_data INNER JOIN patient_data ON follow_up_data.id = patient_data.id where  `date` >= DATE_SUB(CURDATE(), INTERVAL 7 DAY);";
 
                     $qsql = mysqli_query($conn,$weekFollowTab);
 
@@ -253,7 +256,7 @@
                         
                         <td>$rs[address]<br><strong>Phone No :</strong> $rs[phone]
                         </td>
-                        
+                        <td>Rs $rs[paid]</td>                        
                         <td>Rs $rs[balance]</td>
                         <td>$rs[treatment]</td>
 
