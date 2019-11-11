@@ -30,7 +30,7 @@ $data = mysqli_fetch_assoc($result);
 		<div class="col-md-10">
 			<?php
 			echo '
-			<div class="col"><a href="followUp.php?id=' . $id . '"><button class="btn btn-success my-2 my-sm-0" type="submit" value="submit">Add Follow Up</button></a></div>
+			<div class="col"><a href="followUp.php?id=' . $id . '" target="_blank"><button class="btn btn-success my-2 my-sm-0" type="submit" value="submit">Add Follow Up</button></a></div>
 			'
 			?>
 			<br>
