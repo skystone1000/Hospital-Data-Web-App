@@ -127,7 +127,7 @@
 					<div class="card-body">
 						<h5 class="card-title"> New patients : <?php echo $todayNewCount; ?> </h5>
 						<h5 class="card-title"> Follow Ups : <?php echo $todayFollowCount; ?></h5>
-						<p class="card-text"> Earning : <?php echo $todayEarnCount; ?></p>
+						<p class="card-title"> Earning : <?php echo $todayEarnCount; ?></p>
 					</div>
 				</div>
 				&emsp;
@@ -136,7 +136,7 @@
 					<div class="card-body">
 						<h5 class="card-title"> New patients : <?php echo $weekNewCount; ?></h5>
 						<h5 class="card-title"> Follow Ups : <?php echo $weekFollowCount; ?></h5>
-						<p class="card-text"> Earning : <?php echo $weekEarnCount; ?></p>
+						<p class="card-title"> Earning : <?php echo $weekEarnCount; ?></p>
 					</div>
 				</div>
 				&emsp;
@@ -145,7 +145,7 @@
 					<div class="card-body">
 						<h5 class="card-title"> New patients : <?php echo $monthNewCount; ?></h5>
 						<h5 class="card-title"> Follow Ups : <?php echo $monthFollowCount; ?></h5>
-						<p class="card-text"> Earning : <?php echo $monthEarnCount; ?></p>
+						<p class="card-title"> Earning : <?php echo $monthEarnCount; ?></p>
 					</div>
 				</div>
 				&emsp;
@@ -154,7 +154,7 @@
 					<div class="card-body">
 						<h5 class="card-title"> New patients : <?php echo $yearNewCount; ?></h5>
 						<h5 class="card-title"> Follow Ups : <?php echo $yearFollowCount; ?></h5>
-						<p class="card-text"> Earning : <?php echo $yearEarnCount; ?></p>
+						<p class="card-title"> Earning : <?php echo $yearEarnCount; ?></p>
 					</div>
 				</div>
 			</div><hr>

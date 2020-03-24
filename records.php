@@ -42,6 +42,53 @@
 		
 	</div>
 
+	<br>
+	<div class="container">
+		<nav aria-label="Page navigation example">
+			<ul class="pagination pg-blue justify-content-center">
+
+				<?php if($page != 0){  ?>
+					
+					<li class="page-item ">
+						<a class="page-link btn-primary text-white" tabindex="-1" href="records.php?page=<?php echo $page; ?>">Previous</a>
+					</li>
+
+					<li class="page-item"><a class="page-link"> . . . </a></li>
+
+					<li class="page-item">
+						<a class="page-link" href="records.php?page=<?php echo $page; ?>"><?php echo $page; ?></a>
+					</li>
+
+				<?php } else { ?>
+
+					<li class="page-item ">
+						<a class="page-link btn-light text-white disabled" tabindex="-1" href="records.php?page=<?php echo $page; ?>">Previous</a>
+					</li>
+
+					<li class="page-item"><a class="page-link"> &nbsp; </a></li>
+
+				<?php } ?>
+
+				<li class="page-item active">
+					<a class="page-link"><?php echo $page+1; ?><span class="sr-only">(current)</span></a>
+				</li>
+				
+
+
+				<li class="page-item">
+					<a class="page-link" href="records.php?page=<?php echo $page+2; ?>"><?php echo $page+2; ?></a>
+				</li>
+				
+
+
+				<li class="page-item"><a class="page-link"> . . . </a></li>
+
+				<li class="page-item ">
+					<a class="page-link btn-primary text-white" href="records.php?page=<?php echo $page+2; ?>">Next</a>
+				</li>
+			</ul>
+		</nav>
+	</div>
 
 </div>
 

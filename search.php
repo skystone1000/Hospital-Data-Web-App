@@ -45,12 +45,12 @@ foreach ($searchE as $term) {
 }
 
 
-$sql = "SELECT * FROM patient_data WHERE $construct;";
+$sql = "SELECT * FROM patient_data WHERE $construct LIMIT 20;";
 $result = mysqli_query($conn, $sql);
 $resultNum = mysqli_num_rows($result);
 
 if ($resultNum > 0) {
-	echo "<br><h2>Search Results : " . $resultNum . " Found ... </h2><br>";
+	echo "<br><h2>Search Results : Top " . $resultNum . " records ... </h2><br>";
 	include './includes/detailsCard.php';
 	while($row = mysqli_fetch_assoc($result)){
 		include './includes/recordCard.php';

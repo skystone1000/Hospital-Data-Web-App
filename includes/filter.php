@@ -21,19 +21,26 @@
 	<br>
 	<?php 
 	# Check if sort paramenter is present in url
+		$sort = '';
+		$page = '1';
 		if (isset($_GET['sort'])){
 			$sort = $_GET['sort'];
-		} else {
-			$sort = '';
 		}
+		if (isset($_GET['page'])){
+			$page = $_GET['page'];
+		}
+		$page = (int)$page - 1;
+		$offset = $page * 20;
 
 		# Set the sql statement according to the sort variable filter
-		if ($sort=='regno'){ $sql = "SELECT * FROM patient_data ORDER BY regno;"; }
-		elseif ($sort=='fname'){ $sql = "SELECT * FROM patient_data ORDER BY firstName;"; }
-		elseif ($sort=='lname'){ $sql = "SELECT * FROM patient_data ORDER BY lastName;"; } 
-		elseif ($sort=='datejoined'){ $sql = "SELECT * FROM patient_data ORDER BY dateJoined;"; }
-		elseif ($sort=='diagnosis'){ $sql = "SELECT * FROM patient_data ORDER BY diagnosis;"; }
-		else{ $sql = "SELECT * FROM patient_data;"; }
+		if ($sort=='regno'){ $sql = "SELECT * FROM patient_data ORDER BY regno LIMIT " . $offset . ",20;"; }
+		elseif ($sort=='fname'){ $sql = "SELECT * FROM patient_data ORDER BY firstName LIMIT " . $offset . ",20;"; }
+		elseif ($sort=='lname'){ $sql = "SELECT * FROM patient_data ORDER BY lastName LIMIT " . $offset . ",20;"; } 
+		elseif ($sort=='datejoined'){ $sql = "SELECT * FROM patient_data ORDER BY dateJoined LIMIT " . $offset . ",20;"; }
+		elseif ($sort=='diagnosis'){ $sql = "SELECT * FROM patient_data ORDER BY diagnosis LIMIT " . $offset . ",20;"; }
+		else{ $sql = "SELECT * FROM patient_data LIMIT " . $offset . ",20;"; }
+
+		//echo $sql;
 		?>
 
 </div>
