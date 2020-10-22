@@ -84,7 +84,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         Toast.makeText(BaseActivity.this, "Test", Toast.LENGTH_SHORT).show();
         // Scroll the Forward view down (so that we can see the bottom part) Animation 2
         toolbar.setNavigationOnClickListener(new NavigationIconClickListener(
-                getContext(),
+                (Activity)this,
                 findViewById(R.id.product_grid),
                 new AccelerateDecelerateInterpolator(),
                 this.getDrawable(R.drawable.shr_branded_menu), // Menu open icon
