@@ -1,0 +1,621 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.patientrecords.ui.addpatient.AddPatientViewModel" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!-- Title Heading -->
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Add New Patient"
+                android:textAlignment="center"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <!-- Patient Details Label -->
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Add Patient Details"
+                android:layout_marginVertical="12dp" />
+
+            <!-- Name Row -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp">
+
+                <!-- Guidelines -->
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintGuide_percent="0.33"
+                    android:orientation="vertical" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintGuide_percent="0.66"
+                    android:orientation="vertical" />
+
+                <!-- First Name -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/fn"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:hint="First Name"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/guideline1"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etFirstName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Middle Name -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/mn"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:hint="Middle Name"
+                    app:layout_constraintStart_toStartOf="@id/guideline1"
+                    app:layout_constraintEnd_toStartOf="@id/guideline2"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etMiddleName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Last Name -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/ln"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:hint="Last Name"
+                    app:layout_constraintStart_toStartOf="@id/guideline2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etLastName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- Age / Sex / Occupation Row -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp">
+
+                <!-- Reuse guidelines -->
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintGuide_percent="0.33"
+                    android:orientation="vertical" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintGuide_percent="0.66"
+                    android:orientation="vertical" />
+
+                <!-- Age -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:hint="Age"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/guideline3"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etAge"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Sex -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:hint="Sex"
+                    app:layout_constraintStart_toStartOf="@id/guideline3"
+                    app:layout_constraintEnd_toStartOf="@id/guideline4"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etSex"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Occupation -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:hint="Occupation"
+                    app:layout_constraintStart_toStartOf="@id/guideline4"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/occupation"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- Address -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Address">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Phone + Reg. No. Row -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp">
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guidelinePhoneHalf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.5" />
+
+                <!-- Phone -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:hint="Phone"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/guidelinePhoneHalf"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etPhone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="phone" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Reg. No. -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:hint="Registration No."
+                    app:layout_constraintStart_toStartOf="@id/guidelinePhoneHalf"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etRegNo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- Clinical Details Label -->
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Clinical Details"
+                android:layout_marginTop="16dp" />
+
+            <!-- Height + Weight Row -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp">
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guidelineHW"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.5" />
+
+                <!-- Height -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:hint="Height (cm)"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/guidelineHW"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etHeight"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Weight -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:hint="Weight (kg)"
+                    app:layout_constraintStart_toStartOf="@id/guidelineHW"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etWeight"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- Chief Complain 1 -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Chief Complain 1">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etCc1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Chief Complain 2 -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Chief Complain 2">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etCc2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Chief Complain 3 -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Chief Complain 3">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etCc3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Appetite -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Appetite">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etAppetite"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lines="2"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Desire -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Desire">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etDesire"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lines="5"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Aversions -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Aversions">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etAversions"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lines="2" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Thirst -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Thirst">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etThirst"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lines="2" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Perspiration -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Perspiration">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etPerspiration"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lines="2" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Sleep -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Sleep">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etSleep"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lines="2" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Stool -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Stool">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etStool"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lines="2" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Urine -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Urine">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etUrine"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lines="2" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Menses -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Menses">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etMenses"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lines="2" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Thermal -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Thermal">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etThermal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lines="1" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Mind -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Mind">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etMind"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lines="6" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Hobbies -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Hobbies">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etHobbies"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lines="2" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Particulars -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Particulars">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etParticulars"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lines="8" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- On Examination -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="On Examination">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etOnExamination"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lines="4" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Path Inv -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Path Inv">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etPathInv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lines="4" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Previous_rx -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Previous Rx">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etPreviousRx"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lines="4" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Past History -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Past History">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etPastHistory"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lines="4" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Family History -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Family History">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etFamilyHistory"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lines="2" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Treatment -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Treatment">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etTreatment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lines="3" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Paid -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Paid">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etPaid"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lines="1" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Balance -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Balance">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etBalance"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lines="1" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Follow Up 1
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Follow Up 1">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/followUp1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lines="2" />
+            </com.google.android.material.textfield.TextInputLayout>
+            -->
+
+
+            <!-- Submit Button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSubmit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Submit"
+                android:layout_marginTop="24dp"
+                android:backgroundTint="?attr/colorPrimary"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+    </ScrollView>
+</layout>

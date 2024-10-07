@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginVertical="8dp"
+    android:layout_marginHorizontal="16dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="6dp"
+    android:foreground="?attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <!-- Full Name -->
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="John Doe"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textColor="?android:textColorPrimary"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/tvSex"
+            app:layout_constraintHorizontal_bias="0.0" />
+
+        <!-- Sex -->
+        <TextView
+            android:id="@+id/tvSex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="M"
+            android:textColor="?android:textColorSecondary"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Occupation -->
+        <TextView
+            android:id="@+id/tvOccupation"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Software Engineer"
+            android:textSize="14sp"
+            android:textColor="?android:textColorSecondary"
+            app:layout_constraintTop_toBottomOf="@id/tvName"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="4dp" />
+
+        <!-- Phone -->
+        <TextView
+            android:id="@+id/tvPhone"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Phone: 1234567890"
+            android:textSize="13sp"
+            android:textColor="?android:textColorSecondary"
+            app:layout_constraintTop_toBottomOf="@id/tvOccupation"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/tvRegNo"
+            android:layout_marginTop="8dp" />
+
+        <!-- Reg No -->
+        <TextView
+            android:id="@+id/tvRegNo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Reg: R123"
+            android:textSize="13sp"
+            android:textColor="?android:textColorSecondary"
+            app:layout_constraintTop_toTopOf="@id/tvPhone"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="8dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

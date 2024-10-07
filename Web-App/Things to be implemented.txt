@@ -40,3 +40,27 @@ Follow Up add module
 	4) Medicine for days 3/8/15/30
 	1) Other complains
 	7) payment and balance 
+
+Following is the website file structure and its corrosponding UI screen
+Web App Structure
+	index.php - sign in
+
+	home.php - home
+	dashboard.php - dashboard
+	fillForm.php - Add Patient
+	records.php - Patient Records
+	detailedRecords.php - Detailed patient records
+	
+	search.php?dataSearch=k - Search bar
+	patientDetails.php?id=8 - Patient details
+	followUp.php?id=8 - follow up
+
+Now we need to convert this website having above structure in to an android app.
+For Android App use following details
+Language - Kotlin
+Architecture - MVVM
+For UI use Compose instead of XML
+Use Activity and Fragments where ever necessary for the screens required
+Give a package structure first to follow the MVVM and 
+Layers as Data, Domain and UI
+After package structure give the implementation of all the classes

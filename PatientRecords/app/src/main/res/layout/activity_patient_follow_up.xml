@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.patientrecords.ui.followuppatient.PatientFollowUpViewModel" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="?attr/actionBarSize"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:text="Patient Follow-Up"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <!-- Section 1: Prepopulated Fields -->
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Patient Details"
+                android:layout_marginVertical="12dp" />
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:layout_marginHorizontal="4dp"
+                android:padding="16dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="6dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="?attr/colorPrimaryContainer"
+                app:cardBackgroundColor="?attr/colorSurface">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+                    <!-- Name (First + Last) -->
+                    <TextView
+                        android:id="@+id/tvNameLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Name:"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tvName"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text='@{viewModel.patient.firstName + " " + viewModel.patient.lastName}'
+                        android:textSize="16sp"
+                        android:textColor="?android:textColorPrimary"
+                        app:layout_constraintStart_toEndOf="@id/tvNameLabel"
+                        app:layout_constraintTop_toTopOf="@id/tvNameLabel"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_marginStart="8dp" />
+
+                    <!-- Reg No -->
+                    <TextView
+                        android:id="@+id/tvRegNoLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Reg No:"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvName"
+                        android:layout_marginTop="12dp" />
+
+                    <TextView
+                        android:id="@+id/tvRegNo"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text='@{viewModel.patient.regno}'
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toEndOf="@id/tvRegNoLabel"
+                        app:layout_constraintTop_toTopOf="@id/tvRegNoLabel"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_marginStart="8dp" />
+
+                    <!-- Phone -->
+                    <TextView
+                        android:id="@+id/tvPhoneLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Phone:"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvRegNo"
+                        android:layout_marginTop="12dp" />
+
+                    <TextView
+                        android:id="@+id/tvPhone"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text='@{viewModel.patient.phone}'
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toEndOf="@id/tvPhoneLabel"
+                        app:layout_constraintTop_toTopOf="@id/tvPhoneLabel"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_marginStart="8dp" />
+
+                    <!-- ID -->
+                    <TextView
+                        android:id="@+id/tvIdLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Patient ID:"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvPhone"
+                        android:layout_marginTop="12dp" />
+
+                    <TextView
+                        android:id="@+id/tvId"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text='@{String.valueOf(viewModel.patient.id)}'
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toEndOf="@id/tvIdLabel"
+                        app:layout_constraintTop_toTopOf="@id/tvIdLabel"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_marginStart="8dp" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Section 2: Follow-Up Inputs -->
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Follow Up Details"
+                android:layout_marginVertical="12dp" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp">
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guidelineWeightHalf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.5" />
+
+                <!-- Weight -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:hint="Weight"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/guidelineWeightHalf"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etWeight"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Treatment Output -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:hint="Previous Treatment Output"
+                    app:layout_constraintStart_toStartOf="@id/guidelineWeightHalf"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etTreatmentOutput"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- Other Complains -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Other Complains">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etOtherComplains"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lines="4"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Treatment -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Treatment">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etTreatment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lines="5"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Medicine Duration -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Medicine Duration">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etMedicineDuration"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guidelineBalanceHalf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.5" />
+
+                <!-- Paid Amount -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:hint="Paid Amount"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/guidelineBalanceHalf"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etPaidAmount"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Balance Amount -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:hint="Balance Amount"
+                    app:layout_constraintStart_toStartOf="@id/guidelineBalanceHalf"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etBalanceAmount"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+            <!-- treatment_output, other_complains, treatment, medicine_duration, paid, balance -->
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSubmit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Submit" />
+        </LinearLayout>
+    </ScrollView>
+</layout>
