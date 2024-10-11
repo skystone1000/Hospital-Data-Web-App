@@ -1,5 +1,9 @@
 package com.example.patientrecords.data
 
+import com.example.patientrecords.data.localdb.Patient
+import com.example.patientrecords.data.localdb.PatientDao
+import com.example.patientrecords.data.localdb.PatientFollowUp
+import com.example.patientrecords.data.localdb.PatientFollowUpDao
 import kotlinx.coroutines.flow.Flow
 
 class PatientRepository(private val patientDao: PatientDao, private val patientFollowUpDao: PatientFollowUpDao) {

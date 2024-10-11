@@ -4,14 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.patientrecords.data.Patient
-import com.example.patientrecords.data.PatientFollowUp
+import com.example.patientrecords.data.localdb.Patient
+import com.example.patientrecords.data.localdb.PatientFollowUp
 import com.example.patientrecords.data.PatientRepository
-import com.example.patientrecords.databinding.ActivityPatientFollowUpBinding
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
-import kotlin.random.Random
 
 class PatientFollowUpViewModel(
     private val repository: PatientRepository,

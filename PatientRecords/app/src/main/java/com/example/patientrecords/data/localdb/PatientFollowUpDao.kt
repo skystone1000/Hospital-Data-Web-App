@@ -1,4 +1,4 @@
-package com.example.patientrecords.data
+package com.example.patientrecords.data.localdb
 
 import androidx.room.Dao
 import androidx.room.Insert

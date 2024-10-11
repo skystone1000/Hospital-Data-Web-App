@@ -2,18 +2,12 @@ package com.example.patientrecords.ui.followuppatient
 
 import android.os.Bundle
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.example.patientrecords.PatientRecordsApp
 import com.example.patientrecords.R
-import com.example.patientrecords.data.PatientFollowUp
+import com.example.patientrecords.data.localdb.PatientFollowUp
 import com.example.patientrecords.databinding.ActivityPatientFollowUpBinding
 import com.example.patientrecords.ui.base.BaseActivity
 import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 import java.util.Calendar
 import java.util.Locale
 import kotlin.random.Random
@@ -52,7 +46,7 @@ class PatientFollowUpActivity : BaseActivity(R.layout.activity_patient_follow_up
         }
     }
 
-    private fun collectPatientFollowUpFromInput(): PatientFollowUp{
+    private fun collectPatientFollowUpFromInput(): PatientFollowUp {
         var newPatientFollowUp = PatientFollowUp(
             followUpId = Random.nextInt(100000),  // Replace with a proper ID logic if needed,
             id = patientId,

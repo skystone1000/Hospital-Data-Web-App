@@ -31,14 +31,9 @@ class ViewAllPatientsActivity : BaseActivity(R.layout.activity_view_all_patients
         val factory = ViewAllPatientsViewModelFactory((application as PatientRecordsApp).repository)
         viewModel = ViewModelProvider(this, factory)[ViewAllPatientsViewModel::class.java]
 
-
-
         viewModel.allPatients.observe(this) { patients ->
             binding.rvPatients.adapter = PatientAdapter(patients)
         }
 
-
-
-//        viewModel.getAllPatients()
     }
 }

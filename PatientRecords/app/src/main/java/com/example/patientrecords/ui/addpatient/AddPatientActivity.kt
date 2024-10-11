@@ -2,15 +2,10 @@ package com.example.patientrecords.ui.addpatient
 
 import android.os.Bundle
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
 import com.example.patientrecords.PatientRecordsApp
 import com.example.patientrecords.R
-import com.example.patientrecords.data.Patient
-import com.example.patientrecords.data.PatientDatabase
-import com.example.patientrecords.data.PatientRepository
+import com.example.patientrecords.data.localdb.Patient
 import com.example.patientrecords.databinding.ActivityAddPatientBinding
 import com.example.patientrecords.ui.base.BaseActivity
 import kotlin.random.Random

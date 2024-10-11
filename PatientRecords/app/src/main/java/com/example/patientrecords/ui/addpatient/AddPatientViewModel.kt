@@ -1,7 +1,7 @@
 package com.example.patientrecords.ui.addpatient
 
 import androidx.lifecycle.viewModelScope
-import com.example.patientrecords.data.Patient
+import com.example.patientrecords.data.localdb.Patient
 import kotlinx.coroutines.launch
 import androidx.lifecycle.ViewModel
 import com.example.patientrecords.data.PatientRepository
