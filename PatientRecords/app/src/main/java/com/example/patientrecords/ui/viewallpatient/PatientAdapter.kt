@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.patientrecords.data.localdb.Patient
 import com.example.patientrecords.databinding.ItemPatientBinding
 import com.example.patientrecords.ui.followuppatient.PatientFollowUpActivity
+import com.example.patientrecords.ui.patienthistory.PatientHistoryActivity
 
 class PatientAdapter(private val patients: List<Patient>) :
     RecyclerView.Adapter<PatientAdapter.PatientViewHolder>() {
@@ -30,12 +31,13 @@ class PatientAdapter(private val patients: List<Patient>) :
 
         holder.itemView.setOnClickListener {
             val context = it.context
-            val intent = Intent(context, PatientFollowUpActivity::class.java).apply {
+            val intent = Intent(context, PatientHistoryActivity::class.java).apply {
                 putExtra("patient_id", patient.id)
                 putExtra("patient_regno", patient.regno)
             }
             context.startActivity(intent)
         }
+
 
     }
 
