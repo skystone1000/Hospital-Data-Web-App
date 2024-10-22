@@ -16,7 +16,7 @@ class PatientHistoryViewModel(
     private val repository: PatientRepository
 ) : ViewModel() {
 
-    val Patient: LiveData<Patient> = repository.getPatientById(patientId).asLiveData()
+    val patient: LiveData<Patient> = repository.getPatientById(patientId).asLiveData()
 
     val followUps: StateFlow<List<PatientFollowUp>> =
         repository.getFollowUps(patientId).stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
