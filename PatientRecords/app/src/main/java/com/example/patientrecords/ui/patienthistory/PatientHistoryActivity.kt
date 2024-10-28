@@ -1,11 +1,15 @@
 package com.example.patientrecords.ui.patienthistory
 
 import android.content.Intent
+import android.content.res.Resources
 import android.os.Bundle
+import android.widget.LinearLayout
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.marginEnd
+import androidx.core.view.marginTop
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.patientrecords.PatientRecordsApp
@@ -63,10 +67,9 @@ class PatientHistoryActivity : BaseActivity(R.layout.activity_patient_history) {
         }
     }
 
-    private fun displayFollowUps(followUps: List<PatientFollowUp>) {
+    private fun displayFollowUps1(followUps: List<PatientFollowUp>) {
         val container = binding.followUpListContainer
         container.removeAllViews()
-
         followUps.forEach { followUp ->
             val itemBinding = ItemFollowupEntryBinding.inflate(layoutInflater)
             itemBinding.tvFollowUpDate.text = "Date: ${followUp.date}"
@@ -77,4 +80,41 @@ class PatientHistoryActivity : BaseActivity(R.layout.activity_patient_history) {
             container.addView(itemBinding.root)
         }
     }
+
+    private fun displayFollowUps(followUps: List<PatientFollowUp>) {
+        val container = binding.followUpListContainer
+        container.removeAllViews()
+        followUps.forEach { followUp ->
+            val itemBinding = ItemFollowupEntryBinding.inflate(layoutInflater)
+
+            // Set data
+            itemBinding.tvFollowUpDate.text = "Date: ${followUp.date}"
+            itemBinding.tvFollowUpNum.text = "Follow Up Number: ${followUp.follow_up_num}"
+
+            // Set click listener
+            itemBinding.btnViewDetails.setOnClickListener {
+                // handle view follow-up details
+            }
+
+            // Apply margins programmatically
+            val layoutParams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+            ).apply {
+                val marginVertical = 8.dpToPx()
+                val marginHorizontal = 4.dpToPx()
+                setMargins(marginHorizontal, marginVertical, marginHorizontal, marginVertical) // top and bottom margins
+            }
+
+            itemBinding.root.layoutParams = layoutParams
+
+            // Add view to container
+            container.addView(itemBinding.root)
+        }
+    }
+
+    fun Int.dpToPx(): Int {
+        return (this * Resources.getSystem().displayMetrics.density).toInt()
+    }
+
 }
