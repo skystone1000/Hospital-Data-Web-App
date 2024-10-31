@@ -1,6 +1,7 @@
 package com.example.patientrecords.ui.followuppatient
 
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import com.example.patientrecords.PatientRecordsApp
 import com.example.patientrecords.R
@@ -20,6 +21,8 @@ class PatientFollowUpActivity : BaseActivity(R.layout.activity_patient_follow_up
     private var patientId: Int = -1
     private var patientRegNo: String = ""
     private var totalInitialFollowUps: Int = 0
+    private var patientFollowUpNumber: String = "-1"
+    private var isViewMode:Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,8 +30,10 @@ class PatientFollowUpActivity : BaseActivity(R.layout.activity_patient_follow_up
         setContentView(binding.root)
 
         patientId = intent.getIntExtra("patient_id", -1)
-        patientRegNo = intent.getStringExtra("patient_regno").toString()
+        patientRegNo = intent.getStringExtra("patient_reg_no").toString()
         viewModel = PatientFollowUpViewModelFactory((application as PatientRecordsApp).repository, patientId).create(PatientFollowUpViewModel::class.java)
+        patientFollowUpNumber = intent.getStringExtra("follow_up_number").toString()
+        isViewMode = intent.getBooleanExtra("is_view_mode", false)
 
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
@@ -36,6 +41,16 @@ class PatientFollowUpActivity : BaseActivity(R.layout.activity_patient_follow_up
         // Get Total number of current patient follow ups
          viewModel.patientFollowUps.observe(this){
              totalInitialFollowUps = it.count()
+             if (patientFollowUpNumber != "-1") {
+                 // Find Current Follow up
+                 val currentFollowUp = findCurrentFollowup(it)
+                 // Add Data to views
+                 if (currentFollowUp != null) {
+                     setPatientFollowUpFromDb(currentFollowUp)
+                 }
+                 // Disable input fields
+                 setViewOnlyMode()
+             }
         }
 
         binding.btnSubmit.setOnClickListener {
@@ -44,6 +59,37 @@ class PatientFollowUpActivity : BaseActivity(R.layout.activity_patient_follow_up
             Toast.makeText(this, "Patient Follow Up Added", Toast.LENGTH_SHORT).show()
             finish()
         }
+    }
+
+    private fun findCurrentFollowup(patientFollowUps: List<PatientFollowUp>) : PatientFollowUp? {
+        for(patientFollowUp in patientFollowUps){
+            if(patientFollowUp.follow_up_num == patientFollowUpNumber.toString()){
+                return patientFollowUp
+            }
+        }
+        return null
+    }
+
+    private fun setPatientFollowUpFromDb(patientFollowUp: PatientFollowUp) {
+        binding.etWeight.setText(patientFollowUp.weight.toString())  // Bcz Int
+        binding.etTreatmentOutput.setText(patientFollowUp.treatment_output)
+        binding.etOtherComplains.setText(patientFollowUp.other_complains)
+        binding.etTreatment.setText(patientFollowUp.treatment)
+        binding.etMedicineDuration.setText(patientFollowUp.medicine_duration)
+        binding.etPaidAmount.setText(patientFollowUp.paid)
+        binding.etBalanceAmount.setText(patientFollowUp.balance.toString())  // Bcz Int
+    }
+
+    private fun setViewOnlyMode() {
+        binding.etWeight.isEnabled = false
+        binding.etTreatmentOutput.isEnabled = false
+        binding.etOtherComplains.isEnabled = false
+        binding.etTreatment.isEnabled = false
+        binding.etMedicineDuration.isEnabled = false
+        binding.etPaidAmount.isEnabled = false
+        binding.etBalanceAmount.isEnabled = false
+
+        binding.btnSubmit.visibility = View.GONE
     }
 
     private fun collectPatientFollowUpFromInput(): PatientFollowUp {

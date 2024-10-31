@@ -33,7 +33,7 @@ class PatientAdapter(private val patients: List<Patient>) :
             val context = it.context
             val intent = Intent(context, PatientHistoryActivity::class.java).apply {
                 putExtra("patient_id", patient.id)
-                putExtra("patient_regno", patient.regno)
+                putExtra("patient_reg_no", patient.regno)
             }
             context.startActivity(intent)
         }

@@ -64,7 +64,7 @@ class AddPatientActivity : BaseActivity(R.layout.activity_add_patient) {
         binding.address.setText(patient.address)
         binding.etPhone.setText(patient.phone)
         binding.etRegNo.setText(patient.regno)
-        patient.height?.let { binding.etHeight.setText(it.toString()) }
+        patient.height?.let { binding.etHeight.setText(it.toString()) } // Because Its an Int field and nullable
         patient.weight?.let { binding.etWeight.setText(it.toString()) }
         binding.etCc1.setText(patient.cc1)
         binding.etCc2.setText(patient.cc2)

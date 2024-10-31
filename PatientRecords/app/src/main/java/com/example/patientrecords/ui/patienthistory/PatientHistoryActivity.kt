@@ -14,6 +14,10 @@ import com.example.patientrecords.databinding.ItemFollowupEntryBinding
 import com.example.patientrecords.ui.addpatient.AddPatientActivity
 import com.example.patientrecords.ui.base.BaseActivity
 import com.example.patientrecords.ui.followuppatient.PatientFollowUpActivity
+import com.example.patientrecords.utils.Extensions.Companion.EXTRA_FOLLOW_UP_NUMBER
+import com.example.patientrecords.utils.Extensions.Companion.EXTRA_PATIENT_ID
+import com.example.patientrecords.utils.Extensions.Companion.EXTRA_REG_NO
+import com.example.patientrecords.utils.Extensions.Companion.EXTRA_VIEW_MODE
 
 
 class PatientHistoryActivity : BaseActivity(R.layout.activity_patient_history) {
@@ -21,13 +25,16 @@ class PatientHistoryActivity : BaseActivity(R.layout.activity_patient_history) {
     private lateinit var binding: ActivityPatientHistoryBinding
     private lateinit var viewModel: PatientHistoryViewModel
 
+    private var patientId = -1
+    private var patientRegNo = -1
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPatientHistoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val patientId = intent.getIntExtra("patient_id", -1)
-        val patientRegNo = intent.getIntExtra("patient_regno", -1)
+        patientId = intent.getIntExtra(EXTRA_PATIENT_ID, -1)
+        patientRegNo = intent.getIntExtra("patient_reg_no", -1)
 
         viewModel = ViewModelProvider(
             this,
@@ -37,23 +44,25 @@ class PatientHistoryActivity : BaseActivity(R.layout.activity_patient_history) {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
+        // Add New Patient Follow Up
         binding.btnAddFollowUp.setOnClickListener {
-            // Navigating to Follow Up Activity
             val intent = Intent(this, PatientFollowUpActivity::class.java).apply {
-                putExtra("patient_id", patientId)
-                putExtra("patient_regno", patientRegNo)
+                putExtra(EXTRA_PATIENT_ID, patientId)
+                putExtra("patient_reg_no", patientRegNo)
             }
             startActivity(intent)
         }
 
+        // View Initial Details
         binding.btnInitialDetails.setOnClickListener {
             val intent = Intent(this, AddPatientActivity::class.java).apply {
-                putExtra("patient_id", patientId)
-                putExtra("is_view_mode", true) // optional flag to mark view-only mode
+                putExtra(EXTRA_PATIENT_ID, patientId)
+                putExtra(EXTRA_VIEW_MODE, true) // optional flag to mark view-only mode
             }
             startActivity(intent)
         }
 
+        // Update Patient Details Card
         viewModel.patient.observe(this){ patient->
             binding.cvPatientDetails.tvName.text = "${patient.firstName} ${patient.lastName}"
             binding.cvPatientDetails.tvSex.text = patient.sex ?: "N/A"
@@ -62,6 +71,7 @@ class PatientHistoryActivity : BaseActivity(R.layout.activity_patient_history) {
             binding.cvPatientDetails.tvRegNo.text = patient.regno ?: "N/A"
         }
 
+        // Add All follow ups
         lifecycleScope.launchWhenStarted {
             viewModel.followUps.collect { list ->
                 displayFollowUps(list)
@@ -79,9 +89,15 @@ class PatientHistoryActivity : BaseActivity(R.layout.activity_patient_history) {
             itemBinding.tvFollowUpDate.text = "Date: ${followUp.date}"
             itemBinding.tvFollowUpNum.text = "Follow Up Number: ${followUp.follow_up_num}"
 
-            // Set click listener
+            // View Follow up Details
             itemBinding.btnViewDetails.setOnClickListener {
-                // handle view follow-up details
+                val intent = Intent(this, PatientFollowUpActivity::class.java).apply {
+                    putExtra(EXTRA_PATIENT_ID, patientId)
+                    putExtra(EXTRA_REG_NO, patientRegNo)
+                    putExtra(EXTRA_FOLLOW_UP_NUMBER, followUp.follow_up_num)
+                    putExtra(EXTRA_VIEW_MODE, true) // optional flag to mark view-only mode
+                }
+                startActivity(intent)
             }
 
             // Apply margins programmatically
@@ -104,5 +120,7 @@ class PatientHistoryActivity : BaseActivity(R.layout.activity_patient_history) {
     fun Int.dpToPx(): Int {
         return (this * Resources.getSystem().displayMetrics.density).toInt()
     }
+
+
 
 }
