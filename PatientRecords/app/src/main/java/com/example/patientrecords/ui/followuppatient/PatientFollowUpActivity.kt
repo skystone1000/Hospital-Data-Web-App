@@ -8,6 +8,10 @@ import com.example.patientrecords.R
 import com.example.patientrecords.data.localdb.PatientFollowUp
 import com.example.patientrecords.databinding.ActivityPatientFollowUpBinding
 import com.example.patientrecords.ui.base.BaseActivity
+import com.example.patientrecords.utils.Extensions.Companion.EXTRA_FOLLOW_UP_NUMBER
+import com.example.patientrecords.utils.Extensions.Companion.EXTRA_PATIENT_ID
+import com.example.patientrecords.utils.Extensions.Companion.EXTRA_REG_NO
+import com.example.patientrecords.utils.Extensions.Companion.EXTRA_VIEW_MODE
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -29,11 +33,11 @@ class PatientFollowUpActivity : BaseActivity(R.layout.activity_patient_follow_up
         binding = ActivityPatientFollowUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        patientId = intent.getIntExtra("patient_id", -1)
-        patientRegNo = intent.getStringExtra("patient_reg_no").toString()
+        patientId = intent.getIntExtra(EXTRA_PATIENT_ID, -1)
+        patientRegNo = intent.getStringExtra(EXTRA_REG_NO).toString()
         viewModel = PatientFollowUpViewModelFactory((application as PatientRecordsApp).repository, patientId).create(PatientFollowUpViewModel::class.java)
-        patientFollowUpNumber = intent.getStringExtra("follow_up_number").toString()
-        isViewMode = intent.getBooleanExtra("is_view_mode", false)
+        patientFollowUpNumber = intent.getStringExtra(EXTRA_FOLLOW_UP_NUMBER).toString()
+        isViewMode = intent.getBooleanExtra(EXTRA_VIEW_MODE, false)
 
         binding.viewModel = viewModel
         binding.lifecycleOwner = this

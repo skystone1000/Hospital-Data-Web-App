@@ -9,6 +9,8 @@ import com.example.patientrecords.R
 import com.example.patientrecords.data.localdb.Patient
 import com.example.patientrecords.databinding.ActivityAddPatientBinding
 import com.example.patientrecords.ui.base.BaseActivity
+import com.example.patientrecords.utils.Extensions.Companion.EXTRA_PATIENT_ID
+import com.example.patientrecords.utils.Extensions.Companion.EXTRA_VIEW_MODE
 import kotlin.random.Random
 
 class AddPatientActivity : BaseActivity(R.layout.activity_add_patient) {
@@ -29,8 +31,8 @@ class AddPatientActivity : BaseActivity(R.layout.activity_add_patient) {
         val factory = AddPatientViewModelFactory((application as PatientRecordsApp).repository)
         viewModel = ViewModelProvider(this, factory)[AddPatientViewModel::class.java]
 
-        patientId = intent.getIntExtra("patient_id", -1)
-        isViewMode = intent.getBooleanExtra("is_view_mode", false)
+        patientId = intent.getIntExtra(EXTRA_PATIENT_ID, -1)
+        isViewMode = intent.getBooleanExtra(EXTRA_VIEW_MODE, false)
 
         if (patientId != -1) {
             viewModel.getPatientById(patientId)

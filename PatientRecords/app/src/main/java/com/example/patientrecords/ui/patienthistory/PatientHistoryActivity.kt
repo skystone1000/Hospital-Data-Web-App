@@ -34,7 +34,7 @@ class PatientHistoryActivity : BaseActivity(R.layout.activity_patient_history) {
         setContentView(binding.root)
 
         patientId = intent.getIntExtra(EXTRA_PATIENT_ID, -1)
-        patientRegNo = intent.getIntExtra("patient_reg_no", -1)
+        patientRegNo = intent.getIntExtra(EXTRA_REG_NO, -1)
 
         viewModel = ViewModelProvider(
             this,
@@ -48,7 +48,7 @@ class PatientHistoryActivity : BaseActivity(R.layout.activity_patient_history) {
         binding.btnAddFollowUp.setOnClickListener {
             val intent = Intent(this, PatientFollowUpActivity::class.java).apply {
                 putExtra(EXTRA_PATIENT_ID, patientId)
-                putExtra("patient_reg_no", patientRegNo)
+                putExtra(EXTRA_REG_NO, patientRegNo)
             }
             startActivity(intent)
         }
