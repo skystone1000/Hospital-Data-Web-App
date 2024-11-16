@@ -18,8 +18,9 @@ class AddPatientActivity : BaseActivity(R.layout.activity_add_patient) {
     private lateinit var binding: ActivityAddPatientBinding
     private lateinit var viewModel: AddPatientViewModel
 
-    var patientId = -1
-    var isViewMode = false
+    private var patientId = -1
+    private var isViewMode = false
+    private var isEditMode = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,8 +44,23 @@ class AddPatientActivity : BaseActivity(R.layout.activity_add_patient) {
                 setPatientFromDb(it)
                 if (isViewMode) {
                     setViewOnlyMode()
+                    binding.btnEdit.visibility = View.VISIBLE
                 }
             }
+        }
+
+        binding.btnEdit.setOnClickListener {
+            isEditMode = true
+            enableAllFields()
+            binding.btnUpdate.visibility = View.VISIBLE
+            binding.btnEdit.visibility = View.GONE
+        }
+
+        binding.btnUpdate.setOnClickListener {
+            val updatedPatient = collectPatientFromInput()
+            viewModel.updatePatient(updatedPatient)
+            Toast.makeText(this, "Patient details updated", Toast.LENGTH_SHORT).show()
+            finish()
         }
 
         binding.btnSubmit.setOnClickListener {
@@ -54,6 +70,48 @@ class AddPatientActivity : BaseActivity(R.layout.activity_add_patient) {
             finish()
         }
     }
+
+    private fun enableAllFields() {
+        binding.etFirstName.isEnabled = true
+        binding.etMiddleName.isEnabled = true
+        binding.etLastName.isEnabled = true
+        binding.etAge.isEnabled = true
+        binding.etSex.isEnabled = true
+        binding.occupation.isEnabled = true
+        binding.address.isEnabled = true
+        binding.etPhone.isEnabled = true
+        binding.etRegNo.isEnabled = true
+        binding.etHeight.isEnabled = true
+        binding.etWeight.isEnabled = true
+        binding.etCc1.isEnabled = true
+        binding.etCc2.isEnabled = true
+        binding.etCc3.isEnabled = true
+        binding.etAppetite.isEnabled = true
+        binding.etDesire.isEnabled = true
+        binding.etAversions.isEnabled = true
+        binding.etThirst.isEnabled = true
+        binding.etPerspiration.isEnabled = true
+        binding.etSleep.isEnabled = true
+        binding.etStool.isEnabled = true
+        binding.etUrine.isEnabled = true
+        binding.etMenses.isEnabled = true
+        binding.etThermal.isEnabled = true
+        binding.etMind.isEnabled = true
+        binding.etHobbies.isEnabled = true
+        binding.etParticulars.isEnabled = true
+        binding.etOnExamination.isEnabled = true
+        binding.etPathInv.isEnabled = true
+        binding.etPreviousRx.isEnabled = true
+        binding.etPastHistory.isEnabled = true
+        binding.etFamilyHistory.isEnabled = true
+        binding.etTreatment.isEnabled = true
+        binding.etPaid.isEnabled = true
+        binding.etBalance.isEnabled = true
+
+        binding.btnSubmit.visibility = View.GONE
+        binding.btnUpdate.visibility = View.VISIBLE
+    }
+
 
 
     private fun setPatientFromDb(patient: Patient) {
@@ -132,11 +190,17 @@ class AddPatientActivity : BaseActivity(R.layout.activity_add_patient) {
         binding.etBalance.isEnabled = false
 
         binding.btnSubmit.visibility = View.GONE
+        binding.btnUpdate.visibility = View.GONE
     }
 
     private fun collectPatientFromInput(): Patient {
+        var currPatient = Random.nextInt(100000)
+        if(isEditMode){
+            currPatient = patientId
+        }
+
         return Patient(
-            id = Random.nextInt(100000),  // Replace with a proper ID logic if needed
+            id = currPatient,  // Replace with a proper ID logic if needed
             firstName = binding.etFirstName.text.toString(),
             middleName = binding.etMiddleName.text.toString(),
             lastName = binding.etLastName.text.toString(),

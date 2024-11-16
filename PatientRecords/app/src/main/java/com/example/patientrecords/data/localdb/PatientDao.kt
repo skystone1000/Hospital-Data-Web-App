@@ -5,6 +5,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -14,6 +15,9 @@ interface PatientDao {
 
     @Delete
     suspend fun delete(patient: Patient)
+
+    @Update
+    suspend fun updatePatient(patient: Patient)
 
     @Query("SELECT * FROM patient_data")
     fun getAll(): Flow<List<Patient>>

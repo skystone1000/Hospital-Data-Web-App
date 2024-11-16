@@ -18,6 +18,12 @@ class AddPatientViewModel(private val repository: PatientRepository) : ViewModel
         }
     }
 
+    fun updatePatient(patient: Patient) {
+        viewModelScope.launch {
+            repository.updatePatient(patient)
+        }
+    }
+
     fun getPatientById(patientId: Int) {
         viewModelScope.launch {
             repository.getPatientById(patientId).collect { patientObj ->
