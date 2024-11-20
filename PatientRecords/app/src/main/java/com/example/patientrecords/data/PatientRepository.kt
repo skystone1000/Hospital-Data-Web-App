@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.Flow
 
 class PatientRepository(private val patientDao: PatientDao, private val patientFollowUpDao: PatientFollowUpDao) {
 
+    // Patient Methods
     suspend fun insertPatient(patient: Patient) = patientDao.insert(patient)
     suspend fun updatePatient(patient: Patient) = patientDao.updatePatient(patient)
     suspend fun deletePatient(patient: Patient) = patientDao.delete(patient)
@@ -17,8 +18,13 @@ class PatientRepository(private val patientDao: PatientDao, private val patientF
         return patientDao.getPatientById(patientId)
     }
 
+    // Follow Up Methods
     suspend fun addFollowUp(followUp: PatientFollowUp) {
         patientFollowUpDao.insertFollowUp(followUp)
+    }
+
+    suspend fun updateFollowUp(followUp: PatientFollowUp) {
+        patientFollowUpDao.updateFollowUp(followUp)
     }
 
     fun getFollowUps(patientId: Int): Flow<List<PatientFollowUp>> {

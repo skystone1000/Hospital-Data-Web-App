@@ -22,4 +22,10 @@ class PatientFollowUpViewModel(
             repository.addFollowUp(patientFollowUp)
         }
     }
+
+    fun updateFollowUp(patientFollowUp: PatientFollowUp){
+        viewModelScope.launch {
+            repository.updateFollowUp(patientFollowUp)
+        }
+    }
 }

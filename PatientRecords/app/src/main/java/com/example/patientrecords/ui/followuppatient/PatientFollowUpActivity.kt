@@ -26,7 +26,9 @@ class PatientFollowUpActivity : BaseActivity(R.layout.activity_patient_follow_up
     private var patientRegNo: String = ""
     private var totalInitialFollowUps: Int = 0
     private var patientFollowUpNumber: String = "-1"
+    private var followUpId: Int = -1
     private var isViewMode:Boolean = false
+    private var isEditMode: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,10 +53,26 @@ class PatientFollowUpActivity : BaseActivity(R.layout.activity_patient_follow_up
                  // Add Data to views
                  if (currentFollowUp != null) {
                      setPatientFollowUpFromDb(currentFollowUp)
+                     followUpId = currentFollowUp.followUpId
                  }
                  // Disable input fields
                  setViewOnlyMode()
+                 binding.btnEdit.visibility = View.VISIBLE
              }
+        }
+
+        binding.btnEdit.setOnClickListener {
+            isEditMode = true
+            enableAllFields()
+            binding.btnUpdate.visibility = View.VISIBLE
+            binding.btnEdit.visibility = View.GONE
+        }
+
+        binding.btnUpdate.setOnClickListener {
+            val updatedPatient = collectPatientFollowUpFromInput()
+            viewModel.updateFollowUp(updatedPatient)
+            Toast.makeText(this, "Patient details updated", Toast.LENGTH_SHORT).show()
+            finish()
         }
 
         binding.btnSubmit.setOnClickListener {
@@ -72,6 +90,19 @@ class PatientFollowUpActivity : BaseActivity(R.layout.activity_patient_follow_up
             }
         }
         return null
+    }
+
+    private fun enableAllFields() {
+        binding.etWeight.isEnabled = true
+        binding.etTreatmentOutput.isEnabled = true
+        binding.etOtherComplains.isEnabled = true
+        binding.etTreatment.isEnabled = true
+        binding.etMedicineDuration.isEnabled = true
+        binding.etPaidAmount.isEnabled = true
+        binding.etBalanceAmount.isEnabled = true
+
+        binding.btnSubmit.visibility = View.GONE
+        binding.btnUpdate.visibility = View.VISIBLE
     }
 
     private fun setPatientFollowUpFromDb(patientFollowUp: PatientFollowUp) {
@@ -94,15 +125,25 @@ class PatientFollowUpActivity : BaseActivity(R.layout.activity_patient_follow_up
         binding.etBalanceAmount.isEnabled = false
 
         binding.btnSubmit.visibility = View.GONE
+        binding.btnUpdate.visibility = View.GONE
     }
 
     private fun collectPatientFollowUpFromInput(): PatientFollowUp {
+        // New Follow up Id and number
+        var currFollowUpId = Random.nextInt(100000)
+        var currFollowUpNo = (totalInitialFollowUps + 1).toString()
+        if(isEditMode){
+            // Existing Follow up Id and number
+            currFollowUpId = followUpId
+            currFollowUpNo = patientFollowUpNumber
+        }
+
         var newPatientFollowUp = PatientFollowUp(
-            followUpId = Random.nextInt(100000),  // Replace with a proper ID logic if needed,
+            followUpId = currFollowUpId,  // Replace with a proper ID logic if needed,
             id = patientId,
             date = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(Calendar.getInstance().time),
             regno = patientRegNo,
-            follow_up_num = (totalInitialFollowUps + 1).toString(),
+            follow_up_num = currFollowUpNo,
             weight = binding.etWeight.text.toString().toInt(),
             treatment_output = binding.etTreatmentOutput.text.toString(),
             other_complains = binding.etOtherComplains.text.toString(),
