@@ -24,4 +24,7 @@ interface PatientDao {
 
     @Query("SELECT * FROM patient_data WHERE id = :patientId")
     fun getPatientById(patientId: Int): Flow<Patient>
+
+    @Query("SELECT * FROM patient_data WHERE firstName LIKE '%' || :query || '%' OR middleName LIKE '%' || :query || '%' OR lastName LIKE '%' || :query || '%'")
+        fun searchPatients(query: String): Flow<List<Patient>>
 }

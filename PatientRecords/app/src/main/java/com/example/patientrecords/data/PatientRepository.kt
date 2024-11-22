@@ -30,4 +30,9 @@ class PatientRepository(private val patientDao: PatientDao, private val patientF
     fun getFollowUps(patientId: Int): Flow<List<PatientFollowUp>> {
         return patientFollowUpDao.getFollowUpsForPatient(patientId)
     }
+
+    // Search Method
+    fun searchPatients(query: String): Flow<List<Patient>> {
+        return patientDao.searchPatients(query)
+    }
 }

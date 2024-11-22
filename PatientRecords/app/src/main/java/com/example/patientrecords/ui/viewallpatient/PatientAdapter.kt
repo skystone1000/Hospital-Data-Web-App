@@ -3,16 +3,16 @@ package com.example.patientrecords.ui.viewallpatient
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.patientrecords.data.localdb.Patient
 import com.example.patientrecords.databinding.ItemPatientBinding
-import com.example.patientrecords.ui.followuppatient.PatientFollowUpActivity
 import com.example.patientrecords.ui.patienthistory.PatientHistoryActivity
 import com.example.patientrecords.utils.Extensions.Companion.EXTRA_PATIENT_ID
 import com.example.patientrecords.utils.Extensions.Companion.EXTRA_REG_NO
 
-class PatientAdapter(private val patients: List<Patient>) :
-    RecyclerView.Adapter<PatientAdapter.PatientViewHolder>() {
+class PatientAdapter : ListAdapter<Patient, PatientAdapter.PatientViewHolder>(PatientDiffCallback()) {
 
     inner class PatientViewHolder(val binding: ItemPatientBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -22,9 +22,9 @@ class PatientAdapter(private val patients: List<Patient>) :
     }
 
     override fun onBindViewHolder(holder: PatientViewHolder, position: Int) {
-        val patient = patients[position]
+        val patient = getItem(position) // Updated to use ListAdapter's getItem
         with(holder.binding) {
-            tvName.text = "${patient.firstName} ${patient.lastName}"
+            tvName.text = "${patient.firstName} ${patient.middleName} ${patient.lastName}"
             tvSex.text = patient.sex ?: "N/A"
             tvOccupation.text = patient.occupation ?: "N/A"
             tvPhone.text = patient.phone ?: "N/A"
@@ -39,9 +39,16 @@ class PatientAdapter(private val patients: List<Patient>) :
             }
             context.startActivity(intent)
         }
-
-
     }
 
-    override fun getItemCount(): Int = patients.size
+    class PatientDiffCallback : DiffUtil.ItemCallback<Patient>() {
+        override fun areItemsTheSame(oldItem: Patient, newItem: Patient): Boolean {
+            return oldItem.id == newItem.id
+        }
+
+        override fun areContentsTheSame(oldItem: Patient, newItem: Patient): Boolean {
+            return oldItem == newItem
+        }
+    }
+
 }
