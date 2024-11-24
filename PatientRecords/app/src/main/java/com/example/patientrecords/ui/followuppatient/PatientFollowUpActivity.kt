@@ -47,7 +47,7 @@ class PatientFollowUpActivity : BaseActivity(R.layout.activity_patient_follow_up
         // Get Total number of current patient follow ups
          viewModel.patientFollowUps.observe(this){
              totalInitialFollowUps = it.count()
-             if (patientFollowUpNumber != "-1") {
+             if (patientFollowUpNumber != "-1" && isViewMode) {
                  // Find Current Follow up
                  val currentFollowUp = findCurrentFollowup(it)
                  // Add Data to views
@@ -55,9 +55,18 @@ class PatientFollowUpActivity : BaseActivity(R.layout.activity_patient_follow_up
                      setPatientFollowUpFromDb(currentFollowUp)
                      followUpId = currentFollowUp.followUpId
                  }
+
+                 // Set Followup Date and number
+                 binding.tvFollowUpDate.visibility = View.VISIBLE
+                 binding.tvFollowUpDate.text = "Follow up date: ".plus(currentFollowUp?.date)
+                 binding.tvFollowUpNum.visibility = View.VISIBLE
+                 binding.tvFollowUpNum.text = "Follow up number: ".plus(currentFollowUp?.follow_up_num)
+
                  // Disable input fields
                  setViewOnlyMode()
                  binding.btnEdit.visibility = View.VISIBLE
+             }else{
+                 enableAllFields()
              }
         }
 
@@ -101,8 +110,14 @@ class PatientFollowUpActivity : BaseActivity(R.layout.activity_patient_follow_up
         binding.etPaidAmount.isEnabled = true
         binding.etBalanceAmount.isEnabled = true
 
-        binding.btnSubmit.visibility = View.GONE
-        binding.btnUpdate.visibility = View.VISIBLE
+        if(isEditMode){
+            binding.btnSubmit.visibility = View.GONE
+            binding.btnUpdate.visibility = View.VISIBLE
+        }else{
+            binding.btnSubmit.visibility = View.VISIBLE
+            binding.btnUpdate.visibility = View.GONE
+        }
+
     }
 
     private fun setPatientFollowUpFromDb(patientFollowUp: PatientFollowUp) {

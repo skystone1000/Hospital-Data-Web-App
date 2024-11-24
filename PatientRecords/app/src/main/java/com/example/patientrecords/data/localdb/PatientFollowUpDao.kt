@@ -16,6 +16,6 @@ interface PatientFollowUpDao {
     @Update
     suspend fun updateFollowUp(followUp: PatientFollowUp)
 
-    @Query("SELECT * FROM follow_up_data WHERE id = :patientId")
+    @Query("SELECT * FROM follow_up_data WHERE id = :patientId ORDER BY follow_up_num DESC")
     fun getFollowUpsForPatient(patientId: Int): Flow<List<PatientFollowUp>>
 }
