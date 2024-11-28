@@ -24,14 +24,18 @@ class AddPatientActivity : BaseActivity(R.layout.activity_add_patient) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Binding and ViewModel
         binding = ActivityAddPatientBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        setToolbarTitle("Add a Patient")
-
         val factory = AddPatientViewModelFactory((application as PatientRecordsApp).repository)
         viewModel = ViewModelProvider(this, factory)[AddPatientViewModel::class.java]
 
+        // Updating Lifecycle Owners
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
+
+        // Getting Extras
         patientId = intent.getIntExtra(EXTRA_PATIENT_ID, -1)
         isViewMode = intent.getBooleanExtra(EXTRA_VIEW_MODE, false)
 
