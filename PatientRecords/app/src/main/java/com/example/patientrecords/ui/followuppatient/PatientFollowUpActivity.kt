@@ -33,6 +33,12 @@ class PatientFollowUpActivity : BaseActivity(R.layout.activity_patient_follow_up
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        // Getting Extras
+        patientId = intent.getIntExtra(EXTRA_PATIENT_ID, -1)
+        patientRegNo = intent.getStringExtra(EXTRA_REG_NO).toString()
+        patientFollowUpNumber = intent.getStringExtra(EXTRA_FOLLOW_UP_NUMBER).toString()
+        isViewMode = intent.getBooleanExtra(EXTRA_VIEW_MODE, false)
+
         // Binding and ViewModel
         binding = ActivityPatientFollowUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -41,13 +47,6 @@ class PatientFollowUpActivity : BaseActivity(R.layout.activity_patient_follow_up
         // Updating Lifecycle Owners
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
-
-        // Getting Extras
-        patientId = intent.getIntExtra(EXTRA_PATIENT_ID, -1)
-        patientRegNo = intent.getStringExtra(EXTRA_REG_NO).toString()
-        patientFollowUpNumber = intent.getStringExtra(EXTRA_FOLLOW_UP_NUMBER).toString()
-        isViewMode = intent.getBooleanExtra(EXTRA_VIEW_MODE, false)
-
 
         // Get Total number of current patient follow ups
          viewModel.patientFollowUps.observe(this){

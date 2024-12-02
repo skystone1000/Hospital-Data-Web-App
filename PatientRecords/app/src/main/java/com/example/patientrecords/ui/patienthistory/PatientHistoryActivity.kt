@@ -31,6 +31,10 @@ class PatientHistoryActivity : BaseActivity(R.layout.activity_patient_history) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        // Getting Extras
+        patientId = intent.getIntExtra(EXTRA_PATIENT_ID, -1)
+        patientRegNo = intent.getIntExtra(EXTRA_REG_NO, -1)
+
         // Binding and ViewModel
         binding = ActivityPatientHistoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -42,10 +46,6 @@ class PatientHistoryActivity : BaseActivity(R.layout.activity_patient_history) {
         // Updating Lifecycle Owners
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
-
-        // Getting Extras
-        patientId = intent.getIntExtra(EXTRA_PATIENT_ID, -1)
-        patientRegNo = intent.getIntExtra(EXTRA_REG_NO, -1)
 
         // Add New Patient Follow Up
         binding.btnAddFollowUp.setOnClickListener {

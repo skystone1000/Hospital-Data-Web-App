@@ -25,6 +25,10 @@ class AddPatientActivity : BaseActivity(R.layout.activity_add_patient) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        // Getting Extras
+        patientId = intent.getIntExtra(EXTRA_PATIENT_ID, -1)
+        isViewMode = intent.getBooleanExtra(EXTRA_VIEW_MODE, false)
+
         // Binding and ViewModel
         binding = ActivityAddPatientBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -34,10 +38,6 @@ class AddPatientActivity : BaseActivity(R.layout.activity_add_patient) {
         // Updating Lifecycle Owners
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
-
-        // Getting Extras
-        patientId = intent.getIntExtra(EXTRA_PATIENT_ID, -1)
-        isViewMode = intent.getBooleanExtra(EXTRA_VIEW_MODE, false)
 
         if (patientId != -1) {
             viewModel.getPatientById(patientId)
