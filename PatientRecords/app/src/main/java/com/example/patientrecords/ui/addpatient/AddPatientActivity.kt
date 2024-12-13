@@ -31,13 +31,17 @@ class AddPatientActivity : BaseActivity(R.layout.activity_add_patient) {
 
         // Binding and ViewModel
         binding = ActivityAddPatientBinding.inflate(layoutInflater)
-        setContentView(binding.root)
         val factory = AddPatientViewModelFactory((application as PatientRecordsApp).repository)
         viewModel = ViewModelProvider(this, factory)[AddPatientViewModel::class.java]
 
         // Updating Lifecycle Owners
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
+
+        // Toolbars And NavigationDrawer
+        setChildContentView(binding.root)
+        initToolbarWithDrawer()
+        setToolbarTitle("Patient Details")
 
         if (patientId != -1) {
             viewModel.getPatientById(patientId)

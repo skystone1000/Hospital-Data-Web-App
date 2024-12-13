@@ -14,11 +14,16 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        // Binding and ViewModel
         binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
 
+        // Updating Lifecycle Owners
+        binding.lifecycleOwner = this
+
+        // Toolbars And NavigationDrawer
+        setChildContentView(binding.root)
         initToolbarWithDrawer()
-        setToolbarTitle("Main Activity")
+        setToolbarTitle("Mahajan Homeo Clinic")
 
         // Button Clicks
         binding.btnPatientRecords.setOnClickListener {

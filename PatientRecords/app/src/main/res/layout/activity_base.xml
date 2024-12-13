@@ -1,27 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/rootLayout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.base.BaseActivity">
+    xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <!-- ViewModel or bindings can go here -->
+    </data>
 
-<com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/topAppBar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        android:elevation="4dp"
-        app:titleTextColor="@android:color/white"
-        app:navigationIcon="@drawable/ic_back" />
-
-    <!-- Placeholder for child content -->
-    <FrameLayout
-        android:id="@+id/contentFrame"
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawerLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="?attr/actionBarSize"
-        android:layout_gravity="bottom" />
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+        tools:openDrawer="start">
+
+        <!-- Main Content Area -->
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!-- Top App Bar -->
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                android:titleTextColor="@android:color/white"
+                app:navigationIconTint="@color/white"
+                app:title="Home"
+                app:navigationIcon="@drawable/baseline_menu_24_white"/>
+
+            <!-- 🔻 Child layout will be injected here -->
+            <FrameLayout
+                android:id="@+id/baseContainer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="?attr/actionBarSize" />
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+        <!-- Navigation Drawer Content -->
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/navView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            app:menu="@menu/drawer_menu"
+            app:headerLayout="@layout/nav_header_main"
+            android:layout_marginTop="?attr/actionBarSize"/>
+    </androidx.drawerlayout.widget.DrawerLayout>
+</layout>
+

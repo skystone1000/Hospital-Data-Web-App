@@ -41,12 +41,16 @@ class PatientFollowUpActivity : BaseActivity(R.layout.activity_patient_follow_up
 
         // Binding and ViewModel
         binding = ActivityPatientFollowUpBinding.inflate(layoutInflater)
-        setContentView(binding.root)
         viewModel = PatientFollowUpViewModelFactory((application as PatientRecordsApp).repository, patientId).create(PatientFollowUpViewModel::class.java)
 
         // Updating Lifecycle Owners
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
+
+        // Toolbars And NavigationDrawer
+        setChildContentView(binding.root)
+        initToolbarWithDrawer()
+        setToolbarTitle("Patient Follow Up")
 
         // Get Total number of current patient follow ups
          viewModel.patientFollowUps.observe(this){

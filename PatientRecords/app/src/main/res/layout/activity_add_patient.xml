@@ -40,6 +40,7 @@
                     android:layout_height="wrap_content"
                     android:text="Add Patient Details"
                     android:textSize="16sp"
+                    style="@style/TextAppearance.MaterialComponents.Subtitle1"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -63,7 +64,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp">
+                android:layout_marginVertical="6dp">
 
                 <!-- Guidelines -->
                 <androidx.constraintlayout.widget.Guideline
@@ -133,7 +134,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp">
+                android:layout_marginVertical="6dp">
 
                 <!-- Reuse guidelines -->
                 <androidx.constraintlayout.widget.Guideline
@@ -201,6 +202,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginVertical="6dp"
                 android:hint="Address">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -213,7 +215,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp">
+                android:layout_marginVertical="6dp">
 
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/guidelinePhoneHalf"
@@ -259,13 +261,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Clinical Details"
-                android:layout_marginTop="16dp" />
+                style="@style/TextAppearance.MaterialComponents.Subtitle1"
+                android:layout_marginVertical="16dp" />
 
             <!-- Height + Weight Row -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp">
+                android:layout_marginVertical="6dp">
 
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/guidelineHW"
@@ -311,6 +314,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginVertical="6dp"
                 android:hint="Chief Complain 1">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -323,6 +327,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginVertical="6dp"
                 android:hint="Chief Complain 2">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -335,6 +340,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginVertical="6dp"
                 android:hint="Chief Complain 3">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -347,6 +353,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginVertical="6dp"
                 android:hint="Appetite">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -360,6 +367,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginVertical="6dp"
                 android:hint="Desire">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -373,6 +381,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginVertical="6dp"
                 android:hint="Aversions">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -386,6 +395,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginVertical="6dp"
                 android:hint="Thirst">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -399,6 +409,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginVertical="6dp"
                 android:hint="Perspiration">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -412,6 +423,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginVertical="6dp"
                 android:hint="Sleep">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -425,6 +437,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginVertical="6dp"
                 android:hint="Stool">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -438,6 +451,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginVertical="6dp"
                 android:hint="Urine">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -451,6 +465,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginVertical="6dp"
                 android:hint="Menses">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -464,6 +479,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginVertical="6dp"
                 android:hint="Thermal">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -477,6 +493,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginVertical="6dp"
                 android:hint="Mind">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -490,6 +507,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginVertical="6dp"
                 android:hint="Hobbies">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -503,6 +521,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginVertical="6dp"
                 android:hint="Particulars">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -516,6 +535,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginVertical="6dp"
                 android:hint="On Examination">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -529,6 +549,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginVertical="6dp"
                 android:hint="Path Inv">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -542,6 +563,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginVertical="6dp"
                 android:hint="Previous Rx">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -555,6 +577,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginVertical="6dp"
                 android:hint="Past History">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -568,6 +591,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginVertical="6dp"
                 android:hint="Family History">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -581,6 +605,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginVertical="6dp"
                 android:hint="Treatment">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -594,6 +619,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginVertical="6dp"
                 android:hint="Paid">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -607,6 +633,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginVertical="6dp"
                 android:hint="Balance">
 
                 <com.google.android.material.textfield.TextInputEditText

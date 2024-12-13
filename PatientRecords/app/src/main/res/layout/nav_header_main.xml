@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="160dp"
+    android:layout_width="match_parent" android:layout_height="60dp"
     android:background="?attr/colorPrimary" android:gravity="bottom"
     android:orientation="vertical" android:padding="16dp">
 
-    <TextView android:text="Mahajan Clinic"
+    <TextView android:text="Quick Actions"
         android:textColor="@android:color/white"
         android:textSize="18sp" android:textStyle="bold"
         android:layout_width="wrap_content"

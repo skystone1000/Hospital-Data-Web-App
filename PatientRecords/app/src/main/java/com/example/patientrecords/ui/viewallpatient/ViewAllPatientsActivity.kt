@@ -21,7 +21,6 @@ class ViewAllPatientsActivity : BaseActivity(R.layout.activity_view_all_patients
 
         // Binding and ViewModel
         binding = ActivityViewAllPatientsBinding.inflate(layoutInflater)
-        setContentView(binding.root)
         val factory = ViewAllPatientsViewModelFactory((application as PatientRecordsApp).repository)
         viewModel = ViewModelProvider(this, factory)[ViewAllPatientsViewModel::class.java]
         /**
@@ -33,6 +32,11 @@ class ViewAllPatientsActivity : BaseActivity(R.layout.activity_view_all_patients
         // Updating Lifecycle Owners
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
+
+        // Toolbars And NavigationDrawer
+        setChildContentView(binding.root)
+        initToolbarWithDrawer()
+        setToolbarTitle("View All Patients")
 
         val adapter = PatientAdapter()
         binding.rvPatients.adapter = adapter

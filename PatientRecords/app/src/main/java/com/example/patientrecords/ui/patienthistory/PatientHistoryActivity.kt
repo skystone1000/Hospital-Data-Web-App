@@ -37,7 +37,6 @@ class PatientHistoryActivity : BaseActivity(R.layout.activity_patient_history) {
 
         // Binding and ViewModel
         binding = ActivityPatientHistoryBinding.inflate(layoutInflater)
-        setContentView(binding.root)
         viewModel = ViewModelProvider(
             this,
             PatientHistoryViewModelFactory(patientId, (application as PatientRecordsApp).repository)
@@ -46,6 +45,11 @@ class PatientHistoryActivity : BaseActivity(R.layout.activity_patient_history) {
         // Updating Lifecycle Owners
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
+
+        // Toolbars And NavigationDrawer
+        setChildContentView(binding.root)
+        initToolbarWithDrawer()
+        setToolbarTitle("Patient History")
 
         // Add New Patient Follow Up
         binding.btnAddFollowUp.setOnClickListener {
