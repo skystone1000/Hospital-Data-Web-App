@@ -21,6 +21,7 @@ import com.example.patientrecords.MainActivity
 import com.example.patientrecords.R
 import com.example.patientrecords.databinding.ActivityBaseBinding
 import com.example.patientrecords.ui.addpatient.AddPatientActivity
+import com.example.patientrecords.ui.dashboard.DashboardActivity
 import com.example.patientrecords.ui.viewallpatient.ViewAllPatientsActivity
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.navigation.DrawerLayoutUtils
@@ -91,7 +92,7 @@ abstract class BaseActivity(@LayoutRes private val layoutResId: Int) : AppCompat
                 startActivity(Intent(this, ViewAllPatientsActivity::class.java))
             }
             R.id.nav_dashboard -> {
-                // Navigate to dashboard
+                startActivity(Intent(this, DashboardActivity::class.java))
             }
             R.id.nav_logout -> {
                 // Handle Logout

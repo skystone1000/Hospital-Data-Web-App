@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:scrollbars="none">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+    <!-- Title (e.g. "Today's Summary") -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="6dp"
+        android:layout_weight="1"
+        android:elevation="6dp"
+        app:cardBackgroundColor="@color/material_dynamic_primary60"
+        app:cardCornerRadius="16dp"
+        app:cardUseCompatPadding="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp">
+
+            <!-- Title (e.g. "Today's Summary") -->
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvSummaryTitleToday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Today's Summary"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:textColor="@android:color/primary_text_light"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <!-- New Patients -->
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvNewPatientsToday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="New patients: 0"
+                android:textColor="@android:color/primary_text_light"
+                app:layout_constraintTop_toBottomOf="@id/tvSummaryTitleToday"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <!-- Follow Ups -->
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvFollowUpsToday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Follow Ups: 0"
+                android:textColor="@android:color/primary_text_light"
+                app:layout_constraintTop_toBottomOf="@id/tvNewPatientsToday"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <!-- Earning -->
+            <!--<com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvEarningsToday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Earning: 0"
+                android:textColor="@android:color/primary_text_light"
+                app:layout_constraintTop_toBottomOf="@id/tvFollowUpsToday"
+                app:layout_constraintStart_toStartOf="parent"/>-->
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Title (e.g. "Week's Summary") -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="6dp"
+        android:layout_weight="1"
+        android:elevation="6dp"
+        app:cardBackgroundColor="@color/material_dynamic_neutral_variant60"
+        app:cardCornerRadius="16dp"
+        app:cardUseCompatPadding="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp">
+
+            <!-- Title (e.g. "Week's Summary") -->
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvSummaryTitleWeek"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Week's Summary"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:textColor="@android:color/primary_text_light"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <!-- New Patients -->
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvNewPatientsWeek"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="New patients: 0"
+                android:textColor="@android:color/primary_text_light"
+                app:layout_constraintTop_toBottomOf="@id/tvSummaryTitleWeek"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <!-- Follow Ups -->
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvFollowUpsWeek"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Follow Ups: 0"
+                android:textColor="@android:color/primary_text_light"
+                app:layout_constraintTop_toBottomOf="@id/tvNewPatientsWeek"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Title (e.g. "Month's Summary") -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="6dp"
+        android:layout_weight="1"
+        android:elevation="6dp"
+        app:cardBackgroundColor="@color/material_dynamic_tertiary60"
+        app:cardCornerRadius="16dp"
+        app:cardUseCompatPadding="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp">
+
+            <!-- Title (e.g. "Month's Summary") -->
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvSummaryTitleMonth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Month's Summary"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:textColor="@android:color/primary_text_light"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <!-- New Patients -->
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvNewPatientsMonth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="New patients: 0"
+                android:textColor="@android:color/primary_text_light"
+                app:layout_constraintTop_toBottomOf="@id/tvSummaryTitleMonth"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <!-- Follow Ups -->
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvFollowUpsMonth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Follow Ups: 0"
+                android:textColor="@android:color/primary_text_light"
+                app:layout_constraintTop_toBottomOf="@id/tvNewPatientsMonth"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Title (e.g. "Year's Summary") -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="6dp"
+        android:layout_weight="1"
+        android:elevation="6dp"
+        app:cardBackgroundColor="@color/material_dynamic_secondary80"
+        app:cardCornerRadius="16dp"
+        app:cardUseCompatPadding="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp">
+
+            <!-- Title (e.g. "Year's Summary") -->
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvSummaryTitleYear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Year's Summary"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:textColor="@android:color/primary_text_light"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <!-- New Patients -->
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvNewPatientsYear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="New patients: 0"
+                android:textColor="@android:color/primary_text_light"
+                app:layout_constraintTop_toBottomOf="@id/tvSummaryTitleYear"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <!-- Follow Ups -->
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvFollowUpsYear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Follow Ups: 0"
+                android:textColor="@android:color/primary_text_light"
+                app:layout_constraintTop_toBottomOf="@id/tvNewPatientsYear"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+
+</HorizontalScrollView>
+

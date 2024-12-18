@@ -35,4 +35,10 @@ class PatientRepository(private val patientDao: PatientDao, private val patientF
     fun searchPatients(query: String): Flow<List<Patient>> {
         return patientDao.searchPatients(query)
     }
+
+    // Dashboard Methods
+    suspend fun getPatientsFromDay(date: Long): List<Patient> = patientDao.getPatientsFromDay(date)
+    suspend fun getFollowUpsFromDay(date: Long): List<PatientFollowUp> = patientFollowUpDao.getFollowUpsFromDay(date)
+    suspend fun getPatientWithFollowUpFromDay(date: Long): List<Patient> = patientFollowUpDao.getPatientsWithFollowUpsFromDay(date)
+
 }
