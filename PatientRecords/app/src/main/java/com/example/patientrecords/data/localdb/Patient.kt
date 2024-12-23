@@ -5,11 +5,11 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "patient_data")
 data class Patient(
-    @PrimaryKey(autoGenerate = true) val id: Int,
-    val firstName: String,
+    @PrimaryKey(autoGenerate = true) val id: Int = 0,
+    val firstName: String = "",
     val middleName: String? = null,
-    val lastName: String,
-    val age: Int,
+    val lastName: String = "",
+    val age: Int = 0,
     val sex: String? = null,
     val occupation: String? = null,
     val address: String? = null,

@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
+        android:id="@+id/nav_dashboard"
+        android:icon="@drawable/baseline_dashboard_24"
+        android:title="Dashboard" />
+    <item
         android:id="@+id/nav_home"
         android:icon="@drawable/baseline_home_24"
         android:title="Home" />
@@ -12,10 +16,6 @@
         android:id="@+id/nav_view_patients"
         android:icon="@drawable/baseline_checklist_24"
         android:title="View Patients" />
-    <item
-        android:id="@+id/nav_dashboard"
-        android:icon="@drawable/baseline_dashboard_24"
-        android:title="Dashboard" />
     <item
         android:id="@+id/nav_logout"
         android:icon="@drawable/baseline_logout_24"

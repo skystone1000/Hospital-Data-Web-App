@@ -1,6 +1,7 @@
 package com.example.patientrecords
 
 import android.app.Application
+import com.example.patientrecords.data.FirebaseRepository
 import com.example.patientrecords.data.PatientDatabase
 import com.example.patientrecords.data.PatientRepository
 
@@ -8,6 +9,10 @@ class PatientRecordsApp : Application() {
 
     // Expose repository for use across the app
     lateinit var repository: PatientRepository
+        private set
+
+    // Expose firebase repository for use across the app
+    lateinit var firebaseRepository: FirebaseRepository
         private set
 
     override fun onCreate() {
@@ -21,6 +26,8 @@ class PatientRecordsApp : Application() {
 
         // You can initialize other libraries here if needed in future
         // Timber.plant(Timber.DebugTree())
-        // FirebaseApp.initializeApp(this)
+
+        // Initialize Firebase Repository
+        firebaseRepository = FirebaseRepository(database.patientDao(), database.patientFollowUpDao())
     }
 }

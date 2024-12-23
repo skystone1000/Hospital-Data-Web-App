@@ -4,6 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.patientrecords.data.FirebaseRepository
+import com.example.patientrecords.data.FirebaseSyncManager
 import com.example.patientrecords.data.PatientRepository
 import com.example.patientrecords.data.localdb.Patient
 import com.example.patientrecords.data.localdb.PatientFollowUp
@@ -15,7 +17,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
-class DashboardViewModel(private val repository: PatientRepository) : ViewModel() {
+class DashboardViewModel(private val repository: PatientRepository, private val firebaseRepository: FirebaseRepository) : ViewModel() {
 
     private val _patientsLastWeek = MutableStateFlow<List<Patient>>(emptyList())
     val patientsLastWeek: StateFlow<List<Patient>> = _patientsLastWeek
@@ -66,5 +68,9 @@ class DashboardViewModel(private val repository: PatientRepository) : ViewModel(
             _followUps31DayCount.value = repository.getFollowUpsFromDay(get31DaysAgo()).size
             _followUps365DayCount.value = repository.getFollowUpsFromDay(get365DaysAgo()).size
         }
+    }
+
+    fun syncPatients() = viewModelScope.launch {
+        FirebaseSyncManager(repository, firebaseRepository).syncPatientsBothWays()
     }
 }

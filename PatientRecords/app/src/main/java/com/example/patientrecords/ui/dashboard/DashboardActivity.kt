@@ -6,6 +6,7 @@ import android.os.Handler
 import android.os.Looper
 import android.view.LayoutInflater
 import android.widget.TextView
+import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import com.example.patientrecords.PatientRecordsApp
 import com.example.patientrecords.R
@@ -15,6 +16,7 @@ import com.example.patientrecords.ui.base.BaseActivity
 import com.example.patientrecords.ui.patienthistory.PatientHistoryActivity
 import com.example.patientrecords.utils.Extensions.Companion.EXTRA_PATIENT_ID
 import com.example.patientrecords.utils.Extensions.Companion.EXTRA_REG_NO
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
@@ -31,7 +33,7 @@ class DashboardActivity : BaseActivity(R.layout.activity_dashboard){
 
         // Binding and ViewModel
         binding = ActivityDashboardBinding.inflate(layoutInflater)
-        viewModel = DashboardViewModel((application as PatientRecordsApp).repository)
+        viewModel = DashboardViewModel((application as PatientRecordsApp).repository , (application as PatientRecordsApp).firebaseRepository)
 
         // Updating Lifecycle Owners
         binding.viewModel = viewModel
@@ -48,6 +50,13 @@ class DashboardActivity : BaseActivity(R.layout.activity_dashboard){
 
         viewModel.loadSummaryData()
         viewModel.loadDashboardData()
+
+        binding.btnSyncFirebase.setOnClickListener {
+            lifecycleScope.launch {
+                viewModel.syncPatients()
+                Toast.makeText(this@DashboardActivity, "Sync completed!", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     private fun setupClock() {

@@ -245,7 +245,7 @@ class AddPatientActivity : BaseActivity(R.layout.activity_add_patient) {
             past_history = binding.etPastHistory.text.toString(),
             family_history = binding.etFamilyHistory.text.toString(),
             treatment = binding.etTreatment.text.toString(),
-            dateJoined = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(Calendar.getInstance().time),
+            dateJoined = SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.getDefault()).format(Calendar.getInstance().time),
             paid = binding.etPaid.text.toString(),
             balance = binding.etBalance.text.toString()
         )
