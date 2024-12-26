@@ -20,6 +20,9 @@ interface PatientFollowUpDao {
     @Query("SELECT * FROM follow_up_data WHERE id = :patientId ORDER BY follow_up_num DESC")
     fun getFollowUpsForPatient(patientId: Int): Flow<List<PatientFollowUp>>
 
+    @Query("SELECT * FROM follow_up_data")
+    suspend fun getAllFollowUps() : List<PatientFollowUp>
+
     @Query("SELECT * FROM follow_up_data WHERE date >= :date")
     suspend fun getFollowUpsFromDay(date: Long): List<PatientFollowUp>
 

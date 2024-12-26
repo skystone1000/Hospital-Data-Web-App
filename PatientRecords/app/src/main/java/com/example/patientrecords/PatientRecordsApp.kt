@@ -28,6 +28,6 @@ class PatientRecordsApp : Application() {
         // Timber.plant(Timber.DebugTree())
 
         // Initialize Firebase Repository
-        firebaseRepository = FirebaseRepository(database.patientDao(), database.patientFollowUpDao())
+        firebaseRepository = FirebaseRepository()
     }
 }

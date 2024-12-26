@@ -31,6 +31,10 @@ class PatientRepository(private val patientDao: PatientDao, private val patientF
         return patientFollowUpDao.getFollowUpsForPatient(patientId)
     }
 
+    suspend fun getAllFollowUps(): List<PatientFollowUp> {
+        return patientFollowUpDao.getAllFollowUps()
+    }
+
     // Search Method
     fun searchPatients(query: String): Flow<List<Patient>> {
         return patientDao.searchPatients(query)

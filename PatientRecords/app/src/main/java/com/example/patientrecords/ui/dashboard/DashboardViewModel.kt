@@ -70,7 +70,16 @@ class DashboardViewModel(private val repository: PatientRepository, private val 
         }
     }
 
+    fun syncData(){
+        syncPatients()
+        syncPatientFollowUps()
+    }
+
     fun syncPatients() = viewModelScope.launch {
         FirebaseSyncManager(repository, firebaseRepository).syncPatientsBothWays()
+    }
+
+    fun syncPatientFollowUps() = viewModelScope.launch {
+        FirebaseSyncManager(repository, firebaseRepository).syncPatientFollowUpsBothWays()
     }
 }

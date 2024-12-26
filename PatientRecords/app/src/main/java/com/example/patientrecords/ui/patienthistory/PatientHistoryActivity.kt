@@ -26,14 +26,12 @@ class PatientHistoryActivity : BaseActivity(R.layout.activity_patient_history) {
     private lateinit var viewModel: PatientHistoryViewModel
 
     private var patientId = -1
-    private var patientRegNo = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         // Getting Extras
         patientId = intent.getIntExtra(EXTRA_PATIENT_ID, -1)
-        patientRegNo = intent.getIntExtra(EXTRA_REG_NO, -1)
 
         // Binding and ViewModel
         binding = ActivityPatientHistoryBinding.inflate(layoutInflater)
@@ -55,7 +53,6 @@ class PatientHistoryActivity : BaseActivity(R.layout.activity_patient_history) {
         binding.btnAddFollowUp.setOnClickListener {
             val intent = Intent(this, PatientFollowUpActivity::class.java).apply {
                 putExtra(EXTRA_PATIENT_ID, patientId)
-                putExtra(EXTRA_REG_NO, patientRegNo)
             }
             startActivity(intent)
         }
@@ -100,7 +97,6 @@ class PatientHistoryActivity : BaseActivity(R.layout.activity_patient_history) {
             itemBinding.btnViewDetails.setOnClickListener {
                 val intent = Intent(this, PatientFollowUpActivity::class.java).apply {
                     putExtra(EXTRA_PATIENT_ID, patientId)
-                    putExtra(EXTRA_REG_NO, patientRegNo)
                     putExtra(EXTRA_FOLLOW_UP_NUMBER, followUp.follow_up_num)
                     putExtra(EXTRA_VIEW_MODE, true) // optional flag to mark view-only mode
                 }

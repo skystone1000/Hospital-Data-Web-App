@@ -53,7 +53,7 @@ class DashboardActivity : BaseActivity(R.layout.activity_dashboard){
 
         binding.btnSyncFirebase.setOnClickListener {
             lifecycleScope.launch {
-                viewModel.syncPatients()
+                viewModel.syncData()
                 Toast.makeText(this@DashboardActivity, "Sync completed!", Toast.LENGTH_SHORT).show()
             }
         }
@@ -93,7 +93,6 @@ class DashboardActivity : BaseActivity(R.layout.activity_dashboard){
                     itemBinding.root.setOnClickListener {
                         val intent = Intent(this@DashboardActivity, PatientHistoryActivity::class.java).apply {
                             putExtra(EXTRA_PATIENT_ID, patient.id)
-                            putExtra(EXTRA_REG_NO, patient.regno)
                         }
                         startActivity(intent)
                     }
@@ -123,7 +122,6 @@ class DashboardActivity : BaseActivity(R.layout.activity_dashboard){
                     itemBinding.root.setOnClickListener {
                         val intent = Intent(this@DashboardActivity, PatientHistoryActivity::class.java).apply {
                             putExtra(EXTRA_PATIENT_ID, patient.id)
-                            putExtra(EXTRA_REG_NO, patient.regno)
                         }
                         startActivity(intent)
                     }

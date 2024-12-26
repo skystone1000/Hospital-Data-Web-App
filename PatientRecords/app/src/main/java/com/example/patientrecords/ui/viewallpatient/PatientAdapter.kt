@@ -35,7 +35,6 @@ class PatientAdapter : ListAdapter<Patient, PatientAdapter.PatientViewHolder>(Pa
             val context = it.context
             val intent = Intent(context, PatientHistoryActivity::class.java).apply {
                 putExtra(EXTRA_PATIENT_ID, patient.id)
-                putExtra(EXTRA_REG_NO, patient.regno)
             }
             context.startActivity(intent)
         }

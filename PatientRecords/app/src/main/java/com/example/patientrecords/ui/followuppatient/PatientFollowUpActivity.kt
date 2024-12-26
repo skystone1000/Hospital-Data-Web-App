@@ -35,7 +35,6 @@ class PatientFollowUpActivity : BaseActivity(R.layout.activity_patient_follow_up
 
         // Getting Extras
         patientId = intent.getIntExtra(EXTRA_PATIENT_ID, -1)
-        patientRegNo = intent.getStringExtra(EXTRA_REG_NO).toString()
         patientFollowUpNumber = intent.getStringExtra(EXTRA_FOLLOW_UP_NUMBER).toString()
         isViewMode = intent.getBooleanExtra(EXTRA_VIEW_MODE, false)
 
@@ -51,6 +50,11 @@ class PatientFollowUpActivity : BaseActivity(R.layout.activity_patient_follow_up
         setChildContentView(binding.root)
         initToolbarWithDrawer()
         setToolbarTitle("Patient Follow Up")
+
+        // Patient Data
+        viewModel.patient.observe(this){
+            patientRegNo = it.regno.toString()
+        }
 
         // Get Total number of current patient follow ups
          viewModel.patientFollowUps.observe(this){
@@ -164,7 +168,7 @@ class PatientFollowUpActivity : BaseActivity(R.layout.activity_patient_follow_up
         var newPatientFollowUp = PatientFollowUp(
             followUpId = currFollowUpId,  // Replace with a proper ID logic if needed,
             id = patientId,
-            date = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(Calendar.getInstance().time),
+            date = SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.getDefault()).format(Calendar.getInstance().time),
             regno = patientRegNo,
             follow_up_num = currFollowUpNo,
             weight = binding.etWeight.text.toString().toInt(),
