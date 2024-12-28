@@ -8,7 +8,6 @@ import com.example.patientrecords.data.FirebaseRepository
 import com.example.patientrecords.data.FirebaseSyncManager
 import com.example.patientrecords.data.PatientRepository
 import com.example.patientrecords.data.localdb.Patient
-import com.example.patientrecords.data.localdb.PatientFollowUp
 import com.example.patientrecords.utils.Extensions.Companion.get1DayAgo
 import com.example.patientrecords.utils.Extensions.Companion.get31DaysAgo
 import com.example.patientrecords.utils.Extensions.Companion.get365DaysAgo

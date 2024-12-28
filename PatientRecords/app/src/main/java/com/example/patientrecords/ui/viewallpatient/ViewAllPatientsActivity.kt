@@ -1,20 +1,17 @@
 package com.example.patientrecords.ui.viewallpatient
 
 import android.os.Bundle
-import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.patientrecords.PatientRecordsApp
-import com.example.patientrecords.R
 import com.example.patientrecords.databinding.ActivityViewAllPatientsBinding
 import com.example.patientrecords.ui.base.BaseActivity
 import kotlinx.coroutines.flow.collectLatest
 
-class ViewAllPatientsActivity : BaseActivity(R.layout.activity_view_all_patients) {
+class ViewAllPatientsActivity : BaseActivity() {
 
     private lateinit var binding: ActivityViewAllPatientsBinding
     private lateinit var viewModel: ViewAllPatientsViewModel
-    private lateinit var adapter: PatientAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

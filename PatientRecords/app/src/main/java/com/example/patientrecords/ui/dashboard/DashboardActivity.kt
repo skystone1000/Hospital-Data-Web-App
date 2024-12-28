@@ -5,24 +5,20 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.LayoutInflater
-import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import com.example.patientrecords.PatientRecordsApp
-import com.example.patientrecords.R
 import com.example.patientrecords.databinding.ActivityDashboardBinding
 import com.example.patientrecords.databinding.ItemPatientBinding
 import com.example.patientrecords.ui.base.BaseActivity
 import com.example.patientrecords.ui.patienthistory.PatientHistoryActivity
 import com.example.patientrecords.utils.Extensions.Companion.EXTRA_PATIENT_ID
-import com.example.patientrecords.utils.Extensions.Companion.EXTRA_REG_NO
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
-import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 
-class DashboardActivity : BaseActivity(R.layout.activity_dashboard){
+class DashboardActivity : BaseActivity(){
 
     private lateinit var binding: ActivityDashboardBinding
     private lateinit var viewModel: DashboardViewModel

@@ -10,7 +10,6 @@ import com.example.patientrecords.data.localdb.Patient
 import com.example.patientrecords.databinding.ItemPatientBinding
 import com.example.patientrecords.ui.patienthistory.PatientHistoryActivity
 import com.example.patientrecords.utils.Extensions.Companion.EXTRA_PATIENT_ID
-import com.example.patientrecords.utils.Extensions.Companion.EXTRA_REG_NO
 
 class PatientAdapter : ListAdapter<Patient, PatientAdapter.PatientViewHolder>(PatientDiffCallback()) {
 

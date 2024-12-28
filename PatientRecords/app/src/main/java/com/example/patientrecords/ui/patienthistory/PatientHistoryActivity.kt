@@ -7,7 +7,6 @@ import android.widget.LinearLayout
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.patientrecords.PatientRecordsApp
-import com.example.patientrecords.R
 import com.example.patientrecords.data.localdb.PatientFollowUp
 import com.example.patientrecords.databinding.ActivityPatientHistoryBinding
 import com.example.patientrecords.databinding.ItemFollowupEntryBinding
@@ -16,11 +15,10 @@ import com.example.patientrecords.ui.base.BaseActivity
 import com.example.patientrecords.ui.followuppatient.PatientFollowUpActivity
 import com.example.patientrecords.utils.Extensions.Companion.EXTRA_FOLLOW_UP_NUMBER
 import com.example.patientrecords.utils.Extensions.Companion.EXTRA_PATIENT_ID
-import com.example.patientrecords.utils.Extensions.Companion.EXTRA_REG_NO
 import com.example.patientrecords.utils.Extensions.Companion.EXTRA_VIEW_MODE
 
 
-class PatientHistoryActivity : BaseActivity(R.layout.activity_patient_history) {
+class PatientHistoryActivity : BaseActivity() {
 
     private lateinit var binding: ActivityPatientHistoryBinding
     private lateinit var viewModel: PatientHistoryViewModel

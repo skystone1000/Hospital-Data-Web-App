@@ -7,7 +7,7 @@ import com.example.patientrecords.ui.addpatient.AddPatientActivity
 import com.example.patientrecords.ui.base.BaseActivity
 import com.example.patientrecords.ui.viewallpatient.ViewAllPatientsActivity
 
-class MainActivity : BaseActivity(R.layout.activity_main) {
+class MainActivity : BaseActivity() {
 
     private lateinit var binding: ActivityMainBinding
 

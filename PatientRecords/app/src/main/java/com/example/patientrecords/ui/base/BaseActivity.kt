@@ -8,7 +8,6 @@ import android.view.MenuItem
 import android.view.View
 import android.view.WindowInsets
 import android.widget.Toast
-import androidx.annotation.LayoutRes
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.graphics.drawable.DrawerArrowDrawable
@@ -24,10 +23,9 @@ import com.example.patientrecords.ui.addpatient.AddPatientActivity
 import com.example.patientrecords.ui.dashboard.DashboardActivity
 import com.example.patientrecords.ui.viewallpatient.ViewAllPatientsActivity
 import com.google.android.material.appbar.MaterialToolbar
-import com.google.android.material.navigation.DrawerLayoutUtils
 import com.google.android.material.navigation.NavigationView
 
-abstract class BaseActivity(@LayoutRes private val layoutResId: Int) : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+abstract class BaseActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var toolbar: MaterialToolbar
     private lateinit var drawerLayout: DrawerLayout

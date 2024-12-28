@@ -5,7 +5,6 @@ import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.example.patientrecords.PatientRecordsApp
-import com.example.patientrecords.R
 import com.example.patientrecords.data.localdb.Patient
 import com.example.patientrecords.databinding.ActivityAddPatientBinding
 import com.example.patientrecords.ui.base.BaseActivity
@@ -16,7 +15,7 @@ import java.util.Calendar
 import java.util.Locale
 import kotlin.random.Random
 
-class AddPatientActivity : BaseActivity(R.layout.activity_add_patient) {
+class AddPatientActivity : BaseActivity() {
 
     private lateinit var binding: ActivityAddPatientBinding
     private lateinit var viewModel: AddPatientViewModel

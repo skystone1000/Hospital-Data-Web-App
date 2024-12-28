@@ -18,7 +18,7 @@ import java.util.Locale
 import kotlin.random.Random
 
 
-class PatientFollowUpActivity : BaseActivity(R.layout.activity_patient_follow_up) {
+class PatientFollowUpActivity : BaseActivity() {
 
     private lateinit var binding: ActivityPatientFollowUpBinding
     private lateinit var viewModel: PatientFollowUpViewModel
@@ -106,7 +106,7 @@ class PatientFollowUpActivity : BaseActivity(R.layout.activity_patient_follow_up
 
     private fun findCurrentFollowup(patientFollowUps: List<PatientFollowUp>) : PatientFollowUp? {
         for(patientFollowUp in patientFollowUps){
-            if(patientFollowUp.follow_up_num == patientFollowUpNumber.toString()){
+            if(patientFollowUp.follow_up_num == patientFollowUpNumber){
                 return patientFollowUp
             }
         }
