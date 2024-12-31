@@ -16,6 +16,7 @@ import com.example.patientrecords.ui.followuppatient.PatientFollowUpActivity
 import com.example.patientrecords.utils.Extensions.Companion.EXTRA_FOLLOW_UP_NUMBER
 import com.example.patientrecords.utils.Extensions.Companion.EXTRA_PATIENT_ID
 import com.example.patientrecords.utils.Extensions.Companion.EXTRA_VIEW_MODE
+import com.example.patientrecords.utils.Extensions.Companion.toDisplayDateTime
 
 
 class PatientHistoryActivity : BaseActivity() {
@@ -88,7 +89,7 @@ class PatientHistoryActivity : BaseActivity() {
             val itemBinding = ItemFollowupEntryBinding.inflate(layoutInflater)
 
             // Set data
-            itemBinding.tvFollowUpDate.text = "Date: ${followUp.date}"
+            itemBinding.tvFollowUpDate.text = "Date: ${followUp.date.toDisplayDateTime()}"
             itemBinding.tvFollowUpNum.text = "Follow Up Number: ${followUp.follow_up_num}"
 
             // View Follow up Details

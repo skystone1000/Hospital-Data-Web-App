@@ -45,6 +45,6 @@ data class Patient(
     val followUp2: String? = null,
     val followUp3: String? = null,
     val followUp4: String? = null,
-    val dateJoined: String? = null,
+    val dateJoined: Long? = System.currentTimeMillis(),  // Store in millis
     val urlToImage: String? = null
 )

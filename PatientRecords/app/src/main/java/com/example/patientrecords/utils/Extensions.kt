@@ -1,6 +1,9 @@
 package com.example.patientrecords.utils
 
+import java.text.SimpleDateFormat
 import java.util.Calendar
+import java.util.Date
+import java.util.Locale
 
 open class Extensions {
     companion object {
@@ -32,6 +35,12 @@ open class Extensions {
             calendar.add(Calendar.DAY_OF_YEAR, -365)
             return calendar.timeInMillis
         }
+
+        fun Long.toDisplayDateTime(): String {
+            val sdf = SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.getDefault())
+            return sdf.format(Date(this))
+        }
+
 
     }
 }

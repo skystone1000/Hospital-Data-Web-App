@@ -4,17 +4,13 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import com.example.patientrecords.PatientRecordsApp
-import com.example.patientrecords.R
 import com.example.patientrecords.data.localdb.PatientFollowUp
 import com.example.patientrecords.databinding.ActivityPatientFollowUpBinding
 import com.example.patientrecords.ui.base.BaseActivity
 import com.example.patientrecords.utils.Extensions.Companion.EXTRA_FOLLOW_UP_NUMBER
 import com.example.patientrecords.utils.Extensions.Companion.EXTRA_PATIENT_ID
-import com.example.patientrecords.utils.Extensions.Companion.EXTRA_REG_NO
 import com.example.patientrecords.utils.Extensions.Companion.EXTRA_VIEW_MODE
-import java.text.SimpleDateFormat
-import java.util.Calendar
-import java.util.Locale
+import com.example.patientrecords.utils.Extensions.Companion.toDisplayDateTime
 import kotlin.random.Random
 
 
@@ -70,7 +66,7 @@ class PatientFollowUpActivity : BaseActivity() {
 
                  // Set Followup Date and number
                  binding.tvFollowUpDate.visibility = View.VISIBLE
-                 binding.tvFollowUpDate.text = "Follow up date: ".plus(currentFollowUp?.date)
+                 binding.tvFollowUpDate.text = "Follow up date: ".plus(currentFollowUp?.date?.toDisplayDateTime())
                  binding.tvFollowUpNum.visibility = View.VISIBLE
                  binding.tvFollowUpNum.text = "Follow up number: ".plus(currentFollowUp?.follow_up_num)
 
@@ -168,7 +164,7 @@ class PatientFollowUpActivity : BaseActivity() {
         var newPatientFollowUp = PatientFollowUp(
             followUpId = currFollowUpId,  // Replace with a proper ID logic if needed,
             id = patientId,
-            date = SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.getDefault()).format(Calendar.getInstance().time),
+            date = System.currentTimeMillis(),
             regno = patientRegNo,
             follow_up_num = currFollowUpNo,
             weight = binding.etWeight.text.toString().toInt(),

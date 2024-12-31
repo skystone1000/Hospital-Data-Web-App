@@ -10,9 +10,6 @@ import com.example.patientrecords.databinding.ActivityAddPatientBinding
 import com.example.patientrecords.ui.base.BaseActivity
 import com.example.patientrecords.utils.Extensions.Companion.EXTRA_PATIENT_ID
 import com.example.patientrecords.utils.Extensions.Companion.EXTRA_VIEW_MODE
-import java.text.SimpleDateFormat
-import java.util.Calendar
-import java.util.Locale
 import kotlin.random.Random
 
 class AddPatientActivity : BaseActivity() {
@@ -244,7 +241,7 @@ class AddPatientActivity : BaseActivity() {
             past_history = binding.etPastHistory.text.toString(),
             family_history = binding.etFamilyHistory.text.toString(),
             treatment = binding.etTreatment.text.toString(),
-            dateJoined = SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.getDefault()).format(Calendar.getInstance().time),
+            dateJoined = System.currentTimeMillis(),
             paid = binding.etPaid.text.toString(),
             balance = binding.etBalance.text.toString()
         )

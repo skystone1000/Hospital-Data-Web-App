@@ -30,7 +30,7 @@ class FirebaseSyncManager(
         val toRoom = remotePatients.filter { remote ->
             val local = localPatients.find { it.id == remote.id }
             local == null || remote != local &&
-                    (local.dateJoined ?: 0).toString() > (remote.dateJoined ?: 0).toString()
+                    (local.dateJoined ?: 0).toString() < (remote.dateJoined ?: 0).toString()
         }
 
         firebaseRepo.uploadPatients(toFirebase)
@@ -54,7 +54,7 @@ class FirebaseSyncManager(
         val toRoom = remotePatientFollowUps.filter { remote ->
             val local = localPatientFollowUps.find { it.followUpId == remote.followUpId }
             local == null || remote != local &&
-                    (local.date ?: 0).toString() > (remote.date ?: 0).toString()
+                    (local.date ?: 0).toString() < (remote.date ?: 0).toString()
         }
 
         // Update whichever is not synced

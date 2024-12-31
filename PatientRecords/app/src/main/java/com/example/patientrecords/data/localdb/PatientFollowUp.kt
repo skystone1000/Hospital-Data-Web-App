@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 data class PatientFollowUp(
     @PrimaryKey(autoGenerate = true) val followUpId: Int = -1,
     val id: Int = -1,
-    val date: String = "",
+    val date: Long = System.currentTimeMillis(),  // Store in millis
     val regno: String = "",
     val follow_up_num: String = "",
     val weight: Int = -1,
