@@ -68,17 +68,4 @@ class DashboardViewModel(private val repository: PatientRepository, private val 
             _followUps365DayCount.value = repository.getFollowUpsFromDay(get365DaysAgo()).size
         }
     }
-
-    fun syncData(){
-        syncPatients()
-        syncPatientFollowUps()
-    }
-
-    fun syncPatients() = viewModelScope.launch {
-        FirebaseSyncManager(repository, firebaseRepository).syncPatientsBothWays()
-    }
-
-    fun syncPatientFollowUps() = viewModelScope.launch {
-        FirebaseSyncManager(repository, firebaseRepository).syncPatientFollowUpsBothWays()
-    }
 }

@@ -47,12 +47,6 @@ class DashboardActivity : BaseActivity(){
         viewModel.loadSummaryData()
         viewModel.loadDashboardData()
 
-        binding.btnSyncFirebase.setOnClickListener {
-            lifecycleScope.launch {
-                viewModel.syncData()
-                Toast.makeText(this@DashboardActivity, "Sync completed!", Toast.LENGTH_SHORT).show()
-            }
-        }
     }
 
     private fun setupClock() {

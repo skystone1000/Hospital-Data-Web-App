@@ -20,6 +20,7 @@ import com.example.patientrecords.MainActivity
 import com.example.patientrecords.R
 import com.example.patientrecords.databinding.ActivityBaseBinding
 import com.example.patientrecords.ui.addpatient.AddPatientActivity
+import com.example.patientrecords.ui.backup.BackUpActivity
 import com.example.patientrecords.ui.dashboard.DashboardActivity
 import com.example.patientrecords.ui.viewallpatient.ViewAllPatientsActivity
 import com.google.android.material.appbar.MaterialToolbar
@@ -92,6 +93,9 @@ abstract class BaseActivity : AppCompatActivity(), NavigationView.OnNavigationIt
             R.id.nav_dashboard -> {
                 startActivity(Intent(this, DashboardActivity::class.java))
             }
+            R.id.nav_backup -> {
+                startActivity(Intent(this, BackUpActivity::class.java))
+            }
             R.id.nav_logout -> {
                 // Handle Logout
             }
@@ -112,7 +116,10 @@ abstract class BaseActivity : AppCompatActivity(), NavigationView.OnNavigationIt
                 startActivity(Intent(this, ViewAllPatientsActivity::class.java))
             }
             R.id.nav_dashboard -> {
-                // Navigate to dashboard
+                startActivity(Intent(this, DashboardActivity::class.java))
+            }
+            R.id.nav_backup -> {
+                startActivity(Intent(this, BackUpActivity::class.java))
             }
             R.id.nav_logout -> {
                 // Handle Logout
