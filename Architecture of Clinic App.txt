@@ -1,0 +1,320 @@
+Architecture of Clinic App
+
+======================================
+Modules to Implement 
+======================================
+
+Login
+Home Page
+Add Patient
+Add Follow Up
+Patient Records
+Patient Details
+View Patient Initial data
+View patient Follow up
+Edit Patient Initial data
+Edit patient follow up
+Search
+Bug: Add Followup Disabled by default
+Navigation
+Dashboard
+Firebase Sync
+Improvement : remove sending XML layout to base activity in constructor
+Date time unit standards Updated to Long
+    Bug : Date time unit standards 
+    Bug : Dashboard Summary elements (Date fix)
+
+Backup Data Screen
+Register and login update
+Doctor Details Dashboard
+pagination/lazy loading
+Filter Functionality
+Offline working(Sync on internet)
+Delete Patient (Record + Follow ups)
+Delete Follow up
+Voice assist
+Document
+
+
+
+======================================
+Prompts
+======================================
+Todo (Remaining)
+- Functionality : Back Up Screen
+New functionality to create backup of all the things in local db and also to import data to local db
+Add any extra necessary components that you feel like are not already included in UI and logic
+Create New activity "BackUpActivity"
+
+- UI Components: 
+The "BackUpActivity" XML layout will contain following Material Design components
+1) title
+2) Sync Section (Give button to sync all data to firebase cloud)
+3) Import Export Local Db section (Will contain 2 buttons to import and export)
+Use Card view where ever necessary - Give good aesthetics to card like padding, margins, elevation, shadow etc
+All components in item layouts should have all the required parameters/fields - layout_width, layout_height, orientation, constrains
+Prefer constraint layout for better performance
+Make UI layouts responsive, optimized, modern and with standard color pallet used till now
+
+- Architecture: 
+Use Data binding
+Use MVVM architecture with repository pattern to get data from ROOM database
+pass repository object from activity to view model 
+Use Flow where ever necessary
+
+- Logical code for Activity
+Use Room DB and write all the required Queries to get All the above details.
+Dynamically add list item to scroll view for following sections
+4) Patients Added Last week section
+5) Follow ups Added Last week section
+
+File Structure: First give the file structure of all the news files to be created and then their implementations and codes
+
+
+---------------------------------------------------------------------------------------------------
+Commit: Date time unit standards Updated to Long
+
+I have used datetime as a string in 2 data classes 
+@Entity(tableName = "patient_data")
+data class Patient( val dateJoined: String? = null )
+@Entity(tableName = "follow_up_data")
+data class PatientFollowUp( val date: String = "")
+
+These dates are used at various places with different units and hence the comparisions and the queries are failing to return correct output
+SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.getDefault()).format(Calendar.getInstance().time)
+
+Use Cases
+1) DashboardActivity
+To get 1 Day, 7 days, 31 days, 365 Days Patients added and followups added
+
+fun get1DayAgo(): Long {
+    val calendar = Calendar.getInstance()
+    calendar.add(Calendar.DAY_OF_YEAR, -1)
+    return calendar.timeInMillis
+}
+
+@Query("SELECT * FROM follow_up_data WHERE date >= :date")
+    suspend fun getFollowUpsFromDay(date: Long): List<PatientFollowUp>
+
+2) FirebaseSyncManager
+To sync data between firebase and local db and also added the time logic to include the edit updates for existing records
+
+suspend fun syncPatientFollowUpsBothWays(){
+    val localPatientFollowUps = localRepo.getAllFollowUps()
+    val remotePatientFollowUps = firebaseRepo.downloadFollowUps()
+
+    // Detect new or updated patients to push to Firebase
+    val toFirebase = localPatientFollowUps.filter { local ->
+        val remote = remotePatientFollowUps.find { it.followUpId == local.followUpId }
+        remote == null || local != remote &&
+                (local.date ?: 0).toString() > (remote.date ?: 0).toString()
+    }
+
+    // Detect new or updated patients to insert into Room
+    val toRoom = remotePatientFollowUps.filter { remote ->
+        val local = localPatientFollowUps.find { it.followUpId == remote.followUpId }
+        local == null || remote != local &&
+                (local.date ?: 0).toString() > (remote.date ?: 0).toString()
+    }
+
+    // Update whichever is not synced
+    firebaseRepo.uploadPatientFollowUps(toFirebase)
+    toRoom.forEach {
+        localRepo.addFollowUp(it)
+    }
+}
+
+
+how to make the DateTime data standardized and in same format at all the places to give correct outputs
+
+---------------------------------------------------------------------------------------------------
+Functionality
+I want to add Firebase database to my app with the same structure as room DB
+synchronize the local and Firebase data With button clicks in dashboard
+give me step by step instructions to create and integrate Firebase project with the current android app
+modularise the app with proper hierarchy.
+Also mention the usages of both PatientRepository(local room db) and FirebaseRepository(firebase)
+For Patient data class "id" is the primary key
+For PatientFollowUp data class "followUpId" is the primary key
+make Sync logic accordingly and in a separate FirebaseSyncManager
+
+- Architecture: 
+Use Data binding
+Use MVVM architecture with repository pattern to get data from ROOM database
+pass repository object from activity to view model 
+Use Flow where ever necessary
+
+File Structure: First give the file structure of all the news files to be created and then their implementations and codes
+
+---------------------------------------------------------------------------------------------------
+Create following MutableLiveData variables in DashboardViewModel patients1DayCount,patients7DayCount,patients31DayCount,patients365DayCount
+use following function to get that
+suspend fun getPatientsFromDay(date: Long): List<Patient> = patientDao.getPatientsFromDay(date)
+and put observables to those varaibles to update the data in DashboardActivity
+
+
+---------------------------------------------------------------------------------------------------
+- Functionality : Dashboard
+New functionality to get summary of all the things
+Add any extra necessary components that you feel like are not already included in UI
+get reference of the image.
+Create New activity "PatientDashboardActivity"
+
+- UI Components: 
+The "PatientDashboardActivity" XML layout will contain following Material Design components
+1) title (Give a clock at the side)
+2) Doctor details Section
+3) Summary section containing following things
+    Today's Summary
+    Week's Summary
+    Month's Summary
+    Year's Summary
+4) Patients Added Last week section
+5) Follow ups Added Last week section
+Use Card view where ever necessary - Give good aesthetics to card like padding, margins, elevation, shadow etc
+All components in item layouts should have all the required parameters/fields and prefer constraint layout for better performance
+Make UI layouts responsive, optimized, modern and with standard color pallet used till now
+
+- Architecture: 
+Use Data binding
+Use MVVM architecture with repository pattern to get data from ROOM database
+pass repository object from activity to view model 
+Use Flow where ever necessary
+
+- Logical code for Activity
+Use Room DB and write all the required Queries to get All the above details.
+Dynamically add list item to scroll view for following sections
+4) Patients Added Last week section
+5) Follow ups Added Last week section
+
+File Structure: First give the file structure of all the news files to be created and then their implementations and codes
+
+---------------------------------------------------------------------------------------------------
+- Functionality : Make Navigation Simpler
+New functionality to add navigations through out the app
+Add a Material topBar layout which will conatin name from the App, use BaseActivity for initalising the title and toolbar icons 
+Create an Toolbar XMl and include it in all the activities
+add proper icons and menu options where ever necessary for following activities
+
+AddPatientActivity
+PatientFollowUpActivity
+PatientHistoryActivity
+ViewAllPatientsActivity
+MainActivity
+
+-----------------------------------------------------------------------------------------------------
+- Functionality : Edit Patient Details
+New functionality to edit patient details of an existing patient
+When we are in AddPatientActivity View mode -> give edit button to go in edit mode
+input fields will get enabled and there will be an update button on click of which the data will be updated
+Id of current patient needs to be passed to the "AddPatientActivity" (Reuse of this activity)
+All the patient details are fetched from the Room db and updated in the input fields and are disabled
+
+- UI Components: 
+The "PatientHistoryActivity" XML layout will contain following Material Design components
+1) title 
+2) Card view - Give good asthetics to card like paddings, margins, elevation, shadow etc 
+    Add following fields
+    First Name and Last name make it one filed and append together and show in name field
+    Occupation, RegNo
+3) a scrollable list view where we will dynamically add list items for each follow up
+4) Sub title - Initial Details - Button To view inital details
+5) Submit button
+
+All components in item layouts should have all the required parameters/fields and prefer constraint layout for better perfomance
+Make UI layouts responsive, optimized, modern and with standard color pallet used till 
+
+- Architecture: 
+Use Data binding
+Use MVVM architecture with repository pattern to get data from ROOM database
+pass repository object from activity to view model 
+Use Flow where ever necessary
+
+- Logical code for Activity
+Create a Room DB Query to get All follow ups for a patient and for each follow up dynamically add list item to scroll view with a button to view that followup details
+
+File Structure: First give the file structure of all the news files to be created and then their implementations and codes
+
+---------------------------------------------------------------------------------------------------
+1) I want you to act as an experienced android developer who knows kotlin and java and help me with Building an android project with XML layouts and kotlin logics for a patient records app
+
+use material design components for all the UI related XML files and kotlin as programming language
+use data binding and viewmodels where ever necessary
+
+Use MVVM pattern and also use repository where ever necessary
+
+---------------------------------------------------------------------------------------------------
+2) Lets create next feature
+
+- Functionality: 
+New Activity to show all the patient records 
+
+- UI Components: 
+(Material Design) It will consist of title and a recycler view and
+Independent item layout, consisting First name,Last name, sex, occupation, phone, regno
+All components in item layouts should have all the required parameters/fields and prefer constraint layout for better perfomance
+Make UI responsive, modern and with standard color pallet used till now along with optimizations
+
+Architecture: 
+Use Data binding
+Use MVVM architecture with repository pattern to get data from ROOM db
+pass repository object from activity to view model 
+Use Flow where ever necessary
+
+File Structure: First give the file structure of all the news files to be created and then their implementations and codes
+
+-----------------------------------------------------------------------------------------------------
+3) Application Class
+
+Help me create Application class and initialize repository there and use that repository object every where else also add the things which can be extracted to the application class
+
+-----------------------------------------------------------------------------------------------------
+4) Base Activity
+
+- Functionality: 
+New functionality to add/view follow up for a patient, 
+create new activity "PatientFollowUpActivity"
+Entry point by clicking on any patient record in recycler view of ViewAllPatientsActivity,
+Id of current clicked patient needs to be passed to the new activity
+
+- UI Components: 
+The "PatientFollowUpActivity" XML layout will contain following Material Design components
+1) title 
+2) a list view with input fields
+    this will have two section
+    a) Section 1 - For old fields containing, First name, Last Name, RegNo, Phone, ID
+    these will be prepopulated with the selected patient data and will be disabled
+    B) Section 2 - This  will contain new fields that we need to add data, 
+    so will be empty and enabled, the fields are 
+    weight: Int,
+    treatment output: String, 
+    other_complains: String,
+    treatment: String,
+    medicine_duration: String,
+    paid: String,
+    balance: String,
+3) Submit button
+2) Card view - Give good asthetics to card like paddings, margins, elevation, shadow etc 
+    Add following fields
+    First Name and Last name make it one filed and append together and show in name field
+    Occupation, RegNo
+3) a scrollable list view where we will dynamically add list items for each follow up
+4) Sub title - Initial Details - Button To view inital details
+
+
+All components in item layouts should have all the required parameters/fields and prefer constraint layout for better perfomance
+Make UI layouts responsive, optimized, modern and with standard color pallet used till 
+
+- Architecture: 
+Use Data binding
+Use MVVM architecture with repository pattern to get data from ROOM database
+pass repository object from activity to view model 
+Use Flow where ever necessary
+
+- Database
+Create New table "follow_up_data" will following data class
+
+- Logical code for Activity
+On click of submit button should All the data should be added to "follow_up_data" table
+
+File Structure: First give the file structure of all the news files to be created and then their implementations and codes
