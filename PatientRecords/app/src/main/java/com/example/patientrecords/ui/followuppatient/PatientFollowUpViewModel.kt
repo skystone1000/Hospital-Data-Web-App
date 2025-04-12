@@ -8,6 +8,7 @@ import com.example.patientrecords.data.Patient
 import com.example.patientrecords.data.PatientFollowUp
 import com.example.patientrecords.data.PatientRepository
 import com.example.patientrecords.databinding.ActivityPatientFollowUpBinding
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import kotlin.random.Random
@@ -18,6 +19,7 @@ class PatientFollowUpViewModel(
 ) : ViewModel() {
 
     val patient : LiveData<Patient> = repository.getPatientById(patientId).asLiveData()
+    val patientFollowUps: LiveData<List<PatientFollowUp>> = repository.getFollowUps(patientId).asLiveData()
 
     fun insertFollowUp(patientFollowUp : PatientFollowUp) {
         viewModelScope.launch {

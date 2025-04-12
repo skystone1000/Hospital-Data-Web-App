@@ -24,6 +24,8 @@ class PatientFollowUpActivity : BaseActivity(R.layout.activity_patient_follow_up
     private lateinit var binding: ActivityPatientFollowUpBinding
     private lateinit var viewModel: PatientFollowUpViewModel
     private var patientId: Int = -1
+    private var patientRegNo: String = ""
+    private var totalInitialFollowUps: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,14 +33,15 @@ class PatientFollowUpActivity : BaseActivity(R.layout.activity_patient_follow_up
         setContentView(binding.root)
 
         patientId = intent.getIntExtra("patient_id", -1)
+        patientRegNo = intent.getStringExtra("patient_regno").toString()
         viewModel = PatientFollowUpViewModelFactory((application as PatientRecordsApp).repository, patientId).create(PatientFollowUpViewModel::class.java)
 
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
-        viewModel.patient.observe(this){ patient ->
-            // binding.
-
+        // Get Total number of current patient follow ups
+         viewModel.patientFollowUps.observe(this){
+             totalInitialFollowUps = it.count()
         }
 
         binding.btnSubmit.setOnClickListener {
@@ -54,8 +57,8 @@ class PatientFollowUpActivity : BaseActivity(R.layout.activity_patient_follow_up
             followUpId = Random.nextInt(100000),  // Replace with a proper ID logic if needed,
             id = patientId,
             date = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(Calendar.getInstance().time),
-            regno = "123",
-            follow_up_num = "1",
+            regno = patientRegNo,
+            follow_up_num = (totalInitialFollowUps + 1).toString(),
             weight = binding.etWeight.text.toString().toInt(),
             treatment_output = binding.etTreatmentOutput.text.toString(),
             other_complains = binding.etOtherComplains.text.toString(),

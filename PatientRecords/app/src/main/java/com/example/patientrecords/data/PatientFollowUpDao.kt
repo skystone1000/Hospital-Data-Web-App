@@ -12,6 +12,6 @@ interface PatientFollowUpDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertFollowUp(followUp: PatientFollowUp)
 
-    /*@Query("SELECT * FROM follow_up_data WHERE id = :patientId")
-    fun getFollowUpsForPatient(patientId: Int): Flow<List<PatientFollowUp>>*/
+    @Query("SELECT * FROM follow_up_data WHERE id = :patientId")
+    fun getFollowUpsForPatient(patientId: Int): Flow<List<PatientFollowUp>>
 }

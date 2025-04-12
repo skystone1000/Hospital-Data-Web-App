@@ -16,7 +16,7 @@ class PatientRepository(private val patientDao: PatientDao, private val patientF
         patientFollowUpDao.insertFollowUp(followUp)
     }
 
-    /*fun getFollowUps(patientId: Int): Flow<List<PatientFollowUp>> {
+    fun getFollowUps(patientId: Int): Flow<List<PatientFollowUp>> {
         return patientFollowUpDao.getFollowUpsForPatient(patientId)
-    }*/
+    }
 }

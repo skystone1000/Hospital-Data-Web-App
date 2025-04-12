@@ -31,7 +31,8 @@ class PatientAdapter(private val patients: List<Patient>) :
         holder.itemView.setOnClickListener {
             val context = it.context
             val intent = Intent(context, PatientFollowUpActivity::class.java).apply {
-                putExtra("patient_id", patient.id) // pass the patientId
+                putExtra("patient_id", patient.id)
+                putExtra("patient_regno", patient.regno)
             }
             context.startActivity(intent)
         }
