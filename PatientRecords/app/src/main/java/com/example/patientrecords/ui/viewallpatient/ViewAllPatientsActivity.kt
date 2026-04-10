@@ -2,11 +2,14 @@ package com.example.patientrecords.ui.viewallpatient
 
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.example.patientrecords.PatientRecordsApp
 import com.example.patientrecords.databinding.ActivityViewAllPatientsBinding
 import com.example.patientrecords.ui.base.BaseActivity
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 class ViewAllPatientsActivity : BaseActivity() {
 
@@ -50,9 +53,11 @@ class ViewAllPatientsActivity : BaseActivity() {
         }
          **/
 
-        lifecycleScope.launchWhenStarted {
-            viewModel.filteredPatients.collectLatest {
-                adapter.submitList(it)
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.filteredPatients.collectLatest {
+                    adapter.submitList(it)
+                }
             }
         }
 

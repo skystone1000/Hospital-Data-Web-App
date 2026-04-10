@@ -4,8 +4,10 @@ import android.content.Intent
 import android.content.res.Resources
 import android.os.Bundle
 import android.widget.LinearLayout
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.example.patientrecords.PatientRecordsApp
 import com.example.patientrecords.data.localdb.PatientFollowUp
 import com.example.patientrecords.databinding.ActivityPatientHistoryBinding
@@ -17,7 +19,7 @@ import com.example.patientrecords.utils.Extensions.Companion.EXTRA_FOLLOW_UP_NUM
 import com.example.patientrecords.utils.Extensions.Companion.EXTRA_PATIENT_ID
 import com.example.patientrecords.utils.Extensions.Companion.EXTRA_VIEW_MODE
 import com.example.patientrecords.utils.Extensions.Companion.toDisplayDateTime
-
+import kotlinx.coroutines.launch
 
 class PatientHistoryActivity : BaseActivity() {
 
@@ -56,17 +58,17 @@ class PatientHistoryActivity : BaseActivity() {
             startActivity(intent)
         }
 
-        // View Initial Details
+        // View Initial Details — opens AddPatientActivity in view-only mode
         binding.btnInitialDetails.setOnClickListener {
             val intent = Intent(this, AddPatientActivity::class.java).apply {
                 putExtra(EXTRA_PATIENT_ID, patientId)
-                putExtra(EXTRA_VIEW_MODE, true) // optional flag to mark view-only mode
+                putExtra(EXTRA_VIEW_MODE, true)
             }
             startActivity(intent)
         }
 
         // Update Patient Details Card
-        viewModel.patient.observe(this){ patient->
+        viewModel.patient.observe(this) { patient ->
             binding.cvPatientDetails.tvName.text = "${patient.firstName} ${patient.lastName}"
             binding.cvPatientDetails.tvSex.text = patient.sex ?: "N/A"
             binding.cvPatientDetails.tvOccupation.text = patient.occupation ?: "N/A"
@@ -74,10 +76,13 @@ class PatientHistoryActivity : BaseActivity() {
             binding.cvPatientDetails.tvRegNo.text = patient.regno ?: "N/A"
         }
 
-        // Add All follow ups
-        lifecycleScope.launchWhenStarted {
-            viewModel.followUps.collect { list ->
-                displayFollowUps(list)
+        // Add All follow-ups — repeatOnLifecycle cancels the collector when the Activity is stopped,
+        // preventing updates from arriving while the UI is off-screen
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.followUps.collect { list ->
+                    displayFollowUps(list)
+                }
             }
         }
     }
@@ -88,41 +93,31 @@ class PatientHistoryActivity : BaseActivity() {
         followUps.forEach { followUp ->
             val itemBinding = ItemFollowupEntryBinding.inflate(layoutInflater)
 
-            // Set data
             itemBinding.tvFollowUpDate.text = "Date: ${followUp.date.toDisplayDateTime()}"
             itemBinding.tvFollowUpNum.text = "Follow Up Number: ${followUp.follow_up_num}"
 
-            // View Follow up Details
             itemBinding.btnViewDetails.setOnClickListener {
                 val intent = Intent(this, PatientFollowUpActivity::class.java).apply {
                     putExtra(EXTRA_PATIENT_ID, patientId)
-                    putExtra(EXTRA_FOLLOW_UP_NUMBER, followUp.follow_up_num)
-                    putExtra(EXTRA_VIEW_MODE, true) // optional flag to mark view-only mode
+                    putExtra(EXTRA_FOLLOW_UP_NUMBER, followUp.follow_up_num)  // Int
+                    putExtra(EXTRA_VIEW_MODE, true)
                 }
                 startActivity(intent)
             }
 
-            // Apply margins programmatically
             val layoutParams = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
             ).apply {
                 val marginVertical = 8.dpToPx()
                 val marginHorizontal = 4.dpToPx()
-                setMargins(marginHorizontal, marginVertical, marginHorizontal, marginVertical) // top and bottom margins
+                setMargins(marginHorizontal, marginVertical, marginHorizontal, marginVertical)
             }
-
             itemBinding.root.layoutParams = layoutParams
-
-            // Add view to container
             container.addView(itemBinding.root)
         }
     }
 
-    fun Int.dpToPx(): Int {
-        return (this * Resources.getSystem().displayMetrics.density).toInt()
-    }
-
-
-
+    private fun Int.dpToPx(): Int =
+        (this * Resources.getSystem().displayMetrics.density).toInt()
 }

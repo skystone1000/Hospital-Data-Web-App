@@ -5,3 +5,7 @@ This is software is developed keeping in mind the homeopathic point of view of c
 ### For Demo visit : http://hospital.epizy.com/?i=1
 Username : xyz@gmail.com <br>
 password : test12345
+
+### Android App Login
+Username : a <br>
+Password : a

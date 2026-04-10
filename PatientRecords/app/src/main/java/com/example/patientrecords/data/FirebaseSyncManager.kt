@@ -10,57 +10,43 @@ class FirebaseSyncManager(
         val localPatients = localRepo.getAllPatients().first()
         val remotePatients = firebaseRepo.downloadPatients()
 
-        /*
-        // Comparing just with IDs
-        val remoteIds = remotePatients.map { it.id }.toSet()
-        val localIds = localPatients.map { it.id }.toSet()
-
-        val toFirebase = localPatients.filter { it.id !in remoteIds }
-        val toRoom = remotePatients.filter { it.id !in localIds }
-        */
-
-        // Detect new or updated patients to push to Firebase
+        // Detect new or updated patients to push to Firebase:
+        // push if no remote copy exists, or if the local record is strictly newer (Long comparison)
         val toFirebase = localPatients.filter { local ->
             val remote = remotePatients.find { it.id == local.id }
-            remote == null || local != remote &&
-                    (local.dateJoined ?: 0).toString() > (remote.dateJoined ?: 0).toString()
+            remote == null || (local != remote && (local.dateJoined ?: 0L) > (remote.dateJoined ?: 0L))
         }
 
-        // Detect new or updated patients to insert into Room
+        // Detect new or updated patients to pull into Room:
+        // insert if no local copy exists, or if the remote record is strictly newer
         val toRoom = remotePatients.filter { remote ->
             val local = localPatients.find { it.id == remote.id }
-            local == null || remote != local &&
-                    (local.dateJoined ?: 0).toString() < (remote.dateJoined ?: 0).toString()
+            local == null || (remote != local && (remote.dateJoined ?: 0L) > (local.dateJoined ?: 0L))
         }
 
+        // Update whichever side is not synced
         firebaseRepo.uploadPatients(toFirebase)
-        toRoom.forEach{
-            localRepo.insertPatient(it)
-        }
+        toRoom.forEach { localRepo.insertPatient(it) }
     }
 
-    suspend fun syncPatientFollowUpsBothWays(){
-        val localPatientFollowUps = localRepo.getAllFollowUps()
-        val remotePatientFollowUps = firebaseRepo.downloadFollowUps()
+    suspend fun syncPatientFollowUpsBothWays() {
+        val localFollowUps = localRepo.getAllFollowUps()
+        val remoteFollowUps = firebaseRepo.downloadFollowUps()
 
-        // Detect new or updated patients to push to Firebase
-        val toFirebase = localPatientFollowUps.filter { local ->
-            val remote = remotePatientFollowUps.find { it.followUpId == local.followUpId }
-            remote == null || local != remote &&
-                    (local.date ?: 0).toString() > (remote.date ?: 0).toString()
+        // Detect new or updated follow-ups to push to Firebase
+        val toFirebase = localFollowUps.filter { local ->
+            val remote = remoteFollowUps.find { it.followUpId == local.followUpId }
+            remote == null || (local != remote && local.date > remote.date)
         }
 
-        // Detect new or updated patients to insert into Room
-        val toRoom = remotePatientFollowUps.filter { remote ->
-            val local = localPatientFollowUps.find { it.followUpId == remote.followUpId }
-            local == null || remote != local &&
-                    (local.date ?: 0).toString() < (remote.date ?: 0).toString()
+        // Detect new or updated follow-ups to pull into Room
+        val toRoom = remoteFollowUps.filter { remote ->
+            val local = localFollowUps.find { it.followUpId == remote.followUpId }
+            local == null || (remote != local && remote.date > local.date)
         }
 
-        // Update whichever is not synced
+        // Update whichever side is not synced
         firebaseRepo.uploadPatientFollowUps(toFirebase)
-        toRoom.forEach {
-            localRepo.addFollowUp(it)
-        }
+        toRoom.forEach { localRepo.addFollowUp(it) }
     }
 }

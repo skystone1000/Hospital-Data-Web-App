@@ -10,7 +10,6 @@ import com.example.patientrecords.databinding.ActivityAddPatientBinding
 import com.example.patientrecords.ui.base.BaseActivity
 import com.example.patientrecords.utils.Extensions.Companion.EXTRA_PATIENT_ID
 import com.example.patientrecords.utils.Extensions.Companion.EXTRA_VIEW_MODE
-import kotlin.random.Random
 
 class AddPatientActivity : BaseActivity() {
 
@@ -20,6 +19,7 @@ class AddPatientActivity : BaseActivity() {
     private var patientId = -1
     private var isViewMode = false
     private var isEditMode = false
+    private var originalDateJoined: Long? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,12 +42,16 @@ class AddPatientActivity : BaseActivity() {
         initToolbarWithDrawer()
         setToolbarTitle("Patient Details")
 
+        // Load patient data when opened in View or Edit mode
         if (patientId != -1) {
             viewModel.getPatientById(patientId)
         }
 
+        // Populate fields from DB and apply view-only mode if required.
+        // originalDateJoined is cached here so it is not overwritten on update.
         viewModel.patientLiveData.observe(this) { patient ->
             patient?.let {
+                originalDateJoined = it.dateJoined
                 setPatientFromDb(it)
                 if (isViewMode) {
                     setViewOnlyMode()
@@ -56,6 +60,7 @@ class AddPatientActivity : BaseActivity() {
             }
         }
 
+        // Switch from View → Edit mode
         binding.btnEdit.setOnClickListener {
             isEditMode = true
             enableAllFields()
@@ -63,6 +68,7 @@ class AddPatientActivity : BaseActivity() {
             binding.btnEdit.visibility = View.GONE
         }
 
+        // Update existing patient — preserves originalDateJoined
         binding.btnUpdate.setOnClickListener {
             val updatedPatient = collectPatientFromInput()
             viewModel.updatePatient(updatedPatient)
@@ -70,6 +76,7 @@ class AddPatientActivity : BaseActivity() {
             finish()
         }
 
+        // Insert new patient — id=0 so Room auto-assigns the primary key
         binding.btnSubmit.setOnClickListener {
             val patient = collectPatientFromInput()
             viewModel.insertPatient(patient)
@@ -119,19 +126,17 @@ class AddPatientActivity : BaseActivity() {
         binding.btnUpdate.visibility = View.VISIBLE
     }
 
-
-
     private fun setPatientFromDb(patient: Patient) {
         binding.etFirstName.setText(patient.firstName)
         binding.etMiddleName.setText(patient.middleName)
         binding.etLastName.setText(patient.lastName)
-        binding.etAge.setText(patient.age.toString()) // Because Its an Int field
+        binding.etAge.setText(patient.age.toString())
         binding.etSex.setText(patient.sex)
         binding.occupation.setText(patient.occupation)
         binding.address.setText(patient.address)
         binding.etPhone.setText(patient.phone)
         binding.etRegNo.setText(patient.regno)
-        patient.height?.let { binding.etHeight.setText(it.toString()) } // Because Its an Int field and nullable
+        patient.height?.let { binding.etHeight.setText(it.toString()) }
         patient.weight?.let { binding.etWeight.setText(it.toString()) }
         binding.etCc1.setText(patient.cc1)
         binding.etCc2.setText(patient.cc2)
@@ -201,13 +206,9 @@ class AddPatientActivity : BaseActivity() {
     }
 
     private fun collectPatientFromInput(): Patient {
-        var currPatient = Random.nextInt(100000)
-        if(isEditMode){
-            currPatient = patientId
-        }
-
+        // id = 0 for new patients so Room auto-assigns; patientId for edits
         return Patient(
-            id = currPatient,  // Replace with a proper ID logic if needed
+            id = if (isEditMode) patientId else 0,
             firstName = binding.etFirstName.text.toString(),
             middleName = binding.etMiddleName.text.toString(),
             lastName = binding.etLastName.text.toString(),
@@ -241,10 +242,10 @@ class AddPatientActivity : BaseActivity() {
             past_history = binding.etPastHistory.text.toString(),
             family_history = binding.etFamilyHistory.text.toString(),
             treatment = binding.etTreatment.text.toString(),
-            dateJoined = System.currentTimeMillis(),
+            // Preserve original join date on edit; set now only for new patients
+            dateJoined = if (isEditMode) originalDateJoined else System.currentTimeMillis(),
             paid = binding.etPaid.text.toString(),
             balance = binding.etBalance.text.toString()
         )
     }
-
 }

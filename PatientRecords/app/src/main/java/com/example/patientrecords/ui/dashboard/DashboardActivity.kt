@@ -5,8 +5,9 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.LayoutInflater
-import android.widget.Toast
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.example.patientrecords.PatientRecordsApp
 import com.example.patientrecords.databinding.ActivityDashboardBinding
 import com.example.patientrecords.databinding.ItemPatientBinding
@@ -43,7 +44,6 @@ class DashboardActivity : BaseActivity(){
         // Code Logic
         observeData()
         setupClock()
-
         viewModel.loadSummaryData()
         viewModel.loadDashboardData()
 
@@ -63,60 +63,58 @@ class DashboardActivity : BaseActivity(){
     }
 
     private fun observeData() {
-        // New Patients Data
-        lifecycleScope.launchWhenStarted {
-            viewModel.patientsLastWeek.collect { list ->
-                binding.patientsContainer.removeAllViews()
-                list.forEach { patient ->
-                    itemBinding = ItemPatientBinding.inflate(
-                        LayoutInflater.from(this@DashboardActivity),
-                        binding.patientsContainer,
-                        false
-                    )
-                    itemBinding.tvName.text = "${patient.firstName} ${patient.lastName}"
-                    itemBinding.tvSex.text = patient.sex // example
-                    itemBinding.tvPhone.text = patient.phone
-                    itemBinding.tvOccupation.text = patient.occupation
-                    itemBinding.tvRegNo.text = patient.regno
-
-                    // ✅ Add click listener for each card
-                    itemBinding.root.setOnClickListener {
-                        val intent = Intent(this@DashboardActivity, PatientHistoryActivity::class.java).apply {
-                            putExtra(EXTRA_PATIENT_ID, patient.id)
+        // New Patients Data — repeatOnLifecycle cancels the collector when the Activity is stopped
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.patientsLastWeek.collect { list ->
+                    binding.patientsContainer.removeAllViews()
+                    list.forEach { patient ->
+                        itemBinding = ItemPatientBinding.inflate(
+                            LayoutInflater.from(this@DashboardActivity),
+                            binding.patientsContainer,
+                            false
+                        )
+                        itemBinding.tvName.text = "${patient.firstName} ${patient.lastName}"
+                        itemBinding.tvSex.text = patient.sex
+                        itemBinding.tvPhone.text = patient.phone
+                        itemBinding.tvOccupation.text = patient.occupation
+                        itemBinding.tvRegNo.text = patient.regno
+                        itemBinding.root.setOnClickListener {
+                            startActivity(
+                                Intent(this@DashboardActivity, PatientHistoryActivity::class.java)
+                                    .putExtra(EXTRA_PATIENT_ID, patient.id)
+                            )
                         }
-                        startActivity(intent)
+                        binding.patientsContainer.addView(itemBinding.root)
                     }
-
-                    binding.patientsContainer.addView(itemBinding.root)
                 }
             }
         }
 
-        // Patients with followup Data
-        lifecycleScope.launchWhenStarted {
-            viewModel.patientsWithFollowUpsLastWeek.collect { list ->
-                binding.followUpsContainer.removeAllViews()
-                list.forEach { patient ->
-                    itemBinding = ItemPatientBinding.inflate(
-                        LayoutInflater.from(this@DashboardActivity),
-                        binding.followUpsContainer,
-                        false
-                    )
-                    itemBinding.tvName.text = "${patient.firstName} ${patient.lastName}"
-                    itemBinding.tvSex.text = patient.sex // example
-                    itemBinding.tvPhone.text = patient.phone
-                    itemBinding.tvOccupation.text = patient.occupation
-                    itemBinding.tvRegNo.text = patient.regno
-
-                    // ✅ Add click listener for each card
-                    itemBinding.root.setOnClickListener {
-                        val intent = Intent(this@DashboardActivity, PatientHistoryActivity::class.java).apply {
-                            putExtra(EXTRA_PATIENT_ID, patient.id)
+        // Patients with follow-up Data
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.patientsWithFollowUpsLastWeek.collect { list ->
+                    binding.followUpsContainer.removeAllViews()
+                    list.forEach { patient ->
+                        itemBinding = ItemPatientBinding.inflate(
+                            LayoutInflater.from(this@DashboardActivity),
+                            binding.followUpsContainer,
+                            false
+                        )
+                        itemBinding.tvName.text = "${patient.firstName} ${patient.lastName}"
+                        itemBinding.tvSex.text = patient.sex
+                        itemBinding.tvPhone.text = patient.phone
+                        itemBinding.tvOccupation.text = patient.occupation
+                        itemBinding.tvRegNo.text = patient.regno
+                        itemBinding.root.setOnClickListener {
+                            startActivity(
+                                Intent(this@DashboardActivity, PatientHistoryActivity::class.java)
+                                    .putExtra(EXTRA_PATIENT_ID, patient.id)
+                            )
                         }
-                        startActivity(intent)
+                        binding.followUpsContainer.addView(itemBinding.root)
                     }
-
-                    binding.followUpsContainer.addView(itemBinding.root)
                 }
             }
         }

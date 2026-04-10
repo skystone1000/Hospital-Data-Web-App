@@ -22,6 +22,7 @@ import com.example.patientrecords.databinding.ActivityBaseBinding
 import com.example.patientrecords.ui.addpatient.AddPatientActivity
 import com.example.patientrecords.ui.backup.BackUpActivity
 import com.example.patientrecords.ui.dashboard.DashboardActivity
+import com.example.patientrecords.ui.login.LoginActivity
 import com.example.patientrecords.ui.viewallpatient.ViewAllPatientsActivity
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.navigation.NavigationView
@@ -32,14 +33,12 @@ abstract class BaseActivity : AppCompatActivity(), NavigationView.OnNavigationIt
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var navView: NavigationView
     private lateinit var toggle: ActionBarDrawerToggle
-    private lateinit var drawerToggle: ActionBarDrawerToggle
     private lateinit var baseBinding: ActivityBaseBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         baseBinding = ActivityBaseBinding.inflate(layoutInflater)
         super.setContentView(baseBinding.root)
-
         applyTopPaddingToRoot()
     }
 
@@ -52,12 +51,16 @@ abstract class BaseActivity : AppCompatActivity(), NavigationView.OnNavigationIt
         drawerLayout = baseBinding.drawerLayout
         navView = baseBinding.navView
 
-        // Toolbar and Toggle
+        // Toolbar and Toggle — white arrow drawable matches the app's theme colour
         setSupportActionBar(toolbar)
         val toggleDrawable = DrawerArrowDrawable(this).apply {
             color = ContextCompat.getColor(this@BaseActivity, R.color.white)
         }
-        toggle = ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+        toggle = ActionBarDrawerToggle(
+            this, drawerLayout, toolbar,
+            R.string.navigation_drawer_open,
+            R.string.navigation_drawer_close
+        )
         toggle.drawerArrowDrawable = toggleDrawable
         toolbar.setTitleTextColor(Color.WHITE)
         toolbar.setNavigationIcon(R.drawable.baseline_menu_24_white)
@@ -65,71 +68,34 @@ abstract class BaseActivity : AppCompatActivity(), NavigationView.OnNavigationIt
         toggle.syncState()
         toolbar.navigationIcon?.setTint(ContextCompat.getColor(this, R.color.white))
 
-        // Navigation Drawer width
+        // Navigation Drawer width — capped at 50% of screen width to avoid covering full portrait screens
         val layoutParams = navView.layoutParams
         val screenWidth = Resources.getSystem().displayMetrics.widthPixels
-        layoutParams.width = (screenWidth * 0.50).toInt() // 75% of screen width
+        layoutParams.width = (screenWidth * 0.50).toInt()
         navView.layoutParams = layoutParams
 
-        navView.setNavigationItemSelectedListener { menuItem ->
-            onDrawerItemSelected(menuItem)
-            drawerLayout.closeDrawers()
-            true
-        }
-    }
-
-    protected fun onDrawerItemSelected(item: MenuItem) {
-        // Child activities can override this
-        when (item.itemId) {
-            R.id.nav_home -> {
-                startActivity(Intent(this, MainActivity::class.java))
-            }
-            R.id.nav_add_patient -> {
-                startActivity(Intent(this, AddPatientActivity::class.java))
-            }
-            R.id.nav_view_patients -> {
-                startActivity(Intent(this, ViewAllPatientsActivity::class.java))
-            }
-            R.id.nav_dashboard -> {
-                startActivity(Intent(this, DashboardActivity::class.java))
-            }
-            R.id.nav_backup -> {
-                startActivity(Intent(this, BackUpActivity::class.java))
-            }
-            R.id.nav_logout -> {
-                // Handle Logout
-            }
-        }
-        drawerLayout.closeDrawer(GravityCompat.START)
-
+        navView.setNavigationItemSelectedListener(this)
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.nav_home -> {
-                startActivity(Intent(this, MainActivity::class.java))
-            }
-            R.id.nav_add_patient -> {
-                startActivity(Intent(this, AddPatientActivity::class.java))
-            }
-            R.id.nav_view_patients -> {
-                startActivity(Intent(this, ViewAllPatientsActivity::class.java))
-            }
-            R.id.nav_dashboard -> {
-                startActivity(Intent(this, DashboardActivity::class.java))
-            }
-            R.id.nav_backup -> {
-                startActivity(Intent(this, BackUpActivity::class.java))
-            }
+            R.id.nav_home -> startActivity(Intent(this, MainActivity::class.java))
+            R.id.nav_add_patient -> startActivity(Intent(this, AddPatientActivity::class.java))
+            R.id.nav_view_patients -> startActivity(Intent(this, ViewAllPatientsActivity::class.java))
+            R.id.nav_dashboard -> startActivity(Intent(this, DashboardActivity::class.java))
+            R.id.nav_backup -> startActivity(Intent(this, BackUpActivity::class.java))
             R.id.nav_logout -> {
-                // Handle Logout
+                val intent = Intent(this, LoginActivity::class.java).apply {
+                    flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                }
+                startActivity(intent)
             }
         }
         drawerLayout.closeDrawer(GravityCompat.START)
         return true
     }
 
-    // Handle back press for drawer
+    // Close drawer on back press if open; otherwise propagate to system
     override fun onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START)
@@ -138,21 +104,18 @@ abstract class BaseActivity : AppCompatActivity(), NavigationView.OnNavigationIt
         }
     }
 
-    // Handle toolbar toggle click
+    // Route hamburger icon tap through toggle; other menu items fall through to super
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (drawerToggle.onOptionsItemSelected(item)) {
-            return true
-        }
+        if (toggle.onOptionsItemSelected(item)) return true
         return super.onOptionsItemSelected(item)
     }
 
+    // Set notification bar padding — offsets content below the transparent status bar
     private fun applyTopPaddingToRoot() {
-        // Set Notification bar padding
         val root = findViewById<View>(android.R.id.content)
         ViewCompat.setOnApplyWindowInsetsListener(root) { view, insets ->
             val statusBarHeight = insets.getInsets(WindowInsets.Type.statusBars()).top
             view.updatePadding(top = statusBarHeight)
-            // view.setPadding(0, statusBarHeight, 0, 0)
             insets
         }
     }

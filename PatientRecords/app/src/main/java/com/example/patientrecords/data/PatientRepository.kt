@@ -45,4 +45,7 @@ class PatientRepository(private val patientDao: PatientDao, private val patientF
     suspend fun getFollowUpsFromDay(date: Long): List<PatientFollowUp> = patientFollowUpDao.getFollowUpsFromDay(date)
     suspend fun getPatientWithFollowUpFromDay(date: Long): List<Patient> = patientFollowUpDao.getPatientsWithFollowUpsFromDay(date)
 
+    // Follow-up numbering
+    suspend fun getMaxFollowUpNum(patientId: Int): Int? = patientFollowUpDao.getMaxFollowUpNum(patientId)
+
 }
