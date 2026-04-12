@@ -1,64 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/cvFollowUp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginVertical="16dp"
-    android:layout_marginHorizontal="4dp"
-    app:cardCornerRadius="16dp"
-    app:cardElevation="6dp"
-    android:foreground="?attr/selectableItemBackground"
-    android:focusable="true">
+    android:layout_marginHorizontal="@dimen/spacing_xs"
+    android:layout_marginVertical="@dimen/spacing_sm"
+    android:focusable="true"
+    app:cardCornerRadius="@dimen/corner_large"
+    app:cardElevation="@dimen/card_elevation"
+    app:strokeColor="?attr/colorOutlineVariant"
+    app:strokeWidth="1dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="8dp"
-        android:layout_marginHorizontal="4dp"
-        android:padding="4dp">
+        android:padding="@dimen/spacing_md">
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvFollowUpDate"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/spacing_sm"
             android:text="Date: "
-            android:textAppearance="?attr/textAppearanceBody1"
-            android:textColor="@android:color/black"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            android:textAppearance="?attr/textAppearanceBodyMedium"
+            android:textColor="?attr/colorOnSurface"
+            app:layout_constraintBottom_toTopOf="@id/tvFollowUpNum"
             app:layout_constraintEnd_toStartOf="@id/btnViewDetails"
             app:layout_constraintHorizontal_bias="0"
-            app:layout_constraintBottom_toTopOf="@id/tvFollowUpNum"
-            android:layout_marginEnd="8dp"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvFollowUpNum"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_xs"
+            android:layout_marginEnd="@dimen/spacing_sm"
             android:text="Follow Up Number: "
-            android:textAppearance="?attr/textAppearanceBody2"
-            android:textColor="@android:color/darker_gray"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvFollowUpDate"
-            app:layout_constraintEnd_toStartOf="@id/btnViewDetails"
+            android:textAppearance="?attr/textAppearanceBodySmall"
+            android:textColor="?attr/colorOnSurfaceVariant"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="8dp"/>
+            app:layout_constraintEnd_toStartOf="@id/btnViewDetails"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvFollowUpDate" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnViewDetails"
+            style="?attr/materialButtonOutlinedStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="View Details"
-            android:paddingHorizontal="12dp"
-            android:paddingVertical="6dp"
-            android:backgroundTint="?attr/colorPrimary"
-            android:textColor="@android:color/white"
-            app:cornerRadius="8dp"
+            android:text="View"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>

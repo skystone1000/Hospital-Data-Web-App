@@ -1,9 +1,11 @@
 package com.example.patientrecords
 
 import android.app.Application
+import androidx.appcompat.app.AppCompatDelegate
 import com.example.patientrecords.data.FirebaseRepository
 import com.example.patientrecords.data.PatientDatabase
 import com.example.patientrecords.data.PatientRepository
+import com.example.patientrecords.utils.ThemePreferences
 
 class PatientRecordsApp : Application() {
 
@@ -17,6 +19,9 @@ class PatientRecordsApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
+
+        // Apply saved theme before any Activity inflates its window
+        AppCompatDelegate.setDefaultNightMode(ThemePreferences(this).themeMode)
 
         // Initialize Room Database
         val database = PatientDatabase.getInstance(this)

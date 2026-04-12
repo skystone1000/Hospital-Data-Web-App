@@ -9,99 +9,90 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="?attr/actionBarSize">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:padding="@dimen/spacing_md">
 
-            <!-- Doctor Details -->
+            <!-- Doctor details + clock -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent">
+                    app:layout_constraintEnd_toStartOf="@id/tvClock"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
                     <com.google.android.material.textview.MaterialTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Hello Dr. Shivram Mahajan"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
+                        android:text="Hello, Dr. Shivram Mahajan"
+                        android:textAppearance="?attr/textAppearanceTitleLarge" />
 
                     <com.google.android.material.textview.MaterialTextView
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:text="Date Of Birth: 1965-10-10" />
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_xs"
+                        android:text="Date of Birth: 1965-10-10"
+                        android:textAppearance="?attr/textAppearanceBodySmall"
+                        android:textColor="?attr/colorOnSurfaceVariant" />
 
                     <com.google.android.material.textview.MaterialTextView
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:text="Degree: B.H.M.S" />
+                        android:layout_height="wrap_content"
+                        android:text="Degree: B.H.M.S"
+                        android:textAppearance="?attr/textAppearanceBodySmall"
+                        android:textColor="?attr/colorOnSurfaceVariant" />
 
                     <com.google.android.material.textview.MaterialTextView
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:text="Email Id: asm@asm" />
+                        android:layout_height="wrap_content"
+                        android:text="Email: asm@asm"
+                        android:textAppearance="?attr/textAppearanceBodySmall"
+                        android:textColor="?attr/colorOnSurfaceVariant" />
                 </LinearLayout>
 
-                <!-- Clock -->
+                <!-- Live clock -->
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tvClock"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="end"
                     android:text="08:00:00 AM"
-                    android:textColor="@color/black"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
+                    android:textAppearance="?attr/textAppearanceTitleMedium"
+                    android:textColor="?attr/colorPrimary"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
-
+                    app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-            <!-- Summary Section -->
+            <!-- Summary section -->
             <com.google.android.material.textview.MaterialTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="@dimen/spacing_lg"
+                android:layout_marginBottom="@dimen/spacing_xs"
                 android:text="Summary"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textAppearance="?attr/textAppearanceTitleMedium" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:weightSum="4">
+            <include
+                android:id="@+id/summaryCards"
+                layout="@layout/item_dashboard_summary_card" />
 
-                <!-- Summary Cards -->
-                <include
-                    android:id="@+id/summaryCards"
-                    layout="@layout/item_dashboard_summary_card" />
-
-            </LinearLayout>
-
-            <!-- Patients Added Last Week -->
+            <!-- Patients added last week -->
             <com.google.android.material.textview.MaterialTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="@dimen/spacing_lg"
+                android:layout_marginBottom="@dimen/spacing_xs"
                 android:text="Patients Added Last Week"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textAppearance="?attr/textAppearanceTitleMedium" />
 
             <LinearLayout
                 android:id="@+id/patientsContainer"
@@ -109,20 +100,21 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical" />
 
-            <!-- Follow Ups -->
+            <!-- Follow-ups last week -->
             <com.google.android.material.textview.MaterialTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="@dimen/spacing_lg"
+                android:layout_marginBottom="@dimen/spacing_xs"
                 android:text="Follow Ups Last Week"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textAppearance="?attr/textAppearanceTitleMedium" />
 
             <LinearLayout
                 android:id="@+id/followUpsContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical" />
+
         </LinearLayout>
     </ScrollView>
 </layout>

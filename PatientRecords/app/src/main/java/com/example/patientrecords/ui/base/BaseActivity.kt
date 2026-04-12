@@ -20,9 +20,9 @@ import com.example.patientrecords.MainActivity
 import com.example.patientrecords.R
 import com.example.patientrecords.databinding.ActivityBaseBinding
 import com.example.patientrecords.ui.addpatient.AddPatientActivity
-import com.example.patientrecords.ui.backup.BackUpActivity
 import com.example.patientrecords.ui.dashboard.DashboardActivity
 import com.example.patientrecords.ui.login.LoginActivity
+import com.example.patientrecords.ui.settings.SettingsActivity
 import com.example.patientrecords.ui.viewallpatient.ViewAllPatientsActivity
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.navigation.NavigationView
@@ -83,7 +83,7 @@ abstract class BaseActivity : AppCompatActivity(), NavigationView.OnNavigationIt
             R.id.nav_add_patient -> startActivity(Intent(this, AddPatientActivity::class.java))
             R.id.nav_view_patients -> startActivity(Intent(this, ViewAllPatientsActivity::class.java))
             R.id.nav_dashboard -> startActivity(Intent(this, DashboardActivity::class.java))
-            R.id.nav_backup -> startActivity(Intent(this, BackUpActivity::class.java))
+            R.id.nav_settings -> startActivity(Intent(this, SettingsActivity::class.java))
             R.id.nav_logout -> {
                 val intent = Intent(this, LoginActivity::class.java).apply {
                     flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
