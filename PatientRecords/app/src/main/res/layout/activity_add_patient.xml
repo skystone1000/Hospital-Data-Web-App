@@ -11,21 +11,14 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="@dimen/spacing_md">
+        android:paddingStart="@dimen/spacing_md"
+        android:paddingEnd="@dimen/spacing_md"
+        android:scrollbars="none">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
-            <!-- Page heading -->
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tvTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Patient Details"
-                android:textAlignment="center"
-                android:textAppearance="?attr/textAppearanceHeadlineSmall" />
 
             <!-- Section header row: Patient Details + Edit button -->
             <androidx.constraintlayout.widget.ConstraintLayout

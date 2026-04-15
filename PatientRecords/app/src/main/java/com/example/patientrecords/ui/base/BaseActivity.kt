@@ -1,12 +1,12 @@
 package com.example.patientrecords.ui.base
 
+import android.app.Activity
 import android.content.Intent
 import android.content.res.Resources
 import android.graphics.Color
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
-import android.view.WindowInsets
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
@@ -14,6 +14,7 @@ import androidx.appcompat.graphics.drawable.DrawerArrowDrawable
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updatePadding
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.patientrecords.MainActivity
@@ -39,7 +40,7 @@ abstract class BaseActivity : AppCompatActivity(), NavigationView.OnNavigationIt
         super.onCreate(savedInstanceState)
         baseBinding = ActivityBaseBinding.inflate(layoutInflater)
         super.setContentView(baseBinding.root)
-        applyTopPaddingToRoot()
+        applyWindowInsets()
     }
 
     protected fun setChildContentView(childView: View) {
@@ -79,20 +80,27 @@ abstract class BaseActivity : AppCompatActivity(), NavigationView.OnNavigationIt
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.nav_home -> startActivity(Intent(this, MainActivity::class.java))
-            R.id.nav_add_patient -> startActivity(Intent(this, AddPatientActivity::class.java))
-            R.id.nav_view_patients -> startActivity(Intent(this, ViewAllPatientsActivity::class.java))
-            R.id.nav_dashboard -> startActivity(Intent(this, DashboardActivity::class.java))
-            R.id.nav_settings -> startActivity(Intent(this, SettingsActivity::class.java))
+            R.id.nav_home -> navigateTo(MainActivity::class.java)
+            R.id.nav_add_patient -> navigateTo(AddPatientActivity::class.java)
+            R.id.nav_view_patients -> navigateTo(ViewAllPatientsActivity::class.java)
+            R.id.nav_dashboard -> navigateTo(DashboardActivity::class.java)
+            R.id.nav_settings -> navigateTo(SettingsActivity::class.java)
             R.id.nav_logout -> {
-                val intent = Intent(this, LoginActivity::class.java).apply {
+                startActivity(Intent(this, LoginActivity::class.java).apply {
                     flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                }
-                startActivity(intent)
+                })
             }
         }
         drawerLayout.closeDrawer(GravityCompat.START)
         return true
+    }
+
+    // Skip relaunch if already on this screen; bring existing instance forward otherwise
+    private fun navigateTo(destination: Class<out Activity>) {
+        if (this::class.java == destination) return
+        startActivity(Intent(this, destination).apply {
+            addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
+        })
     }
 
     // Close drawer on back press if open; otherwise propagate to system
@@ -110,14 +118,20 @@ abstract class BaseActivity : AppCompatActivity(), NavigationView.OnNavigationIt
         return super.onOptionsItemSelected(item)
     }
 
-    // Set notification bar padding — offsets content below the transparent status bar
-    private fun applyTopPaddingToRoot() {
-        val root = findViewById<View>(android.R.id.content)
-        ViewCompat.setOnApplyWindowInsetsListener(root) { view, insets ->
-            val statusBarHeight = insets.getInsets(WindowInsets.Type.statusBars()).top
-            view.updatePadding(top = statusBarHeight)
+    // Apply status-bar (top) and nav-bar (bottom) insets.
+    // The toolbar absorbs the status-bar height by growing via paddingTop, so its
+    // colorPrimary background fills the status-bar area and title/icons sit below it.
+    // baseContainer gets paddingBottom equal to the nav-bar height so the last item
+    // in any scrollable child is never hidden behind the system navigation bar.
+    private fun applyWindowInsets() {
+        ViewCompat.setOnApplyWindowInsetsListener(baseBinding.root) { _, insets ->
+            val statusBarHeight = insets.getInsets(WindowInsetsCompat.Type.statusBars()).top
+            val navBarHeight = insets.getInsets(WindowInsetsCompat.Type.navigationBars()).bottom
+            baseBinding.toolbar.updatePadding(top = statusBarHeight)
+            baseBinding.baseContainer.updatePadding(bottom = navBarHeight)
             insets
         }
+        ViewCompat.requestApplyInsets(baseBinding.root)
     }
 
     fun setToolbarTitle(title: String) {

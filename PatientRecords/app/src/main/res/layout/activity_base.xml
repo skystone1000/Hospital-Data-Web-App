@@ -11,15 +11,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <!-- Main content area -->
-        <androidx.coordinatorlayout.widget.CoordinatorLayout
+        <!-- Main content: toolbar absorbs the status-bar inset; content fills the rest -->
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
+                android:layout_height="wrap_content"
+                android:minHeight="?attr/actionBarSize"
                 android:background="?attr/colorPrimary"
                 app:navigationIcon="@drawable/baseline_menu_24_white"
                 app:navigationIconTint="?attr/colorOnPrimary"
@@ -30,12 +32,12 @@
             <FrameLayout
                 android:id="@+id/baseContainer"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="?attr/actionBarSize" />
+                android:layout_height="0dp"
+                android:layout_weight="1" />
 
-        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+        </LinearLayout>
 
-        <!-- Navigation drawer — full height, no top margin -->
+        <!-- Navigation drawer — full height -->
         <com.google.android.material.navigation.NavigationView
             android:id="@+id/navView"
             android:layout_width="wrap_content"
