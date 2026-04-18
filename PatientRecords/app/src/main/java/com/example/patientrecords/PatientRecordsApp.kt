@@ -9,6 +9,9 @@ import com.example.patientrecords.utils.ThemePreferences
 
 class PatientRecordsApp : Application() {
 
+    lateinit var database: PatientDatabase
+        private set
+
     // Expose repository for use across the app
     lateinit var repository: PatientRepository
         private set
@@ -24,7 +27,7 @@ class PatientRecordsApp : Application() {
         AppCompatDelegate.setDefaultNightMode(ThemePreferences(this).themeMode)
 
         // Initialize Room Database
-        val database = PatientDatabase.getInstance(this)
+        database = PatientDatabase.getInstance(this)
 
         // Initialize Repository
         repository = PatientRepository(database.patientDao(), database.patientFollowUpDao())

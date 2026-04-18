@@ -8,10 +8,12 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.patientrecords.data.localdb.Patient
 import com.example.patientrecords.data.PatientRepository
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.emitAll
 import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.stateIn
 
 class ViewAllPatientsViewModel(private val repository: PatientRepository) : ViewModel() {
@@ -22,10 +24,16 @@ class ViewAllPatientsViewModel(private val repository: PatientRepository) : View
     val searchQuery = MutableLiveData("")
 
     val filteredPatients = searchQuery.asFlow()
-        .debounce(300)
         .distinctUntilChanged()
         .flatMapLatest { query ->
-            repository.searchPatients(query ?: "")
+            if (query.isNullOrEmpty()) {
+                repository.searchPatients("")
+            } else {
+                flow {
+                    delay(300)
+                    emitAll(repository.searchPatients(query))
+                }
+            }
         }
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
 

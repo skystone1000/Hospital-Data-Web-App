@@ -11,7 +11,7 @@ import com.example.patientrecords.data.localdb.PatientDao
 import com.example.patientrecords.data.localdb.PatientFollowUp
 import com.example.patientrecords.data.localdb.PatientFollowUpDao
 
-@Database(entities = [Patient::class, PatientFollowUp::class], version = 2)
+@Database(entities = [Patient::class, PatientFollowUp::class], version = 3)
 abstract class PatientDatabase : RoomDatabase() {
     abstract fun patientDao(): PatientDao
     abstract fun patientFollowUpDao(): PatientFollowUpDao
@@ -91,6 +91,12 @@ abstract class PatientDatabase : RoomDatabase() {
             }
         }
 
+        private val MIGRATION_2_3 = object : Migration(2, 3) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+                database.execSQL("ALTER TABLE patient_data ADD COLUMN diagnosis TEXT")
+            }
+        }
+
         fun getInstance(context: Context): PatientDatabase {
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
@@ -98,7 +104,7 @@ abstract class PatientDatabase : RoomDatabase() {
                     PatientDatabase::class.java,
                     "patient_database"
                 )
-                    .addMigrations(MIGRATION_1_2)
+                    .addMigrations(MIGRATION_1_2, MIGRATION_2_3)
                     .build()
                 INSTANCE = instance
                 instance

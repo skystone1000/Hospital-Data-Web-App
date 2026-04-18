@@ -1,13 +1,18 @@
 package com.example.patientrecords.ui.settings
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.lifecycleScope
 import com.example.patientrecords.PatientRecordsApp
 import com.example.patientrecords.databinding.ActivitySettingsBinding
 import com.example.patientrecords.ui.backup.BackUpViewModel
 import com.example.patientrecords.ui.base.BaseActivity
+import com.example.patientrecords.ui.importsql.ImportProgressActivity
 import com.example.patientrecords.utils.ThemePreferences
 import kotlinx.coroutines.launch
 
@@ -16,9 +21,21 @@ class SettingsActivity : BaseActivity() {
     private lateinit var binding: ActivitySettingsBinding
     private lateinit var themePrefs: ThemePreferences
     private lateinit var backupViewModel: BackUpViewModel
+    private lateinit var pickSqlFile: ActivityResultLauncher<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Register file picker before anything else
+        pickSqlFile = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+            uri ?: return@registerForActivityResult
+            startActivity(
+                Intent(this, ImportProgressActivity::class.java).apply {
+                    putExtra("FILE_URI", uri.toString())
+                    putExtra("FILE_NAME", uri.lastPathSegment ?: "backup.sql")
+                }
+            )
+        }
 
         // Binding and ViewModels
         binding = ActivitySettingsBinding.inflate(layoutInflater)
@@ -53,6 +70,11 @@ class SettingsActivity : BaseActivity() {
             }
             themePrefs.themeMode = mode
             AppCompatDelegate.setDefaultNightMode(mode)
+        }
+
+        // Import from SQL file
+        binding.btnImportSql.setOnClickListener {
+            pickSqlFile.launch("*/*")
         }
 
         // Sync to cloud — disabled during operation to prevent duplicate triggers

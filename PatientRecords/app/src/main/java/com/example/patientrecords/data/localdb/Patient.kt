@@ -17,6 +17,7 @@ data class Patient(
     val regno: String? = null,
     val height: Int? = null,
     val weight: Int? = null,
+    val diagnosis: String? = null,
     val cc1: String? = null,
     val cc2: String? = null,
     val cc3: String? = null,
