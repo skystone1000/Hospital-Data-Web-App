@@ -12,9 +12,9 @@
         android:minHeight="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
         app:navigationIcon="@drawable/ic_back"
-        app:navigationIconTint="?attr/colorOnPrimary"
+        app:navigationIconTint="@color/toolbar_content_color"
         app:title="Import from Web App"
-        app:titleTextColor="?attr/colorOnPrimary" />
+        app:titleTextColor="@color/toolbar_content_color" />
 
     <FrameLayout
         android:id="@+id/contentContainer"

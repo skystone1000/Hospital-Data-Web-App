@@ -3,7 +3,6 @@ package com.example.patientrecords.ui.base
 import android.app.Activity
 import android.content.Intent
 import android.content.res.Resources
-import android.graphics.Color
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
@@ -52,10 +51,10 @@ abstract class BaseActivity : AppCompatActivity(), NavigationView.OnNavigationIt
         drawerLayout = baseBinding.drawerLayout
         navView = baseBinding.navView
 
-        // Toolbar and Toggle — white arrow drawable matches the app's theme colour
         setSupportActionBar(toolbar)
+        val contentColor = ContextCompat.getColor(this, R.color.toolbar_content_color)
         val toggleDrawable = DrawerArrowDrawable(this).apply {
-            color = ContextCompat.getColor(this@BaseActivity, R.color.white)
+            color = contentColor
         }
         toggle = ActionBarDrawerToggle(
             this, drawerLayout, toolbar,
@@ -63,11 +62,11 @@ abstract class BaseActivity : AppCompatActivity(), NavigationView.OnNavigationIt
             R.string.navigation_drawer_close
         )
         toggle.drawerArrowDrawable = toggleDrawable
-        toolbar.setTitleTextColor(Color.WHITE)
+        toolbar.setTitleTextColor(contentColor)
         toolbar.setNavigationIcon(R.drawable.baseline_menu_24_white)
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
-        toolbar.navigationIcon?.setTint(ContextCompat.getColor(this, R.color.white))
+        toolbar.navigationIcon?.setTint(contentColor)
 
         // Navigation Drawer width — capped at 50% of screen width to avoid covering full portrait screens
         val layoutParams = navView.layoutParams

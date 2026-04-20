@@ -24,9 +24,9 @@
                 android:minHeight="?attr/actionBarSize"
                 android:background="?attr/colorPrimary"
                 app:navigationIcon="@drawable/baseline_menu_24_white"
-                app:navigationIconTint="?attr/colorOnPrimary"
+                app:navigationIconTint="@color/toolbar_content_color"
                 app:title="Home"
-                app:titleTextColor="?attr/colorOnPrimary" />
+                app:titleTextColor="@color/toolbar_content_color" />
 
             <!-- Child layouts are injected here -->
             <FrameLayout

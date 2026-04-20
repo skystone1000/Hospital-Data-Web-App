@@ -2,6 +2,7 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="toolbar_content_color">#FFFFFF</color>
 
     <!-- Light Theme Palette (medical teal) -->
     <color name="md_theme_light_primary">#006B5E</color>
