@@ -10,6 +10,11 @@ Password : a
 Username : asm@asm <br>
 Password : asm
 
-TODO:
-Remove old projects
-Rename main repo and clone others again
+
+### TODO:
+- Remove old projects
+- Rename main repo and clone others again
+- Message to patient 2 days before medicine end period 
+- Scan for image and fill the form automatically (image processing)
+- Adding a patient profile photo
+- Adding patient record images of documents
