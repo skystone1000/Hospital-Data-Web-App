@@ -116,13 +116,69 @@ Status legend:
 
 | Feature | Priority |
 |---|---|
-| Admin logout | High |
-| Password hashing (bcrypt) | Critical |
-| Prepared statements on all queries | Critical |
-| XSS escaping on all output | Critical |
 | Edit and delete follow-up | Medium |
-| Cascade delete follow-ups with patient | High |
-| Data export (CSV / PDF) | Medium |
 | Charts on dashboard | Low |
 | Multi-doctor / role separation | Low |
 | Patient photo management | Low |
+| Firebase sync layer (web → Firebase push) | High |
+
+---
+
+## Next.js Web App (WebPatientRecords/)
+
+A parallel modern web app built with Next.js 14 App Router, TypeScript, shadcn/ui, and Tailwind CSS. Connects to the same `hospital` MySQL database.
+
+### Authentication & Session
+
+| Feature | Status | Notes |
+|---|---|---|
+| Admin login (email or username) | `[x]` | iron-session v8; bcrypt with transparent plaintext migration |
+| Session persistence | `[x]` | Encrypted cookie via iron-session |
+| Logout | `[x]` | POST `/api/auth/logout` |
+| Route protection (middleware) | `[x]` | `middleware.ts` guards all non-public routes |
+
+### Patient Management
+
+| Feature | Status | Notes |
+|---|---|---|
+| Add new patient | `[x]` | Full 37-field form; react-hook-form + zod; POST `/api/patients` |
+| View patient list | `[x]` | Sortable, paginated (20/page), searchable |
+| View patient details | `[x]` | All fields + follow-ups accordion (Radix) |
+| Edit patient | `[x]` | Pre-populated form; PUT `/api/patients/[id]` |
+| Delete patient | `[x]` | AlertDialog confirmation; cascade delete in transaction |
+| Search patients | `[x]` | Debounced URL search param (350ms), LIKE query |
+| Sort patients | `[x]` | firstName, lastName, dateJoined, regno, diagnosis; sort whitelist enforced |
+| Paginate patient list | `[x]` | 20/page with page controls |
+| Detailed records view | `[x]` | All columns table; client-side CSV export |
+
+### Follow-up Management
+
+| Feature | Status | Notes |
+|---|---|---|
+| Add follow-up | `[x]` | POST `/api/patients/[id]/followups`; auto follow_up_num via CAST MAX |
+| View follow-ups per patient | `[x]` | Accordion, ordered by CAST(follow_up_num AS UNSIGNED) DESC |
+| Edit / delete follow-up | `[ ]` | Not implemented |
+
+### Dashboard
+
+| Feature | Status | Notes |
+|---|---|---|
+| 4-period stat cards (today/week/month/year) | `[x]` | Patients count + earnings per period |
+| Recent patients table | `[x]` | Last 7 days |
+| Recent follow-ups table | `[x]` | Last 7 days |
+
+### UI
+
+| Feature | Status | Notes |
+|---|---|---|
+| Dark mode | `[x]` | next-themes; persisted to localStorage; Sun/Moon toggle |
+| Responsive layout | `[x]` | Tailwind + sticky sidebar; Sheet hamburger on mobile |
+| Navbar quick search | `[x]` | GET `/api/search?q=`; links to patient detail pages |
+| Light/dark HSL theme tokens | `[x]` | CSS variables in globals.css; clinic-blue primary |
+
+### Firebase Sync
+
+| Feature | Status | Notes |
+|---|---|---|
+| lib/firebase.ts + sync layer | `[ ]` | Planned (Phase 9); last-write-wins via `updatedAt` |
+| MySQL schema: firebaseId, updatedAt, sync_queue | `[ ]` | Planned (Phase 8 migration) |

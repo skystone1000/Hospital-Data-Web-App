@@ -238,7 +238,48 @@ The 12 queries expose 16 PHP variables (`$todayNewCount`, `$todayFollowCount`, `
 
 ---
 
-## 9. Known Architectural Constraints
+## 10. Next.js Web App (WebPatientRecords/)
+
+A modern parallel web app at `C:\xampp\htdocs\Hospital-Data-Web-App\WebPatientRecords\` sharing the same `hospital` MySQL database.
+
+### Stack
+- **Framework**: Next.js 14 App Router (TypeScript strict)
+- **UI**: shadcn/ui (Radix primitives) + Tailwind CSS v3 with HSL CSS variables
+- **Theme**: next-themes; `darkMode: "class"`; clinic-blue (`hsl(221 83% 53%)`) primary
+- **Auth**: iron-session v8; encrypted cookie; `middleware.ts` route guard
+- **DB**: mysql2 promise pool; parameterised `pool.execute()` throughout
+- **Forms**: react-hook-form + zod (`zodResolver`)
+- **Validation**: zod schemas in `lib/validations.ts`
+
+### Route Structure
+```
+app/
+├── (auth)/login/          # Login page (no session guard)
+├── (dashboard)/           # Session-guarded layout with sidebar + navbar
+│   ├── dashboard/         # Stats + recent tables
+│   ├── patients/          # List (sortable, paginated)
+│   ├── patients/new/      # Add patient form
+│   ├── patients/[id]/     # Patient detail + follow-up accordion
+│   ├── patients/[id]/edit/
+│   ├── patients/[id]/followup/
+│   └── records/           # Wide records table + CSV export
+└── api/
+    ├── auth/login|logout
+    ├── dashboard
+    ├── search
+    ├── patients            # GET (list) + POST (create)
+    ├── patients/[id]       # GET + PUT + DELETE
+    └── patients/[id]/followups  # GET + POST
+```
+
+### Key Constraints
+- `ExecuteValues` (mysql2) excludes `undefined` — all optional fields null-coerced with `?? null` before `pool.execute()`
+- `z.coerce.number()` resolver input type is `unknown` — cast to `as any` on `useForm<PatientInput>` resolver
+- Sort column injection prevented by `SORT_WHITELIST` array; `ORDER BY` uses whitelisted identifier only
+
+---
+
+## 9. Known Architectural Constraints (PHP App)
 
 - **No separation of concerns**: SQL queries are embedded directly in page files and includes. There is no model, controller, or service layer.
 - **GET for writes**: All data mutations (`insertRecord`, `updateRecord`, `insertFollowUp`, `deleteRecord`) use HTTP GET instead of POST. This means browser history and server logs capture sensitive patient data, and the operations can be triggered by simply following a link.

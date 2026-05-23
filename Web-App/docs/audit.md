@@ -219,3 +219,56 @@ The commented-out block was removed entirely. Email-format validation is intenti
 | `search.php` | Prepared statement LIKE search; removed raw SQL injection |
 | `patientDetailsOLD.php` | **Deleted** |
 | `testSideNavForm.php` | **Deleted** |
+
+---
+
+## Change Log — 2026-05-23: Next.js Web App (WebPatientRecords/)
+
+**Type**: New feature — parallel modern web app  
+**Scope**: `C:\xampp\htdocs\Hospital-Data-Web-App\WebPatientRecords\`
+
+### Summary
+
+Built a complete Next.js 14 web app sharing the same `hospital` MySQL database. Replaces the PHP app's UI with a TypeScript + shadcn/ui + Tailwind stack.
+
+### Files Created
+
+| File | Purpose |
+|---|---|
+| `next.config.mjs` | ESLint disabled during builds (shadcn generated files) |
+| `tailwind.config.ts` | HSL CSS variable color system; fade-in / border-beam animations |
+| `app/globals.css` | Full light + dark HSL tokens; clinic-blue primary |
+| `app/layout.tsx` | Root layout with ThemeProvider |
+| `app/(auth)/login/page.tsx` | Two-column login with branded panel |
+| `app/(dashboard)/layout.tsx` | Session-guarded shell; sidebar + navbar |
+| `app/(dashboard)/dashboard/page.tsx` | 4-period stat cards + recent tables |
+| `app/(dashboard)/patients/page.tsx` | Sortable/paginated patient list |
+| `app/(dashboard)/patients/new/page.tsx` | Add patient (PatientForm) |
+| `app/(dashboard)/patients/[id]/page.tsx` | Detail view with follow-up accordion |
+| `app/(dashboard)/patients/[id]/edit/page.tsx` | Edit patient (PatientForm) |
+| `app/(dashboard)/patients/[id]/followup/page.tsx` | Add follow-up form |
+| `app/(dashboard)/records/page.tsx` | Wide records table + CSV export |
+| `app/api/auth/login/route.ts` | POST login → iron-session |
+| `app/api/auth/logout/route.ts` | POST logout |
+| `app/api/dashboard/route.ts` | Period stats (4× COUNT + SUM) |
+| `app/api/search/route.ts` | LIKE search, LIMIT 20 |
+| `app/api/patients/route.ts` | GET list + POST create |
+| `app/api/patients/[id]/route.ts` | GET + PUT + DELETE |
+| `app/api/patients/[id]/followups/route.ts` | GET + POST follow-ups |
+| `lib/db.ts` | mysql2 promise pool |
+| `lib/session.ts` | iron-session helpers |
+| `lib/auth.ts` | loginAdmin / logoutAdmin with bcrypt migration |
+| `lib/validations.ts` | zod schemas (patientSchema, followUpSchema, loginSchema) |
+| `lib/utils.ts` | cn() helper |
+| `middleware.ts` | Route guard; redirects unauthenticated requests |
+| `components/theme-provider.tsx` | next-themes wrapper |
+| `components/layout/app-sidebar.tsx` | Sticky desktop sidebar |
+| `components/layout/app-navbar.tsx` | Sticky top bar + mobile sheet |
+| `components/layout/theme-toggle.tsx` | Sun/Moon dark mode button |
+| `components/patients/patient-form.tsx` | 37-field react-hook-form form |
+| `components/patients/delete-patient-button.tsx` | AlertDialog confirm before DELETE |
+| `components/patients/patients-search.tsx` | Debounced URL search (350ms) |
+
+### Build Status
+
+✅ `npm run build` — all 15 routes built with no TypeScript or compile errors
