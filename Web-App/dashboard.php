@@ -195,27 +195,15 @@
 
                     while($rs = mysqli_fetch_assoc($qsql))
                     {
-                        echo "<tr>
-                        
-                        <td>h($rs['firstName']) h($rs['lastName']) 
-                        </td>
-                        
-                        <td>
-                        <strong>Date</strong>: h($rs['dateJoined'])
-                        </td>
-                        
-                        <td>h($rs['address'])<br><strong>Phone No :</strong> h($rs['phone'])
-                        </td>
-                        <td>Rs h($rs['paid'])</td>
-                        
-                        <td>Rs h($rs['balance'])</td>
-                        <td>h($rs['treatment'])</td>
-
-                        <td align='center'>";
-                        
-                            echo "<a class=\"btn-sm white-text purple-gradient\" href='patientDetails.php?id=h($rs['id'])'>View Report</a>";
-                        
-                        echo "</td></tr>";
+                        echo "<tr>"
+                            . "<td>" . h($rs['firstName']) . " " . h($rs['lastName']) . "</td>"
+                            . "<td><strong>Date</strong>: " . h($rs['dateJoined']) . "</td>"
+                            . "<td>" . h($rs['address']) . "<br><strong>Phone No :</strong> " . h($rs['phone']) . "</td>"
+                            . "<td>Rs " . h($rs['paid']) . "</td>"
+                            . "<td>Rs " . h($rs['balance']) . "</td>"
+                            . "<td>" . h($rs['treatment']) . "</td>"
+                            . "<td align='center'><a class=\"btn-sm white-text purple-gradient\" href='patientDetails.php?id=" . (int)$rs['id'] . "'>View Report</a></td>"
+                            . "</tr>";
                     }
                     ?>
                 </tbody>
@@ -247,26 +235,15 @@
 
                     while($rs = mysqli_fetch_assoc($qsql))
                     {
-                        echo "<tr>
-                        
-                        <td>h($rs['firstName']) h($rs['lastName']) 
-                        </td>
-                        
-                        <td>
-                        <strong>Date</strong>: h($rs['dateJoined'])
-                        </td>
-                        
-                        <td>h($rs['address'])<br><strong>Phone No :</strong> h($rs['phone'])
-                        </td>
-                        <td>Rs h($rs['paid'])</td>                        
-                        <td>Rs h($rs['balance'])</td>
-                        <td>h($rs['treatment'])</td>
-
-                        <td align='center'>";
-                        
-                            echo "<a class=\"btn-sm white-text purple-gradient\" href='patientDetails.php?id=h($rs['id'])'>View Report</a>";
-                        
-                        echo "</td></tr>";
+                        echo "<tr>"
+                            . "<td>" . h($rs['firstName']) . " " . h($rs['lastName']) . "</td>"
+                            . "<td><strong>Date</strong>: " . h($rs['dateJoined']) . "</td>"
+                            . "<td>" . h($rs['address']) . "<br><strong>Phone No :</strong> " . h($rs['phone']) . "</td>"
+                            . "<td>Rs " . h($rs['paid']) . "</td>"
+                            . "<td>Rs " . h($rs['balance']) . "</td>"
+                            . "<td>" . h($rs['treatment']) . "</td>"
+                            . "<td align='center'><a class=\"btn-sm white-text purple-gradient\" href='patientDetails.php?id=" . (int)$rs['id'] . "'>View Report</a></td>"
+                            . "</tr>";
                     }
                     ?>
                 </tbody>
