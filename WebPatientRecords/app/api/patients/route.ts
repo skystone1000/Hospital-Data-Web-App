@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import pool from "@/lib/db";
 import { patientSchema } from "@/lib/validations";
+import { buildLocalDateTime } from "@/lib/utils";
 
 const SORT_WHITELIST = ["firstName", "lastName", "dateJoined", "regno", "diagnosis"] as const;
 
@@ -54,8 +55,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Invalid input", fields: parsed.error.flatten().fieldErrors }, { status: 422 });
     }
     const d = parsed.data;
-    const today = new Date().toISOString().slice(0, 10);
-    const dateJoined = d.dateJoined ?? today;
+    const dateJoined = buildLocalDateTime(d.dateJoined);
 
     const [result] = await pool.execute(
       `INSERT INTO patient_data

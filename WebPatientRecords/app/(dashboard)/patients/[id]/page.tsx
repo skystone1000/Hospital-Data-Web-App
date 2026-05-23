@@ -7,8 +7,9 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { ArrowLeft, Pencil, UserRoundPlus, Phone, MapPin, Calendar, Hash } from "lucide-react";
+import { ArrowLeft, Pencil, UserRoundPlus, Phone, Calendar, Hash } from "lucide-react";
 import { DeletePatientButton } from "@/components/patients/delete-patient-button";
+import { DeleteFollowupButton } from "@/components/patients/delete-followup-button";
 
 async function getPatient(id: number) {
   const [[patient]] = await pool.execute("SELECT * FROM patient_data WHERE id = ?", [id]) as any;
@@ -21,11 +22,11 @@ async function getPatient(id: number) {
 }
 
 function DetailRow({ label, value }: { label: string; value?: string | number | null }) {
-  if (!value) return null;
+  const display = value === null || value === undefined || value === "" ? "-" : value;
   return (
     <div className="space-y-0.5">
       <p className="text-xs text-muted-foreground font-medium uppercase tracking-wide">{label}</p>
-      <p className="text-sm">{value}</p>
+      <p className="text-sm">{display}</p>
     </div>
   );
 }
@@ -36,6 +37,9 @@ export default async function PatientDetailsPage({ params }: { params: { id: str
   const data = await getPatient(id);
   if (!data) notFound();
   const { patient: p, followUps } = data;
+
+  const totalPaid = Number(p.paid ?? 0) + followUps.reduce((acc, f) => acc + Number(f.paid ?? 0), 0);
+  const totalBalance = Number(p.balance ?? 0) + followUps.reduce((acc, f) => acc + Number(f.balance ?? 0), 0);
 
   return (
     <div className="max-w-4xl mx-auto space-y-5 animate-fade-in">
@@ -63,23 +67,17 @@ export default async function PatientDetailsPage({ params }: { params: { id: str
               <span className="hidden sm:inline">Add Follow-up</span>
             </Button>
           </Link>
-          <Link href={`/patients/${id}/edit`}>
-            <Button size="sm" variant="outline" className="gap-2">
-              <Pencil className="h-4 w-4" />
-              <span className="hidden sm:inline">Edit</span>
-            </Button>
-          </Link>
           <DeletePatientButton patientId={id} patientName={`${p.firstName} ${p.lastName}`} />
         </div>
       </div>
 
-      {/* Summary card */}
+      {/* Summary cards */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
         {[
           { label: "Age", value: p.age ? `${p.age} yrs` : null },
           { label: "Sex", value: p.sex },
-          { label: "Paid", value: p.paid ? `₹${p.paid}` : null },
-          { label: "Balance", value: p.balance ? `₹${p.balance}` : null },
+          { label: "Total Paid", value: totalPaid > 0 ? `₹${totalPaid}` : null },
+          { label: "Total Balance", value: totalBalance > 0 ? `₹${totalBalance}` : null },
         ].map(({ label, value }) => value ? (
           <Card key={label} className="text-center py-3">
             <p className="text-xs text-muted-foreground uppercase tracking-wide">{label}</p>
@@ -88,7 +86,7 @@ export default async function PatientDetailsPage({ params }: { params: { id: str
         ) : null)}
       </div>
 
-      {/* Follow-ups accordion */}
+      {/* Follow-ups */}
       <Card>
         <CardHeader className="flex flex-row items-center justify-between pb-3">
           <CardTitle className="text-base">Follow-ups ({followUps.length})</CardTitle>
@@ -105,22 +103,38 @@ export default async function PatientDetailsPage({ params }: { params: { id: str
             <Accordion type="multiple" className="space-y-1">
               {followUps.map((f) => (
                 <AccordionItem key={f.followUpId} value={String(f.followUpId)} className="border rounded-md px-3">
-                  <AccordionTrigger className="text-sm hover:no-underline py-3">
-                    <div className="flex items-center gap-3">
-                      <Badge variant="secondary" className="text-xs">#{f.follow_up_num}</Badge>
-                      <span>{f.date}</span>
-                      {f.treatment_output && <span className="text-muted-foreground text-xs hidden sm:inline">— {f.treatment_output}</span>}
-                    </div>
-                  </AccordionTrigger>
+                  {/* action buttons BEFORE trigger so chevron stays at far right */}
+                  <div className="flex items-center gap-1 [&>h3]:flex-1">
+                    <AccordionTrigger className="text-sm hover:no-underline py-3 w-full">
+                      <div className="flex items-center gap-3">
+                        <Badge variant="secondary" className="text-xs">#{f.follow_up_num}</Badge>
+                        <span>{f.date}</span>
+                        {f.treatment_output && (
+                          <span className="text-muted-foreground text-xs hidden sm:inline">— {f.treatment_output}</span>
+                        )}
+                      </div>
+                    </AccordionTrigger>
+
+                    <Link href={`/patients/${id}/followup/${f.followUpId}/edit`} className="shrink-0">
+                      <Button variant="ghost" size="icon" className="h-7 w-7" title="Edit follow-up">
+                        <Pencil className="h-3.5 w-3.5" />
+                      </Button>
+                    </Link>
+                    <DeleteFollowupButton patientId={id} followUpId={f.followUpId} followUpNum={f.follow_up_num} />
+                  </div>
                   <AccordionContent>
                     <div className="grid grid-cols-2 md:grid-cols-3 gap-3 pb-2 text-sm">
-                      {f.weight && <div><span className="text-muted-foreground text-xs">Weight</span><p>{f.weight} kg</p></div>}
-                      {f.treatment_output && <div><span className="text-muted-foreground text-xs">Treatment Output</span><p>{f.treatment_output}</p></div>}
-                      {f.medicine_duration && <div><span className="text-muted-foreground text-xs">Medicine Duration</span><p>{f.medicine_duration}</p></div>}
-                      {f.paid && <div><span className="text-muted-foreground text-xs">Paid</span><p className="font-medium text-primary">₹{f.paid}</p></div>}
-                      {f.balance && <div><span className="text-muted-foreground text-xs">Balance</span><p>₹{f.balance}</p></div>}
-                      {f.other_complains && <div className="col-span-full"><span className="text-muted-foreground text-xs">Other Complaints</span><p>{f.other_complains}</p></div>}
-                      {f.treatment && <div className="col-span-full"><span className="text-muted-foreground text-xs">Treatment</span><p>{f.treatment}</p></div>}
+                      <DetailRow label="Weight" value={f.weight ? `${f.weight} kg` : null} />
+                      <DetailRow label="Treatment Output" value={f.treatment_output} />
+                      <DetailRow label="Medicine Duration" value={f.medicine_duration} />
+                      <DetailRow label="Paid" value={f.paid ? `₹${f.paid}` : null} />
+                      <DetailRow label="Balance" value={f.balance ? `₹${f.balance}` : null} />
+                      <div className="col-span-full">
+                        <DetailRow label="Other Complaints" value={f.other_complains} />
+                      </div>
+                      <div className="col-span-full">
+                        <DetailRow label="Treatment" value={f.treatment} />
+                      </div>
                     </div>
                   </AccordionContent>
                 </AccordionItem>
@@ -130,14 +144,21 @@ export default async function PatientDetailsPage({ params }: { params: { id: str
         </CardContent>
       </Card>
 
-      {/* Initial details accordion */}
+      {/* Initial Patient Details */}
       <Card>
-        <CardHeader className="pb-0">
+        <CardHeader className="py-0">
           <Accordion type="single" collapsible>
             <AccordionItem value="details" className="border-0">
-              <AccordionTrigger className="py-4 hover:no-underline">
-                <CardTitle className="text-base">Initial Patient Details</CardTitle>
-              </AccordionTrigger>
+              <div className="flex items-center gap-1 [&>h3]:flex-1">
+                <AccordionTrigger className="py-4 hover:no-underline w-full">
+                  <CardTitle className="text-base">Initial Patient Details</CardTitle>
+                </AccordionTrigger>
+                <Link href={`/patients/${id}/edit`} className="shrink-0">
+                  <Button variant="ghost" size="icon" className="h-7 w-7" title="Edit patient details">
+                    <Pencil className="h-3.5 w-3.5" />
+                  </Button>
+                </Link>
+              </div>
               <AccordionContent>
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-4 pb-4">
                   <DetailRow label="Occupation" value={p.occupation} />

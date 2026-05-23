@@ -41,6 +41,11 @@ function Section({ title, children }: { title: string; children: React.ReactNode
   );
 }
 
+function getLocalDateString() {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+}
+
 export function PatientForm({ defaultValues, patientId }: PatientFormProps) {
   const router = useRouter();
   const [serverError, setServerError] = useState("");
@@ -86,7 +91,7 @@ export function PatientForm({ defaultValues, patientId }: PatientFormProps) {
       treatment: defaultValues?.treatment ?? "",
       paid: defaultValues?.paid ?? "",
       balance: defaultValues?.balance ?? "",
-      dateJoined: defaultValues?.dateJoined?.slice(0, 10) ?? new Date().toISOString().slice(0, 10),
+      dateJoined: defaultValues?.dateJoined?.slice(0, 10) ?? getLocalDateString(),
     },
   });
 

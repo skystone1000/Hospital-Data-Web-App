@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import pool from "@/lib/db";
 import { followUpSchema } from "@/lib/validations";
+import { buildLocalDateTime } from "@/lib/utils";
 
 export async function GET(_req: NextRequest, { params }: { params: { id: string } }) {
   const id = parseInt(params.id);
@@ -44,14 +45,14 @@ export async function POST(req: NextRequest, { params }: { params: { id: string 
     const regno = patient?.regno ?? "";
 
     const d = parsed.data;
-    const today = new Date().toISOString().slice(0, 10);
 
     await pool.execute(
       `INSERT INTO follow_up_data
        (id, date, regno, follow_up_num, weight, treatment_output, other_complains, treatment, medicine_duration, paid, balance)
        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-      [id, today, regno, nextNum, d.weight, d.treatment_output, d.other_complains,
-       d.treatment, d.medicine_duration, d.paid, d.balance]
+      [id, buildLocalDateTime(d.date), regno, nextNum, d.weight ?? null, d.treatment_output ?? null,
+       d.other_complains ?? null, d.treatment ?? null, d.medicine_duration ?? null,
+       d.paid ?? null, d.balance ?? null]
     );
 
     return NextResponse.json({ ok: true }, { status: 201 });

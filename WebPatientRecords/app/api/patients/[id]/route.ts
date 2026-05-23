@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import pool from "@/lib/db";
 import { patientSchema } from "@/lib/validations";
+import { buildLocalDateTime } from "@/lib/utils";
 
 export async function GET(_req: NextRequest, { params }: { params: { id: string } }) {
   const id = parseInt(params.id);
@@ -45,7 +46,7 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
        d.mind ?? null, d.hobbies ?? null, d.particulars ?? null, d.on_examination ?? null,
        d.path_inv ?? null, d.previous_rx ?? null, d.past_history ?? null,
        d.family_history ?? null, d.treatment ?? null, d.paid ?? null, d.balance ?? null,
-       d.dateJoined ?? null, id]
+       buildLocalDateTime(d.dateJoined), id]
     );
 
     return NextResponse.json({ ok: true });

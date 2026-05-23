@@ -48,6 +48,7 @@ export const patientSchema = z.object({
 });
 
 export const followUpSchema = z.object({
+  date: optStr,
   weight: optStr,
   treatment_output: optStr,
   other_complains: optStr,

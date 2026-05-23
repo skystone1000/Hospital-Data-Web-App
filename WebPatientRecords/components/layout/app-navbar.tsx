@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { Menu, Search, Activity } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -16,7 +16,18 @@ interface AppNavbarProps {
 
 export function AppNavbar({ doctorName }: AppNavbarProps) {
   const router = useRouter();
+  const pathname = usePathname();
   const [query, setQuery] = useState("");
+  const [mobileNavOpen, setMobileNavOpen] = useState(false);
+  const prevPathname = useRef(pathname);
+
+  // Close the mobile sheet whenever the route changes (e.g. user picks a nav item)
+  useEffect(() => {
+    if (prevPathname.current !== pathname) {
+      setMobileNavOpen(false);
+      prevPathname.current = pathname;
+    }
+  }, [pathname]);
 
   function handleSearch(e: React.FormEvent) {
     e.preventDefault();
@@ -27,7 +38,7 @@ export function AppNavbar({ doctorName }: AppNavbarProps) {
     <header className="sticky top-0 z-40 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="flex h-16 items-center gap-4 px-4 md:px-6">
         {/* Mobile menu */}
-        <Sheet>
+        <Sheet open={mobileNavOpen} onOpenChange={setMobileNavOpen}>
           <SheetTrigger asChild>
             <Button variant="ghost" size="icon" className="md:hidden">
               <Menu className="h-5 w-5" />
@@ -37,7 +48,7 @@ export function AppNavbar({ doctorName }: AppNavbarProps) {
             <SheetHeader className="sr-only">
               <SheetTitle>Navigation</SheetTitle>
             </SheetHeader>
-            <AppSidebar doctorName={doctorName} />
+            <AppSidebar doctorName={doctorName} inSheet />
           </SheetContent>
         </Sheet>
 

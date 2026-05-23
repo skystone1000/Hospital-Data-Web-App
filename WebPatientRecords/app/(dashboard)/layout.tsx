@@ -10,7 +10,7 @@ export default async function DashboardLayout({ children }: { children: React.Re
   const doctorName = `${session.firstName ?? ""} ${session.lastName ?? ""}`.trim();
 
   return (
-    <div className="flex h-screen overflow-hidden bg-background">
+    <div className="flex h-screen h-[100dvh] overflow-hidden bg-background">
       <AppSidebar doctorName={doctorName} />
       <div className="flex-1 flex flex-col overflow-hidden">
         <AppNavbar doctorName={doctorName} />

@@ -4,44 +4,61 @@ import pool from "@/lib/db";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
-import { UserPlus, ChevronLeft, ChevronRight, Eye, UserRoundPlus, Trash2 } from "lucide-react";
+import { UserPlus, ChevronLeft, ChevronRight, Eye, UserRoundPlus } from "lucide-react";
 import { DeletePatientButton } from "@/components/patients/delete-patient-button";
 import { PatientsSearch } from "@/components/patients/patients-search";
 
 const PER_PAGE = 20;
 const SORT_WHITELIST = ["firstName", "lastName", "dateJoined", "regno", "diagnosis"] as const;
 
-async function getPatients(search: string, page: number, sort: string, order: string) {
+async function getPatients(
+  search: string, page: number, sort: string, order: string,
+  sex: string, dateFrom: string, dateTo: string,
+) {
   const safeSort = SORT_WHITELIST.includes(sort as any) ? sort : "dateJoined";
   const safeOrder = order === "asc" ? "ASC" : "DESC";
   const offset = (page - 1) * PER_PAGE;
 
-  let where = "1=1";
+  const conditions: string[] = ["1=1"];
   const params: string[] = [];
+
   if (search) {
-    where = "(firstName LIKE ? OR lastName LIKE ? OR regno LIKE ?)";
+    conditions.push("(firstName LIKE ? OR lastName LIKE ? OR regno LIKE ?)");
     const t = `%${search}%`;
     params.push(t, t, t);
   }
+  if (sex) {
+    conditions.push("sex = ?");
+    params.push(sex);
+  }
+  if (dateFrom) {
+    conditions.push("dateJoined >= ?");
+    params.push(dateFrom);
+  }
+  if (dateTo) {
+    conditions.push("dateJoined <= ?");
+    params.push(dateTo);
+  }
 
-  const [[{ total }]] = await pool.execute(
-    `SELECT COUNT(*) AS total FROM patient_data WHERE ${where}`, params
-  ) as any;
+  const where = conditions.join(" AND ");
 
-  const [rows] = await pool.execute(
-    `SELECT id, firstName, middleName, lastName, age, sex, phone, address, regno,
-            diagnosis, dateJoined, paid, balance, treatment
-     FROM patient_data WHERE ${where}
-     ORDER BY ${safeSort} ${safeOrder}
-     LIMIT ${PER_PAGE} OFFSET ${offset}`,
-    params
-  ) as any;
+  const [[[{ total }]], [rows]] = await Promise.all([
+    pool.execute(`SELECT COUNT(*) AS total FROM patient_data WHERE ${where}`, params),
+    pool.execute(
+      `SELECT id, firstName, middleName, lastName, age, sex, phone, address, regno,
+              diagnosis, dateJoined, paid, balance, treatment
+       FROM patient_data WHERE ${where}
+       ORDER BY ${safeSort} ${safeOrder}
+       LIMIT ${PER_PAGE} OFFSET ${offset}`,
+      params
+    ),
+  ]) as any;
 
   return { rows, total: Number(total) };
 }
 
 interface PageProps {
-  searchParams: { search?: string; page?: string; sort?: string; order?: string };
+  searchParams: { search?: string; page?: string; sort?: string; order?: string; sex?: string; dateFrom?: string; dateTo?: string };
 }
 
 export default async function PatientsPage({ searchParams }: PageProps) {
@@ -49,13 +66,29 @@ export default async function PatientsPage({ searchParams }: PageProps) {
   const page = Math.max(1, Number(searchParams.page ?? 1));
   const sort = searchParams.sort ?? "dateJoined";
   const order = searchParams.order ?? "desc";
-  const { rows, total } = await getPatients(search, page, sort, order);
+  const sex = searchParams.sex ?? "";
+  const dateFrom = searchParams.dateFrom ?? "";
+  const dateTo = searchParams.dateTo ?? "";
+
+  const { rows, total } = await getPatients(search, page, sort, order, sex, dateFrom, dateTo);
   const totalPages = Math.ceil(total / PER_PAGE);
 
   function sortLink(col: string) {
     const newOrder = sort === col && order === "desc" ? "asc" : "desc";
     const sp = new URLSearchParams({ sort: col, order: newOrder, page: "1" });
     if (search) sp.set("search", search);
+    if (sex) sp.set("sex", sex);
+    if (dateFrom) sp.set("dateFrom", dateFrom);
+    if (dateTo) sp.set("dateTo", dateTo);
+    return `?${sp}`;
+  }
+
+  function pageLink(p: number) {
+    const sp = new URLSearchParams({ sort, order, page: String(p) });
+    if (search) sp.set("search", search);
+    if (sex) sp.set("sex", sex);
+    if (dateFrom) sp.set("dateFrom", dateFrom);
+    if (dateTo) sp.set("dateTo", dateTo);
     return `?${sp}`;
   }
 
@@ -84,7 +117,9 @@ export default async function PatientsPage({ searchParams }: PageProps) {
         </Link>
       </div>
 
-      <PatientsSearch defaultValue={search} />
+      <Suspense fallback={<Skeleton className="h-9 w-full max-w-sm" />}>
+        <PatientsSearch defaultSearch={search} />
+      </Suspense>
 
       <div className="rounded-lg border overflow-hidden">
         <div className="overflow-x-auto">
@@ -115,7 +150,7 @@ export default async function PatientsPage({ searchParams }: PageProps) {
               {rows.length === 0 && (
                 <tr>
                   <td colSpan={8} className="text-center py-12 text-muted-foreground">
-                    {search ? "No patients found for your search." : "No patients yet."}
+                    {search || sex || dateFrom || dateTo ? "No patients match the current filters." : "No patients yet."}
                   </td>
                 </tr>
               )}
@@ -167,14 +202,14 @@ export default async function PatientsPage({ searchParams }: PageProps) {
           </span>
           <div className="flex gap-2">
             {page > 1 && (
-              <Link href={`?page=${page - 1}&sort=${sort}&order=${order}${search ? `&search=${search}` : ""}`}>
+              <Link href={pageLink(page - 1)}>
                 <Button variant="outline" size="sm" className="gap-1">
                   <ChevronLeft className="h-3.5 w-3.5" /> Previous
                 </Button>
               </Link>
             )}
             {page < totalPages && (
-              <Link href={`?page=${page + 1}&sort=${sort}&order=${order}${search ? `&search=${search}` : ""}`}>
+              <Link href={pageLink(page + 1)}>
                 <Button variant="outline" size="sm" className="gap-1">
                   Next <ChevronRight className="h-3.5 w-3.5" />
                 </Button>
