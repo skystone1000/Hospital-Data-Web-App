@@ -4,12 +4,13 @@
 
 <?php
 
-$id = $_GET['id'];
+$id = filter_var($_GET['id'] ?? 0, FILTER_VALIDATE_INT);
 include './includes/connection.php';
 
-$sql = "SELECT * FROM patient_data WHERE id LIKE '%$id%';";
-$result = mysqli_query($conn, $sql);
-$data = mysqli_fetch_assoc($result);
+$stmt = $conn->prepare("SELECT * FROM patient_data WHERE id = ?");
+$stmt->bind_param("i", $id);
+$stmt->execute();
+$data = $stmt->get_result()->fetch_assoc();
 
 ?>
 
@@ -21,30 +22,30 @@ $data = mysqli_fetch_assoc($result);
         </h1>
     </div>
 
-    <form action="./php/insertFollowUp.php" method="get" class="container" onsubmit="setFormSubmitting()">
+    <form action="./php/insertFollowUp.php" method="post" class="container" onsubmit="setFormSubmitting()">
         <div class="form-row">
             <div class="col-md-4 mb-3">
                 <label>First name</label>
-                <input type="text" class="form-control disabled" name="firstName" value="<?php echo $data['firstName'] ?>" readonly>
+                <input type="text" class="form-control disabled" name="firstName" value="<?php echo h($data['firstName']) ?>" readonly>
             </div>
             <div class="col-md-4 mb-3">
                 <label>Last name</label>
-                <input type="text" class="form-control" name="lastName" value="<?php echo $data['lastName'] ?>" readonly>
+                <input type="text" class="form-control" name="lastName" value="<?php echo h($data['lastName']) ?>" readonly>
             </div>
             <div class="col-md-4 mb-3">
                 <label>Registration Number : </label>
-                <input type="text" class="form-control" id="regno" name="regno" value="<?php echo $data['regno'] ?>" readonly>
+                <input type="text" class="form-control" id="regno" name="regno" value="<?php echo h($data['regno']) ?>" readonly>
             </div>
         </div>
 
         <div class="form-row">
             <div class="col-md-4 mb-3">
                 <label>Phone Number : </label>
-                <input type="text" class="form-control" id="phone" name="phone" value="<?php echo $data['phone'] ?>" maxlength="15" readonly>
+                <input type="text" class="form-control" id="phone" name="phone" value="<?php echo h($data['phone']) ?>" maxlength="15" readonly>
             </div> 
             <div class="col-md-4 mb-3">
                 <label>Id : </label>
-                <input type="text" class="form-control" id="id" name="id" value="<?php echo $data['id'] ?>" readonly>
+                <input type="text" class="form-control" id="id" name="id" value="<?php echo h($data['id']) ?>" readonly>
             </div>  
         </div>
 

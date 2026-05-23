@@ -9,9 +9,9 @@ Status legend:
 
 | Feature | Status | Notes |
 |---|---|---|
-| Admin login (email or username) | `[x]` | Prepared-statement SELECT; plaintext password comparison |
+| Admin login (email or username) | `[x]` | Prepared-statement SELECT; bcrypt `password_verify()` with transparent migration from plaintext |
 | Session persistence across pages | `[x]` | PHP session; `header.php` guard on all auth pages |
-| Logout | `[ ]` | No logout link or `session_destroy()` call anywhere |
+| Logout | `[x]` | `logout.php` — session destroy + cookie clear; logout button in navbar |
 | Admin self-registration | `[ ]` | Accounts must be created directly in the DB |
 | Password reset | `[ ]` | Not implemented |
 | Multi-admin support | `[~]` | Schema supports multiple `admin_users` rows; no role separation |
@@ -43,11 +43,11 @@ Status legend:
 
 | Feature | Status | Notes |
 |---|---|---|
-| Add follow-up for a patient | `[x]` | `followUp.php` → `php/insertFollowUp.php` |
-| View all follow-ups per patient | `[x]` | Accordion in `patientDetails.php` |
-| Auto-increment follow-up number | `[~]` | Uses `MAX(follow_up_num)` on VARCHAR — breaks after follow-up 9 |
+| Add follow-up for a patient | `[x]` | `followUp.php` → `php/insertFollowUp.php` (POST) |
+| View all follow-ups per patient | `[x]` | Accordion in `patientDetails.php`, ordered by `CAST(follow_up_num AS UNSIGNED) DESC` |
+| Auto-increment follow-up number | `[x]` | Uses `MAX(CAST(follow_up_num AS UNSIGNED))` — fixed ordering bug that broke after #9 |
 | Edit existing follow-up | `[ ]` | No edit form or update endpoint for follow-ups |
-| Delete follow-up | `[ ]` | No delete endpoint |
+| Delete follow-up | `[ ]` | No delete endpoint (follow-ups are cascade-deleted when patient is deleted) |
 
 ---
 
@@ -99,12 +99,14 @@ Status legend:
 
 | Feature | Status | Notes |
 |---|---|---|
-| SQL injection protection | `[~]` | Login query uses prepared statement; all others do not |
-| Password hashing | `[ ]` | Passwords stored and compared in plaintext |
-| CSRF protection | `[ ]` | No CSRF tokens on any form |
-| Input validation (server-side) | `[ ]` | No sanitisation or type checks on POST/GET parameters |
-| XSS output escaping | `[ ]` | No `htmlspecialchars()` on DB-sourced output |
+| SQL injection protection | `[x]` | All queries use MySQLi prepared statements with `bind_param()` |
+| Password hashing | `[x]` | `password_hash(PASSWORD_BCRYPT)`; transparent migration from plaintext on login |
+| CSRF protection | `[N/A]` | Local-only app; no external origin can reach localhost — re-evaluate if deployed to network |
+| Input validation (server-side) | `[~]` | `age` and `id` validated; other text fields use `?? ''` safe defaults |
+| XSS output escaping | `[x]` | `h()` helper (`htmlspecialchars`) applied to all DB-sourced HTML output |
 | HTTPS enforcement | `[ ]` | Not configured (hosting-dependent) |
+| Session auth guard on action endpoints | `[x]` | All `php/*.php` handlers check `$_SESSION['adminId']` |
+| Data mutations use POST | `[x]` | All forms changed from GET to POST |
 | Rate limiting on login | `[ ]` | Not implemented |
 | Brute-force protection | `[ ]` | Not implemented |
 

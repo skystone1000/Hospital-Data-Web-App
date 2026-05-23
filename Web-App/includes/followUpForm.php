@@ -4,7 +4,7 @@
     <div class="form-row">
         <div class="col-md-4 mb-3">
             <label>Weight : </label>
-            <input type="text" class="form-control" id="weight" name="weight" placeholder="<?php echo $dataRowF['weight']; ?>" readonly>
+            <input type="text" class="form-control" id="weight" name="weight" placeholder="<?php echo h($dataRowF['weight']); ?>" readonly>
         </div>
         <div class="col-md-4 mb-3">
         	<label>Previous treatment Output : </label>
@@ -12,7 +12,7 @@
 			    <option>
                     <?php 
                         if(isset($id)){
-                            echo $dataRowF['treatment_output'];
+                            echo h($dataRowF['treatment_output']);
                         } else {
                     ?>
                     None
@@ -25,18 +25,18 @@
         </div>
         <div class="col-md-4 mb-3">
             <label>Date : </label>
-            <input type="text" class="form-control" id="date" name="date" placeholder="<?php echo $dataRowF['date']; ?>" readonly>
+            <input type="text" class="form-control" id="date" name="date" placeholder="<?php echo h($dataRowF['date']); ?>" readonly>
         </div>
     </div>
 
     <div class="form-group">
         <label>Other Complains : - </label>
-        <textarea class="form-control" rows="3" name="other_complains" placeholder="Other Complains" readonly><?php echo $dataRowF['other_complains']; ?></textarea>
+        <textarea class="form-control" rows="3" name="other_complains" placeholder="Other Complains" readonly><?php echo h($dataRowF['other_complains']); ?></textarea>
     </div>
 
     <div class="form-group">
         <label>Treatment : - </label>
-        <textarea class="form-control" rows="3" name="treatment" placeholder="Treatment Given" readonly><?php echo $dataRowF['treatment']; ?></textarea>
+        <textarea class="form-control" rows="3" name="treatment" placeholder="Treatment Given" readonly><?php echo h($dataRowF['treatment']); ?></textarea>
     </div>
 
     <div class="form-row">
@@ -46,7 +46,7 @@
 			    <option>
                     <?php 
                         if(isset($id)){
-                            echo $dataRowF['medicine_duration'];
+                            echo h($dataRowF['medicine_duration']);
                         } else {
                     ?>
                 None
@@ -60,11 +60,11 @@
         </div>
         <div class="col-md-4 mb-3">
             <label>Paid Amount</label>
-            <input type="text" id="paid" class="form-control" name="paid" placeholder="<?php echo $dataRowF['paid']; ?>" readonly>
+            <input type="text" id="paid" class="form-control" name="paid" placeholder="<?php echo h($dataRowF['paid']); ?>" readonly>
         </div>
         <div class="col-md-4 mb-3">
             <label>Balance Amount</label>
-            <input type="text" id="balance" class="form-control" name="balance" placeholder="<?php echo $dataRowF['balance']; ?>"  readonly>
+            <input type="text" id="balance" class="form-control" name="balance" placeholder="<?php echo h($dataRowF['balance']); ?>"  readonly>
         </div>
     </div> 
     <br>

@@ -100,18 +100,20 @@
 
 			<?php
 				include './includes/connection.php';
-				$sql = "SELECT * FROM admin_users WHERE id_admin = " . $_SESSION['adminId'] . ";";
-				$result = mysqli_query($conn, $sql);
-				$data = mysqli_fetch_assoc($result);
+				$adminId = (int)$_SESSION['adminId'];
+				$stmtA = $conn->prepare("SELECT * FROM admin_users WHERE id_admin = ?");
+				$stmtA->bind_param("i", $adminId);
+				$stmtA->execute();
+				$data = $stmtA->get_result()->fetch_assoc();
 				$dob = $data['dateOfBirth'];
 				$deg = $data['degree'];
 				$email = $data['email_admin'];
 			?>
-			<h2>Hello Dr. <?php echo $_SESSION['firstName'] . " " . $_SESSION['lastName']; ?></h2>
+			<h2>Hello Dr. <?php echo h($_SESSION['firstName']) . ' ' . h($_SESSION['lastName']); ?></h2>
 			<h4>Personal Details</h4>
-			<h4>Date Of Birth : <?php echo $dob; ?></h4>
-			<h4>Degree : <?php echo $deg; ?></h4>
-			<h4>Email Id : <?php echo $email; ?></h4>
+			<h4>Date Of Birth : <?php echo h($dob); ?></h4>
+			<h4>Degree : <?php echo h($deg); ?></h4>
+			<h4>Email Id : <?php echo h($email); ?></h4>
 
 			<hr>
 			<!-- SUMMARY  -->
@@ -195,23 +197,23 @@
                     {
                         echo "<tr>
                         
-                        <td>$rs[firstName] $rs[lastName] 
+                        <td>h($rs['firstName']) h($rs['lastName']) 
                         </td>
                         
                         <td>
-                        <strong>Date</strong>: $rs[dateJoined]
+                        <strong>Date</strong>: h($rs['dateJoined'])
                         </td>
                         
-                        <td>$rs[address]<br><strong>Phone No :</strong> $rs[phone]
+                        <td>h($rs['address'])<br><strong>Phone No :</strong> h($rs['phone'])
                         </td>
-                        <td>Rs $rs[paid]</td>
+                        <td>Rs h($rs['paid'])</td>
                         
-                        <td>Rs $rs[balance]</td>
-                        <td>$rs[treatment]</td>
+                        <td>Rs h($rs['balance'])</td>
+                        <td>h($rs['treatment'])</td>
 
                         <td align='center'>";
                         
-                            echo "<a class=\"btn-sm white-text purple-gradient\" href='patientDetails.php?id=$rs[id]'>View Report</a>";
+                            echo "<a class=\"btn-sm white-text purple-gradient\" href='patientDetails.php?id=h($rs['id'])'>View Report</a>";
                         
                         echo "</td></tr>";
                     }
@@ -247,22 +249,22 @@
                     {
                         echo "<tr>
                         
-                        <td>$rs[firstName] $rs[lastName] 
+                        <td>h($rs['firstName']) h($rs['lastName']) 
                         </td>
                         
                         <td>
-                        <strong>Date</strong>: $rs[dateJoined]
+                        <strong>Date</strong>: h($rs['dateJoined'])
                         </td>
                         
-                        <td>$rs[address]<br><strong>Phone No :</strong> $rs[phone]
+                        <td>h($rs['address'])<br><strong>Phone No :</strong> h($rs['phone'])
                         </td>
-                        <td>Rs $rs[paid]</td>                        
-                        <td>Rs $rs[balance]</td>
-                        <td>$rs[treatment]</td>
+                        <td>Rs h($rs['paid'])</td>                        
+                        <td>Rs h($rs['balance'])</td>
+                        <td>h($rs['treatment'])</td>
 
                         <td align='center'>";
                         
-                            echo "<a class=\"btn-sm white-text purple-gradient\" href='patientDetails.php?id=$rs[id]'>View Report</a>";
+                            echo "<a class=\"btn-sm white-text purple-gradient\" href='patientDetails.php?id=h($rs['id'])'>View Report</a>";
                         
                         echo "</td></tr>";
                     }

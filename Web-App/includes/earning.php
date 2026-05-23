@@ -1,67 +1,67 @@
 <?php
-	
-	function calculate($conn, $sql){
-		$result = mysqli_query($conn, $sql);
-		$data = mysqli_fetch_assoc($result);
-		return $data['count'];
-	}
 
-	function calcEarning($conn, $new, $follow){
-		$newResult = mysqli_query($conn, $new);
-		$newData = mysqli_fetch_assoc($newResult);
-		$newTotal = $newData['count'];	
-		//echo $newTotal . "  ";
+function calculate($conn, $sql) {
+    $result = mysqli_query($conn, $sql);
+    $data   = mysqli_fetch_assoc($result);
+    return (int)$data['count'];
+}
 
-		$followResult = mysqli_query($conn, $follow);
-		$followData = mysqli_fetch_assoc($followResult);
-		$followTotal = $followData['count'];
-		//echo $followTotal . "  ";
+function calcEarning($conn, $new, $follow) {
+    $newResult  = mysqli_query($conn, $new);
+    $newData    = mysqli_fetch_assoc($newResult);
+    $newTotal   = (float)$newData['count'];
 
-		$totalEarn = $newTotal + $followTotal;
-		return $totalEarn;
-	}
+    $followResult = mysqli_query($conn, $follow);
+    $followData   = mysqli_fetch_assoc($followResult);
+    $followTotal  = (float)$followData['count'];
 
-	// Today
-	$todayNew = "select COUNT(id) as count from patient_data where `dateJoined` >= DATE_SUB(CURDATE(), INTERVAL 0 DAY);";
-	$todayNewCount = calculate($conn,$todayNew);
+    return $newTotal + $followTotal;
+}
 
-	$todayFollow = "select COUNT(id) as count from follow_up_data where `date` >= DATE_SUB(CURDATE(), INTERVAL 0 DAY);";
-	$todayFollowCount = calculate($conn,$todayFollow);
+// Use CAST(paid AS DECIMAL) so non-numeric values are safely treated as 0
+$sumExpr = "SUM(CAST(paid AS DECIMAL(10,2)))";
 
-	$todayEarnNew = "select SUM(paid) as count from patient_data where `dateJoined` >= DATE_SUB(CURDATE(), INTERVAL 0 DAY);";
-	$todayEarnFollow = "select SUM(paid) as count from follow_up_data where `date` >= DATE_SUB(CURDATE(), INTERVAL 0 DAY);";
-	$todayEarnCount = calcEarning($conn, $todayEarnNew, $todayEarnFollow);				
+// Today
+$todayNew      = "SELECT COUNT(id) as count FROM patient_data WHERE dateJoined >= CURDATE()";
+$todayNewCount = calculate($conn, $todayNew);
 
-	// Week
-	$weekNew = "select COUNT(id) as count from patient_data where  `dateJoined` >= DATE_SUB(CURDATE(), INTERVAL 7 DAY);";
-	$weekNewCount = calculate($conn,$weekNew);
+$todayFollow      = "SELECT COUNT(id) as count FROM follow_up_data WHERE date >= CURDATE()";
+$todayFollowCount = calculate($conn, $todayFollow);
 
-	$weekFollow = "select COUNT(id) as count from follow_up_data where  `date` >= DATE_SUB(CURDATE(), INTERVAL 7 DAY);";
-	$weekFollowCount = calculate($conn,$weekFollow);
+$todayEarnNew    = "SELECT $sumExpr as count FROM patient_data WHERE dateJoined >= CURDATE()";
+$todayEarnFollow = "SELECT $sumExpr as count FROM follow_up_data WHERE date >= CURDATE()";
+$todayEarnCount  = calcEarning($conn, $todayEarnNew, $todayEarnFollow);
 
-	$weekEarnNew = "select SUM(paid) as count from patient_data where `dateJoined` >= DATE_SUB(CURDATE(), INTERVAL 7 DAY);";
-	$weekEarnFollow = "select SUM(paid) as count from follow_up_data where `date` >= DATE_SUB(CURDATE(), INTERVAL 7 DAY);";
-	$weekEarnCount = calcEarning($conn, $weekEarnNew, $weekEarnFollow);				
+// Week
+$weekNew      = "SELECT COUNT(id) as count FROM patient_data WHERE dateJoined >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)";
+$weekNewCount = calculate($conn, $weekNew);
 
-	// Month
-	$monthNew = "select COUNT(id) as count from patient_data where  `dateJoined` >= DATE_SUB(CURDATE(), INTERVAL 30 DAY);";
-	$monthNewCount = calculate($conn,$monthNew);
+$weekFollow      = "SELECT COUNT(id) as count FROM follow_up_data WHERE date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)";
+$weekFollowCount = calculate($conn, $weekFollow);
 
-	$monthFollow = "select COUNT(id) as count from follow_up_data where  `date` >= DATE_SUB(CURDATE(), INTERVAL 30 DAY);";
-	$monthFollowCount = calculate($conn,$monthFollow);
+$weekEarnNew    = "SELECT $sumExpr as count FROM patient_data WHERE dateJoined >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)";
+$weekEarnFollow = "SELECT $sumExpr as count FROM follow_up_data WHERE date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)";
+$weekEarnCount  = calcEarning($conn, $weekEarnNew, $weekEarnFollow);
 
-	$monthEarnNew = "select SUM(paid) as count from patient_data where `dateJoined` >= DATE_SUB(CURDATE(), INTERVAL 30 DAY);";
-	$monthEarnFollow = "select SUM(paid) as count from follow_up_data where `date` >= DATE_SUB(CURDATE(), INTERVAL 30 DAY);";
-	$monthEarnCount = calcEarning($conn, $monthEarnNew, $monthEarnFollow);
+// Month
+$monthNew      = "SELECT COUNT(id) as count FROM patient_data WHERE dateJoined >= DATE_SUB(CURDATE(), INTERVAL 30 DAY)";
+$monthNewCount = calculate($conn, $monthNew);
 
-	// Year
-	$yearNew = "select COUNT(id) as count from patient_data where  `dateJoined` >= DATE_SUB(CURDATE(), INTERVAL 365 DAY);";
-	$yearNewCount = calculate($conn,$yearNew);
+$monthFollow      = "SELECT COUNT(id) as count FROM follow_up_data WHERE date >= DATE_SUB(CURDATE(), INTERVAL 30 DAY)";
+$monthFollowCount = calculate($conn, $monthFollow);
 
-	$yearFollow = "select COUNT(id) as count from follow_up_data where  `date` >= DATE_SUB(CURDATE(), INTERVAL 365 DAY);";
-	$yearFollowCount = calculate($conn,$yearFollow);
+$monthEarnNew    = "SELECT $sumExpr as count FROM patient_data WHERE dateJoined >= DATE_SUB(CURDATE(), INTERVAL 30 DAY)";
+$monthEarnFollow = "SELECT $sumExpr as count FROM follow_up_data WHERE date >= DATE_SUB(CURDATE(), INTERVAL 30 DAY)";
+$monthEarnCount  = calcEarning($conn, $monthEarnNew, $monthEarnFollow);
 
-	$yearEarnNew = "select SUM(paid) as count from patient_data where `dateJoined` >= DATE_SUB(CURDATE(), INTERVAL 365 DAY);";
-	$yearEarnFollow = "select SUM(paid) as count from follow_up_data where `date` >= DATE_SUB(CURDATE(), INTERVAL 365 DAY);";
-	$yearEarnCount = calcEarning($conn, $yearEarnNew, $yearEarnFollow);
+// Year
+$yearNew      = "SELECT COUNT(id) as count FROM patient_data WHERE dateJoined >= DATE_SUB(CURDATE(), INTERVAL 365 DAY)";
+$yearNewCount = calculate($conn, $yearNew);
+
+$yearFollow      = "SELECT COUNT(id) as count FROM follow_up_data WHERE date >= DATE_SUB(CURDATE(), INTERVAL 365 DAY)";
+$yearFollowCount = calculate($conn, $yearFollow);
+
+$yearEarnNew    = "SELECT $sumExpr as count FROM patient_data WHERE dateJoined >= DATE_SUB(CURDATE(), INTERVAL 365 DAY)";
+$yearEarnFollow = "SELECT $sumExpr as count FROM follow_up_data WHERE date >= DATE_SUB(CURDATE(), INTERVAL 365 DAY)";
+$yearEarnCount  = calcEarning($conn, $yearEarnNew, $yearEarnFollow);
 ?>

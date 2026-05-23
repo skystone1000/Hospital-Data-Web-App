@@ -15,7 +15,7 @@ include './includes/header.php';
             </h1>
         </div>
 
-        <form action="./php/insertRecord.php" method="get" class="container" onsubmit="setFormSubmitting()">
+        <form action="./php/insertRecord.php" method="post" class="container" onsubmit="setFormSubmitting()">
             <div class="form-row">
                 <div class="col-md-4 mb-3">
                     <label>First name</label>

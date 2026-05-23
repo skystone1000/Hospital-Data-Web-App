@@ -1,55 +1,84 @@
 <?php
+session_start();
+if (!isset($_SESSION['adminId'])) {
+    http_response_code(403);
+    exit('Unauthorized');
+}
+
 include '../includes/connection.php';
 
-$id	= $_GET['id'];
-$firstName	= $_GET['firstName'];
-$middleName	= $_GET['middleName'];
-$lastName	= $_GET['lastName'];
-$age	= $_GET['age'];
-$sex	= $_GET['sex'];
-$occupation	= $_GET['occupation'];
-$address	= $_GET['address'];
-$phone	= $_GET['phone'];
-$regno  = $_GET['regno'];
-$height = $_GET['height'];
-$weight = $_GET['weight'];
-$diagnosis = $_GET['diagnosis'];
+$id             = filter_var($_POST['id'] ?? 0, FILTER_VALIDATE_INT);
+$firstName      = trim($_POST['firstName']      ?? '');
+$middleName     = trim($_POST['middleName']      ?? '');
+$lastName       = trim($_POST['lastName']        ?? '');
+$age            = filter_var($_POST['age'] ?? '', FILTER_VALIDATE_INT, ['options' => ['min_range' => 0, 'max_range' => 150]]);
+$sex            = $_POST['sex']            ?? '';
+$occupation     = $_POST['occupation']     ?? '';
+$address        = $_POST['address']        ?? '';
+$phone          = $_POST['phone']          ?? '';
+$regno          = $_POST['regno']          ?? '';
+$height         = (int)($_POST['height']   ?? 0);
+$weight         = (int)($_POST['weight']   ?? 0);
+$diagnosis      = $_POST['diagnosis']      ?? '';
+$cc1            = $_POST['cc1']            ?? '';
+$cc2            = $_POST['cc2']            ?? '';
+$cc3            = $_POST['cc3']            ?? '';
+$appetite       = $_POST['appetite']       ?? '';
+$desire         = $_POST['desire']         ?? '';
+$aversions      = $_POST['aversions']      ?? '';
+$thirst         = $_POST['thirst']         ?? '';
+$perspiration   = $_POST['perspiration']   ?? '';
+$sleep          = $_POST['sleep']          ?? '';
+$stool          = $_POST['stool']          ?? '';
+$urine          = $_POST['urine']          ?? '';
+$menses         = $_POST['menses']         ?? '';
+$thermal        = $_POST['thermal']        ?? '';
+$mind           = $_POST['mind']           ?? '';
+$hobbies        = $_POST['hobbies']        ?? '';
+$particulars    = $_POST['particulars']    ?? '';
+$on_examination = $_POST['on_examination'] ?? '';
+$path_inv       = $_POST['path_inv']       ?? '';
+$previous_rx    = $_POST['previous_rx']    ?? '';
+$past_history   = $_POST['past_history']   ?? '';
+$family_history = $_POST['family_history'] ?? '';
+$treatment      = $_POST['treatment']      ?? '';
+$paid           = $_POST['paid']           ?? '';
+$balance        = $_POST['balance']        ?? '';
+$followUp1      = $_POST['followUp1']      ?? '';
+$followUp2      = $_POST['followUp2']      ?? '';
+$followUp3      = $_POST['followUp3']      ?? '';
+$followUp4      = $_POST['followUp4']      ?? '';
 
-$cc1	= $_GET['cc1'];
-$cc2	= $_GET['cc2'];
-$cc3	= $_GET['cc3'];
-$appetite	= $_GET['appetite'];
-$desire	= $_GET['desire'];
-$aversions	= $_GET['aversions'];
-$thirst	= $_GET['thirst'];
-$perspiration	= $_GET['perspiration'];
-$sleep	= $_GET['sleep'];
-$stool	= $_GET['stool'];
-$urine	= $_GET['urine'];
-$menses	= $_GET['menses'];
-$thermal	= $_GET['thermal'];
-$mind	= $_GET['mind'];
-$hobbies	= $_GET['hobbies'];
-$particulars	= $_GET['particulars'];
-$on_examination	= $_GET['on_examination'];
-$path_inv	= $_GET['path_inv'];
-$previous_rx	= $_GET['previous_rx'];
-$past_history	= $_GET['past_history'];
-$family_history	= $_GET['family_history'];
-$treatment	= $_GET['treatment'];
-$paid = $_GET['paid'];
-$balance = $_GET['balance'];
+if (!$id || empty($firstName) || empty($lastName) || $age === false) {
+    header("Location: ../patientDetailsEdit.php?id=" . (int)$_POST['id'] . "&error=invalid_input");
+    exit();
+}
 
-$followUp1	= $_GET['followUp1'];
-$followUp2  = $_GET['followUp2'];
-$followUp3	= $_GET['followUp3'];
-$followUp4  = $_GET['followUp4'];
+$stmt = $conn->prepare(
+    "UPDATE patient_data SET
+     firstName=?, middleName=?, lastName=?, age=?, sex=?, occupation=?, address=?,
+     phone=?, regno=?, height=?, weight=?, diagnosis=?, cc1=?, cc2=?, cc3=?,
+     appetite=?, desire=?, aversions=?, thirst=?, perspiration=?, sleep=?, stool=?,
+     urine=?, menses=?, thermal=?, mind=?, hobbies=?, particulars=?, on_examination=?,
+     path_inv=?, previous_rx=?, past_history=?, family_history=?, treatment=?,
+     paid=?, balance=?, followUp1=?, followUp2=?, followUp3=?, followUp4=?
+     WHERE id=?"
+);
 
+$stmt->bind_param(
+    "sssisssssiisssssssssssssssssssssssssssi",
+    $firstName, $middleName, $lastName, $age, $sex, $occupation, $address, $phone, $regno,
+    $height, $weight, $diagnosis, $cc1, $cc2, $cc3, $appetite, $desire, $aversions, $thirst,
+    $perspiration, $sleep, $stool, $urine, $menses, $thermal, $mind, $hobbies, $particulars,
+    $on_examination, $path_inv, $previous_rx, $past_history, $family_history, $treatment,
+    $paid, $balance, $followUp1, $followUp2, $followUp3, $followUp4,
+    $id
+);
 
-$sql = "UPDATE patient_data SET firstName='$firstName' ,	middleName = '$middleName',	lastName = '$lastName',	age = '$age',	sex = '$sex',	occupation = '$occupation',	address = '$address',	phone = '$phone',	regno = '$regno',	height = '$height',	weight = '$weight',	diagnosis = '$diagnosis',	cc1 = '$cc1',	cc2 = '$cc2',	cc3 = '$cc3',	appetite = '$appetite',	desire = '$desire',	aversions = '$aversions',	thirst = '$thirst',	perspiration = '$perspiration',	sleep = '$sleep',	stool = '$stool',	urine = '$urine',	menses = '$menses',	thermal = '$thermal',	mind = '$mind',	hobbies = '$hobbies',	particulars = '$particulars',	on_examination = '$on_examination',	path_inv = '$path_inv',	previous_rx = '$previous_rx',	past_history = '$past_history',	family_history = '$family_history',	treatment = '$treatment',	paid = '$paid',	balance = '$balance',	followUp1 = '$followUp1',	followUp2 = '$followUp2',	followUp3 = '$followUp3',	followUp4 = '$followUp4' WHERE id = $id "; 
-
-
-mysqli_query($conn , $sql);
-header("Location: ../patientDetails.php?id=" . $id . "&insert=success");
-
-?>
+if ($stmt->execute()) {
+    header("Location: ../patientDetails.php?id=" . $id . "&insert=success");
+} else {
+    error_log("updateRecord failed: " . $conn->error);
+    header("Location: ../patientDetailsEdit.php?id=" . $id . "&error=update_failed");
+}
+exit();
